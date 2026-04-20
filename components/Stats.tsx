@@ -5,7 +5,7 @@ import useReveal from "@/hooks/useReveal";
 const stats = [
   { value: "2,000+", label: "Teams worldwide" },
   { value: "99.9%", label: "Uptime guarantee" },
-  { value: "50M+", label: "Tasks completed" },
+  { value: "5000", label: "Tasks completed" },
   { value: "4.9/5", label: "Customer rating" },
 ];
 

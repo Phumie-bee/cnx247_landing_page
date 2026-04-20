@@ -1,41 +1,34 @@
 "use client";
 
 import { useState } from "react";
+import { Rocket, TrendingUp, Building2 } from "lucide-react";
 
 const plans = [
   {
-    name: "Enterprise",
-    icon: "👑",
-    description: "For businesses and power users who want it all.",
-    price: "$36.99",
+    name: "Startup",
+    icon: Rocket,
+    description: "Best for beginners who want to explore the platform.",
+    price: "₦10,000",
+    isContactUs: false,
     highlighted: false,
     features: [
       "Email",
-      "Chat",
       "Announcement",
-      "Query",
-      "Workflow",
       "Workgroup",
-      "GDrive",
       "Cash Requisition",
       "Trainings",
-      "eMeeting",
-      "Leave Administration",
-      "Performance Management",
       "Reminders",
-      "Mobile App",
-      "Attendance",
       "CRM",
-      "Memo",
-      "Circular",
-      "Registry",
+      "Mobile App",
     ],
   },
+
   {
     name: "SMB",
-    icon: "🛡️",
+    icon: TrendingUp,
     description: "Perfect for professionals who need advanced tools.",
-    price: "$24.99",
+    price: "₦18,000",
+    isContactUs: false,
     highlighted: true,
     features: [
       "Email",
@@ -57,20 +50,32 @@ const plans = [
     ],
   },
   {
-    name: "Startup",
-    icon: "🚀",
-    description: "Best for beginners who want to explore the platform.",
-    price: "$12.99",
+    name: "Enterprise",
+    icon: Building2,
+    description: "For businesses and power users who want it all.",
+    price: "Contact Us",
+    isContactUs: true,
     highlighted: false,
     features: [
       "Email",
+      "Chat",
       "Announcement",
+      "Query",
+      "Workflow",
       "Workgroup",
+      "GDrive",
       "Cash Requisition",
       "Trainings",
+      "eMeeting",
+      "Leave Administration",
+      "Performance Management",
       "Reminders",
-      "CRM",
       "Mobile App",
+      "Attendance",
+      "CRM",
+      "Memo",
+      "Circular",
+      "Registry",
     ],
   },
 ];
@@ -166,7 +171,7 @@ export default function Pricing() {
             >
               {/* Plan header */}
               <div className="flex items-center gap-3 mb-1">
-                <span className="text-2xl">{plan.icon}</span>
+                <plan.icon className="w-6 h-6 text-primary" />
                 <span className="text-heading font-bold text-xl">
                   {plan.name}
                 </span>
@@ -180,10 +185,21 @@ export default function Pricing() {
 
               {/* Price */}
               <div className="mb-5">
-                <span className="text-heading font-extrabold text-3xl">
-                  {plan.price}
-                </span>
-                <span className="text-body text-sm">/mo per user</span>
+                {plan.isContactUs ? (
+                  <a
+                    href="#cta"
+                    className="text-primary font-extrabold text-3xl hover:underline"
+                  >
+                    {plan.price}
+                  </a>
+                ) : (
+                  <>
+                    <span className="text-heading font-extrabold text-3xl">
+                      {plan.price}
+                    </span>
+                    <span className="text-body text-sm">/mo per user</span>
+                  </>
+                )}
               </div>
 
               {/* CTA button */}
@@ -245,7 +261,7 @@ export default function Pricing() {
                       <div className="flex items-center justify-between gap-4">
                         <div className="min-w-0">
                           <div className="flex items-center gap-2 mb-1">
-                            <span className="text-lg">{plan.icon}</span>
+                            <plan.icon className="w-5 h-5 text-primary" />
                             <span className="text-white font-bold text-lg">
                               {plan.name}
                             </span>
@@ -255,10 +271,22 @@ export default function Pricing() {
                           </p>
                         </div>
                         <div className="text-right shrink-0">
-                          <span className="text-white font-extrabold text-2xl sm:text-3xl">
-                            {plan.price}
-                          </span>
-                          <span className="text-gray-400 text-sm">/mo</span>
+                          {plan.isContactUs ? (
+                            <a
+                              href="#cta"
+                              className="text-primary font-extrabold text-2xl sm:text-3xl hover:underline"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              {plan.price}
+                            </a>
+                          ) : (
+                            <>
+                              <span className="text-white font-extrabold text-2xl sm:text-3xl">
+                                {plan.price}
+                              </span>
+                              <span className="text-gray-400 text-sm">/mo</span>
+                            </>
+                          )}
                         </div>
                       </div>
                     </button>
