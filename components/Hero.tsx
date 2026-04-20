@@ -3,7 +3,7 @@ import Button from "@/components/Button";
 import memoImg from "@/public/memo_img.png";
 import cashReqImg from "@/public/cash_req_img.png";
 import chatImg from "@/public/chat_img.png";
-import allImg from "@/public/all_img.png";
+import announcement from "@/public/announcement.png";
 
 export default function Hero() {
   return (
@@ -43,24 +43,26 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Bottom Left — Chat */}
+          {/* Bottom Right — Dashboard */}
+
           <div className="hidden md:block absolute left-6 lg:left-12 xl:left-20 bottom-16 lg:bottom-24 xl:bottom-32 animate-float-slow rotate-2">
             <div className="bg-surface/80 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-lg overflow-hidden border border-primary/10">
               <Image
-                src={chatImg}
-                alt="Chat"
+                src={announcement}
+                alt="Announcement"
                 priority
                 className="object-cover w-[140px] lg:w-[180px] xl:w-[220px] h-auto"
               />
             </div>
           </div>
 
-          {/* Bottom Right — Dashboard */}
+          {/* Bottom Left — Chat */}
+
           <div className="hidden md:block absolute right-6 lg:right-12 xl:right-20 bottom-16 lg:bottom-24 xl:bottom-32 animate-float-delay -rotate-2">
             <div className="bg-surface/80 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-lg overflow-hidden border border-primary/10">
               <Image
-                src={allImg}
-                alt="Dashboard"
+                src={chatImg}
+                alt="Chat"
                 priority
                 className="object-cover w-[140px] lg:w-[180px] xl:w-[220px] h-auto"
               />
