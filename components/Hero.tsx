@@ -23,6 +23,7 @@ export default function Hero() {
                 alt="Memo"
                 width={250}
                 height={190}
+                priority
                 className="object-cover w-[140px] lg:w-[180px] xl:w-[220px] h-auto"
               />
             </div>
@@ -36,6 +37,7 @@ export default function Hero() {
                 alt="Approval Request"
                 width={250}
                 height={190}
+                priority
                 className="object-cover w-[140px] lg:w-[180px] xl:w-[220px] h-auto"
               />
             </div>
@@ -49,19 +51,21 @@ export default function Hero() {
                 alt="Chat"
                 width={250}
                 height={190}
+                priority
                 className="object-cover w-[140px] lg:w-[180px] xl:w-[220px] h-auto"
               />
             </div>
           </div>
 
           {/* Bottom Right — Dashboard */}
-          <div className="hidden md:block absolute right-6 lg:right-12 xl:right-20 bottom-16 lg:bottom-24 xl:bottom-28 animate-float-delay -rotate-2">
+          <div className="hidden md:block absolute right-6 lg:right-12 xl:right-20 bottom-16 lg:bottom-24 xl:bottom-32 animate-float-delay -rotate-2">
             <div className="bg-surface/80 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-lg overflow-hidden border border-primary/10">
               <Image
                 src="/all_img.png"
                 alt="Dashboard"
                 width={250}
                 height={190}
+                priority
                 className="object-cover w-[140px] lg:w-[180px] xl:w-[220px] h-auto"
               />
             </div>

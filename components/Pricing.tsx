@@ -136,7 +136,7 @@ export default function Pricing() {
   return (
     <section
       id="pricing"
-      className="relative min-h-0 max-h-screen bg-white flex flex-col justify-center py-10 md:py-16 overflow-hidden"
+      className="relative bg-white py-16 md:py-20 overflow-hidden"
     >
       {/* Ambient blobs */}
       <div className="absolute top-0 left-1/4 w-80 h-80 bg-primary/5 rounded-full blur-[100px] animate-blob" />
@@ -144,18 +144,83 @@ export default function Pricing() {
 
       <div className="relative max-w-7xl mx-auto px-6 md:px-8">
         {/* Section header */}
-        <div className="text-center max-w-2xl mx-auto mb-8">
+        <div className="text-center max-w-2xl mx-auto mb-10">
           <p className="text-sm font-semibold text-primary tracking-widest uppercase mb-3 animate-fade-in">
             Pricing
           </p>
-
           <p className="mt-4 text-body text-lg animate-fade-in-up animate-delay-100">
             Choose the plan that fits your team. Upgrade anytime.
           </p>
         </div>
 
-        {/* Pricing card */}
-        <div className="max-w-5xl mx-auto animate-fade-in-up animate-delay-200">
+        {/* ── Mobile: Individual cards ── */}
+        <div className="md:hidden space-y-6">
+          {plans.map((plan) => (
+            <div
+              key={plan.name}
+              className={`rounded-2xl border p-6 ${
+                plan.highlighted
+                  ? "border-primary bg-primary/5"
+                  : "border-gray-200 bg-white"
+              }`}
+            >
+              {/* Plan header */}
+              <div className="flex items-center gap-3 mb-1">
+                <span className="text-2xl">{plan.icon}</span>
+                <span className="text-heading font-bold text-xl">
+                  {plan.name}
+                </span>
+                {plan.highlighted && (
+                  <span className="ml-auto text-[10px] font-bold uppercase tracking-wider bg-primary text-white px-2.5 py-1 rounded-full">
+                    Popular
+                  </span>
+                )}
+              </div>
+              <p className="text-body text-sm mb-4">{plan.description}</p>
+
+              {/* Price */}
+              <div className="mb-5">
+                <span className="text-heading font-extrabold text-3xl">
+                  {plan.price}
+                </span>
+                <span className="text-body text-sm">/mo per user</span>
+              </div>
+
+              {/* CTA button */}
+              <a
+                href="#cta"
+                className={`block w-full text-center py-3 rounded-xl font-semibold text-sm transition-all ${
+                  plan.highlighted
+                    ? "bg-primary text-white hover:bg-primary/90"
+                    : "bg-heading text-white hover:bg-heading/90"
+                }`}
+              >
+                Get Started
+              </a>
+
+              {/* Features */}
+              <div className="mt-5 pt-5 border-t border-gray-100">
+                <p className="text-xs font-semibold text-heading uppercase tracking-wider mb-3">
+                  What&apos;s included
+                </p>
+                <ul className="space-y-2.5">
+                  {plan.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex items-center gap-2.5 text-sm text-body"
+                    >
+                      <CheckIcon />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ── Desktop: Interactive dark card ── */}
+        <div className="hidden md:block max-w-5xl mx-auto animate-fade-in-up animate-delay-200">
           <div className="rounded-3xl bg-heading p-6 sm:p-10 md:p-12">
             <div className="grid md:grid-cols-2 gap-10 md:gap-16 items-start">
               {/* Left — Plan cards */}
