@@ -1,5 +1,7 @@
-import Section from "@/components/Section";
-import Card from "@/components/Card";
+"use client";
+
+import WaveDivider from "@/components/WaveDivider";
+import useReveal from "@/hooks/useReveal";
 
 const features = [
   {
@@ -8,7 +10,7 @@ const features = [
       "Automate repetitive tasks and streamline your team's workflows with powerful drag-and-drop builders.",
     icon: (
       <svg
-        className="w-6 h-6"
+        className="w-5 h-5"
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth={1.5}
@@ -33,7 +35,7 @@ const features = [
       "Keep track of every interaction, manage contacts, and build stronger relationships from one hub.",
     icon: (
       <svg
-        className="w-6 h-6"
+        className="w-5 h-5"
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth={1.5}
@@ -53,7 +55,7 @@ const features = [
       "Get instant insights into your business performance with live dashboards and custom reports.",
     icon: (
       <svg
-        className="w-6 h-6"
+        className="w-5 h-5"
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth={1.5}
@@ -73,7 +75,7 @@ const features = [
       "Chat, assign tasks, share files, and keep your entire team aligned in one integrated workspace.",
     icon: (
       <svg
-        className="w-6 h-6"
+        className="w-5 h-5"
         fill="none"
         viewBox="0 0 24 24"
         strokeWidth={1.5}
@@ -90,35 +92,64 @@ const features = [
 ];
 
 export default function Features() {
-  return (
-    <Section id="features" className="bg-white">
-      <div className="text-center max-w-2xl mx-auto mb-16">
-        <p className="text-sm font-semibold text-primary tracking-widest uppercase mb-3 animate-fade-in">
-          Features
-        </p>
-        <h2 className="text-3xl md:text-4xl font-extrabold text-heading tracking-tight animate-fade-in-up">
-          Everything you need to run your business
-        </h2>
-        <p className="mt-4 text-body text-lg animate-fade-in-up animate-delay-100">
-          Powerful tools designed to simplify your daily operations and drive
-          growth.
-        </p>
-      </div>
+  const sectionRef = useReveal();
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {features.map((feature, i) => (
-          <div
-            key={feature.title}
-            className={`animate-fade-in-up animate-delay-${(i + 1) * 100}`}
-          >
-            <Card
-              icon={feature.icon}
-              title={feature.title}
-              description={feature.description}
-            />
+  return (
+    <>
+      {/* Wave transition from previous section */}
+      <WaveDivider fill="#e4f3ee" />
+
+      <section
+        id="features"
+        ref={sectionRef}
+        className="relative bg-bg-light pb-20 md:pb-28 pt-10 md:pt-16 overflow-hidden"
+      >
+        <div className="relative max-w-7xl mx-auto px-6 md:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-16">
+            <p className="text-sm font-semibold text-primary tracking-widest uppercase mb-3 reveal">
+              Features
+            </p>
+            {/* <h2 className="text-3xl md:text-4xl font-extrabold text-heading tracking-tight reveal">
+              Everything you need to run your business
+            </h2> */}
+            <p className="mt-4 text-body text-lg reveal">
+              Powerful tools designed to simplify your daily operations and
+              drive growth.
+            </p>
           </div>
-        ))}
-      </div>
-    </Section>
+
+          {/* 2×2 grid */}
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+              {features.map((feature, i) => (
+                <div
+                  key={feature.title}
+                  className="reveal group bg-white rounded-2xl p-6 sm:p-7 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-primary/20 transition-all duration-300"
+                  style={{ animationDelay: `${i * 0.1}s` }}
+                >
+                  {/* Icon */}
+                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+                    {feature.icon}
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-lg font-bold text-heading mb-2">
+                    {feature.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-body text-sm leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Wave transition to next section */}
+      <WaveDivider fill="#ffffff" flip className="bg-bg-light" />
+    </>
   );
 }

@@ -1,6 +1,9 @@
+import Image from "next/image";
+import logo from "@/public/cnx247_logo-t.png";
+
 export default function Footer() {
   return (
-    <footer className="bg-white border-t border-gray-100">
+    <footer className="bg-heading border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 md:px-8 py-14">
         <div className="grid md:grid-cols-4 gap-10">
           {/* Brand */}
@@ -9,17 +12,17 @@ export default function Footer() {
               href="#"
               className="text-xl font-bold text-primary tracking-tight"
             >
-              CNX<span className="text-heading">247</span>
+              <Image src={logo} alt="CNX247 Logo" width={80} height={80} />
             </a>
-            <p className="mt-3 text-sm text-body leading-relaxed">
+            <p className="mt-3 text-sm text-gray-400 leading-relaxed">
               Smarter business operations, all in one platform.
             </p>
           </div>
 
           {/* Links */}
           <div>
-            <h4 className="text-sm font-semibold text-heading mb-4">Product</h4>
-            <ul className="space-y-2.5 text-sm text-body">
+            <h4 className="text-sm font-semibold text-white mb-4">Product</h4>
+            <ul className="space-y-2.5 text-sm text-gray-400">
               <li>
                 <a
                   href="#features"
@@ -47,8 +50,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-heading mb-4">Company</h4>
-            <ul className="space-y-2.5 text-sm text-body">
+            <h4 className="text-sm font-semibold text-white mb-4">Company</h4>
+            <ul className="space-y-2.5 text-sm text-gray-400">
               <li>
                 <a href="#" className="hover:text-primary transition-colors">
                   About
@@ -73,8 +76,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-sm font-semibold text-heading mb-4">Legal</h4>
-            <ul className="space-y-2.5 text-sm text-body">
+            <h4 className="text-sm font-semibold text-white mb-4">Legal</h4>
+            <ul className="space-y-2.5 text-sm text-gray-400">
               <li>
                 <a href="#" className="hover:text-primary transition-colors">
                   Privacy Policy
@@ -94,15 +97,15 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-body">
+        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-gray-400">
             &copy; {new Date().getFullYear()} CNX247. All rights reserved.
           </p>
           <div className="flex items-center gap-5">
             {/* Twitter/X */}
             <a
               href="#"
-              className="text-body hover:text-primary transition-colors"
+              className="text-gray-400 hover:text-primary transition-colors"
               aria-label="Twitter"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -112,7 +115,7 @@ export default function Footer() {
             {/* LinkedIn */}
             <a
               href="#"
-              className="text-body hover:text-primary transition-colors"
+              className="text-gray-400 hover:text-primary transition-colors"
               aria-label="LinkedIn"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -122,7 +125,7 @@ export default function Footer() {
             {/* GitHub */}
             <a
               href="#"
-              className="text-body hover:text-primary transition-colors"
+              className="text-gray-400 hover:text-primary transition-colors"
               aria-label="GitHub"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
