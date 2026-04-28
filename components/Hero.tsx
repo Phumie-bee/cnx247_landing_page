@@ -9,7 +9,7 @@ export default function Hero() {
   return (
     <>
       {/* Bottom fade for seamless transition */}
-      <div className="bg-white px-4 md:px-6 lg:px-8 pt-4  mt-16 h-[calc(100vh-5rem)]">
+      <div className="bg-white px-4 md:px-6 lg:px-8 pt-4  mt-14 h-[calc(100vh-3rem)]">
         <section
           className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 md:px-6 lg:px-8 rounded-3xl md:rounded-4xl border border-gray-200  h-full overflow-hidden"
           style={{
@@ -80,23 +80,24 @@ export default function Hero() {
             {/* Heading */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight animate-fade-in-up">
               <span className="text-heading">
-                Manage, approve &amp; collaborate
+                All Your Business Operations.
               </span>
               <br />
               <span className="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
-                all in one platform
+                One Intelligent System.
               </span>
             </h1>
 
             {/* Subtext */}
             <p className="text-body text-base md:text-lg mt-5 md:mt-6 max-w-md md:max-w-lg lg:max-w-xl mx-auto leading-relaxed animate-fade-in-up animate-delay-200">
-              Streamline communication, workflows, approvals and documents
-              seamlessly — securely from anywhere.
+              CNX247 brings your teams, processes, and data together into a
+              single platform—so you can manage operations, automate workflows,
+              and scale faster without complexity.
             </p>
 
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row justify-center gap-3 mt-8 md:mt-10 animate-fade-in-up animate-delay-300">
-              <Button href="#cta" className="hover:scale-105 bg-primary!">
+              <Button href="/contact" className="hover:scale-105 bg-primary!">
                 Get Started Free
               </Button>
               <Button

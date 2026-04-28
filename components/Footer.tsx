@@ -12,7 +12,7 @@ export default function Footer() {
               href="#"
               className="text-xl font-bold text-primary tracking-tight"
             >
-              <Image src={logo} alt="CNX247 Logo" width={80} height={80} />
+              <Image src={logo} alt="CNX247 Logo" width={120} height={120} />
             </a>
             <p className="mt-3 text-sm text-gray-400 leading-relaxed">
               Smarter business operations, all in one platform.

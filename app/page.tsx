@@ -1,6 +1,5 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import Features from "@/components/Features";
 import WhyCnx from "@/components/WhyCnx";
 import Stats from "@/components/Stats";
 import Pricing from "@/components/Pricing";
@@ -14,7 +13,6 @@ export default function Home() {
       <Hero />
       <WhyCnx />
       <Stats />
-      <Features />
       <Pricing />
       <CtaSection />
       <Footer />

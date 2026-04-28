@@ -6,9 +6,10 @@ import Image from "next/image";
 import logo from "@/public/cnx247_logo-t.png";
 
 const navLinks = [
-  { label: "Features", href: "#features" },
-  { label: "Why CNX247", href: "#why" },
-  { label: "Pricing", href: "#pricing" },
+  { label: "Why CNX247", href: "/#why" },
+  { label: "Products", href: "/products" },
+  { label: "Pricing", href: "/#pricing" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -24,15 +25,14 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
           ? "bg-white/80 backdrop-blur-xl border-b border-gray-200 shadow-sm"
           : "bg-transparent border-b border-transparent"
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between h-16">
-        <a href="#" className="text-xl font-bold text-primary tracking-tight">
-          <Image src={logo} alt="CNX247 Logo" width={80} height={80} />
+        <a href="/" className="text-xl font-bold text-primary tracking-tight">
+          <Image src={logo} alt="CNX247 Logo" width={120} height={120} />
         </a>
 
         {/* Desktop nav */}
@@ -51,7 +51,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-3">
           <Button
-            href="#cta"
+            href="/contact"
             className="hidden md:inline-flex px-5! py-2! text-sm! bg-primary!"
           >
             Get Started
@@ -90,9 +90,8 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ${
-          mobileOpen ? "max-h-64 border-t border-gray-100" : "max-h-0"
-        }`}
+        className={`md:hidden overflow-hidden transition-all duration-300 ${mobileOpen ? "max-h-64 border-t border-gray-100" : "max-h-0"
+          }`}
       >
         <div className="px-6 py-4 bg-white/95 backdrop-blur-xl space-y-1">
           {navLinks.map((link) => (
@@ -106,7 +105,7 @@ export default function Navbar() {
             </a>
           ))}
           <Button
-            href="#cta"
+            href="/contact"
             className="w-full mt-2 px-5! py-2.5! text-sm! bg-primary!"
           >
             Get Started

@@ -29,7 +29,7 @@ export default function CtaSection() {
             credit card required.
           </p>
           <div className="mt-10 animate-fade-in-up animate-delay-200">
-            <Button className="bg-primary! text-white! hover:bg-primary/90! hover:shadow-xl! px-10! py-4! text-base! font-bold">
+            <Button href="/contact" className="bg-primary! text-white! hover:bg-primary/90! hover:shadow-xl! px-10! py-4! text-base! font-bold">
               Get Started Free
             </Button>
           </div>

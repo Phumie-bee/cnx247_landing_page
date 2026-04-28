@@ -187,7 +187,7 @@ export default function Pricing() {
               <div className="mb-5">
                 {plan.isContactUs ? (
                   <a
-                    href="#cta"
+                    href="/contact"
                     className="text-primary font-extrabold text-3xl hover:underline"
                   >
                     {plan.price}
@@ -204,7 +204,7 @@ export default function Pricing() {
 
               {/* CTA button */}
               <a
-                href="#cta"
+                href="/contact"
                 className={`block w-full text-center py-3 rounded-xl font-semibold text-sm transition-all ${
                   plan.highlighted
                     ? "bg-primary text-white hover:bg-primary/90"
@@ -273,7 +273,7 @@ export default function Pricing() {
                         <div className="text-right shrink-0">
                           {plan.isContactUs ? (
                             <a
-                              href="#cta"
+                              href="/contact"
                               className="text-primary font-extrabold text-2xl sm:text-3xl hover:underline"
                               onClick={(e) => e.stopPropagation()}
                             >

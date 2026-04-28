@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"const l = require\\('./node_modules/lucide-react/dist/cjs/lucide-react.js'\\); console.log\\('CheckSquare:', !!l.CheckSquare, 'SquareCheck:', !!l.SquareCheck, 'CreditCard:', !!l.CreditCard\\);\")"
+    ]
+  }
+}
