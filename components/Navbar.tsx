@@ -43,87 +43,108 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        <ul className="hidden md:flex items-center gap-8 text-sm font-medium text-body">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="hover:text-primary transition-colors duration-200"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {pathname === "/contact" && (
+          <Link
+            href="/"
+            className="flex items-center gap-1.5 text-sm font-medium text-body hover:text-primary transition-colors duration-200"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+            </svg>
+            Back to home
+          </Link>
+        )}
 
-        <div className="flex items-center gap-3">
-          {pathname !== "/contact" && (
+        {pathname !== "/contact" && (
+          <ul className="hidden md:flex items-center gap-8 text-sm font-medium text-body">
+            {navLinks.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="hover:text-primary transition-colors duration-200"
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {pathname !== "/contact" && (
+          <div className="flex items-center gap-3">
             <Button
               href="/contact"
               className="hidden md:inline-flex px-5! py-2! text-sm! bg-primary!"
             >
               Get Started
             </Button>
-          )}
 
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
-            aria-label="Toggle menu"
-          >
-            <svg
-              className="w-5 h-5 text-heading"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
+            {/* Mobile hamburger */}
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              aria-label="Toggle menu"
             >
-              {mobileOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18 18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3.75 9h16.5m-16.5 6.75h16.5"
-                />
-              )}
-            </svg>
-          </button>
-        </div>
+              <svg
+                className="w-5 h-5 text-heading"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2}
+                stroke="currentColor"
+              >
+                {mobileOpen ? (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18 18 6M6 6l12 12"
+                  />
+                ) : (
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 9h16.5m-16.5 6.75h16.5"
+                  />
+                )}
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* Mobile menu */}
-      <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ${
-          mobileOpen ? "max-h-64 border-t border-gray-100" : "max-h-0"
-        }`}
-      >
-        <div className="px-6 py-4 bg-white/95 backdrop-blur-xl space-y-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="block py-2.5 text-sm font-medium text-body hover:text-primary transition-colors"
-            >
-              {link.label}
-            </Link>
-          ))}
-          {pathname !== "/contact" && (
+      {pathname !== "/contact" && (
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-300 ${
+            mobileOpen ? "max-h-64 border-t border-gray-100" : "max-h-0"
+          }`}
+        >
+          <div className="px-6 py-4 bg-white/95 backdrop-blur-xl space-y-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="block py-2.5 text-sm font-medium text-body hover:text-primary transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
             <Button
               href="/contact"
               className="w-full mt-2 px-5! py-2.5! text-sm! bg-primary!"
             >
               Get Started
             </Button>
-          )}
+          </div>
         </div>
-      </div>
+      )}
     </nav>
   );
 }

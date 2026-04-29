@@ -98,9 +98,14 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-gray-400">
-            &copy; {new Date().getFullYear()} CNX247. All rights reserved.
-          </p>
+          <div className="flex flex-col items-center md:items-start gap-1">
+            <p className="text-sm text-gray-400">
+              &copy; {new Date().getFullYear()} CNX247. All rights reserved.
+            </p>
+            <p className="text-[11px] text-white/25">
+              Powered by Connexxion Telecoms
+            </p>
+          </div>
           <div className="flex items-center gap-5">
             {/* Twitter/X */}
             <a

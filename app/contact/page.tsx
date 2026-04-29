@@ -26,7 +26,7 @@ const contactDetails = [
     icon: MapPin,
     label: "Location",
     value: "2A, Iller Crescent, Maitama, Abuja",
-    href: null,
+    href: "https://maps.app.goo.gl/2VkjjzMrkFX2vntA6?g_st=iw",
   },
   {
     icon: Clock,
@@ -110,18 +110,23 @@ export default function ContactPage() {
               </ul>
             </div>
 
-            <div className="flex items-center gap-2 pt-7 border-t border-white/10">
-              <CheckCircle
-                size={13}
-                className="text-primary shrink-0"
-                aria-hidden="true"
-              />
-              <p className="text-[12px] text-white/40 leading-snug">
-                We aim to respond within{" "}
-                <span className="text-primary font-semibold">
-                  2 business hours
-                </span>
-                .
+            <div className="pt-7 border-t border-white/10 space-y-3">
+              <div className="flex items-center gap-2">
+                <CheckCircle
+                  size={13}
+                  className="text-primary shrink-0"
+                  aria-hidden="true"
+                />
+                <p className="text-[12px] text-white/40 leading-snug">
+                  We aim to respond within{" "}
+                  <span className="text-primary font-semibold">
+                    2 business hours
+                  </span>
+                  .
+                </p>
+              </div>
+              <p className="text-[11px] text-white/20">
+                Powered by Connexxion Telecoms
               </p>
             </div>
           </div>
