@@ -191,15 +191,15 @@ function ProductSection({
 
   const TextSide = (
     <div className="relative max-w-xl">
-      <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-linear-to-br from-primary to-primary/80 text-white shadow-lg shadow-primary/25 ring-8 ring-primary/5 mb-7">
+      {/* <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-linear-to-br from-primary to-primary/80 text-white shadow-lg shadow-primary/25 ring-8 ring-primary/5 mb-7">
         <MainIcon size={26} strokeWidth={2} aria-hidden="true" />
-      </div>
+      </div> */}
 
-      <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-4">
+      {/* <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-primary mb-4">
         <span className="tabular-nums">{product.number}</span>
         <span className="mx-2 text-primary/30">·</span>
         {product.label}
-      </p>
+      </p> */}
 
       <h2 className="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-heading tracking-tight leading-[1.08] mb-4">
         {product.title}
@@ -209,9 +209,9 @@ function ProductSection({
         {product.subtitle}
       </p>
 
-      <p className="text-body text-[17px] leading-relaxed mb-9">
+      {/* <p className="text-body text-[17px] leading-relaxed mb-9">
         {product.description}
-      </p>
+      </p> */}
 
       <ul className="space-y-5 mb-10">
         {product.features.map((f) => {
@@ -241,7 +241,7 @@ function ProductSection({
         href="/contact"
         className="group inline-flex items-center gap-2 bg-heading text-white hover:bg-primary motion-safe:transition-colors px-5 py-3 rounded-xl text-sm font-semibold"
       >
-        Get started with {product.label}
+        Try now
         <ArrowRight
           size={16}
           strokeWidth={2.5}
@@ -257,9 +257,8 @@ function ProductSection({
   return (
     <section
       id={product.anchor}
-      className={`relative scroll-mt-20 ${
-        isFirst ? "pt-28 md:pt-32 pb-20 md:pb-28 lg:pb-32" : "py-20 md:py-28 lg:py-32"
-      } ${altBg ? "bg-bg-light/40" : "bg-white"}`}
+      className={`relative scroll-mt-20 ${isFirst ? "pt-28 md:pt-32 pb-20 md:pb-28 lg:pb-32" : "py-20 md:py-28 lg:py-32"
+        } ${altBg ? "bg-bg-light/40" : "bg-white"}`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
@@ -290,9 +289,8 @@ function MockupFrame({
     <div className="relative">
       <div
         aria-hidden="true"
-        className={`absolute -inset-8 ${
-          glow === "accent" ? "bg-accent/15" : "bg-primary/15"
-        } blur-3xl rounded-full pointer-events-none`}
+        className={`absolute -inset-8 ${glow === "accent" ? "bg-accent/15" : "bg-primary/15"
+          } blur-3xl rounded-full pointer-events-none`}
       />
       <div className="relative rounded-[2rem] bg-linear-to-br from-primary/25 via-accent/15 to-transparent p-px shadow-[0_30px_70px_-20px_rgba(46,147,125,0.25)]">
         <div className="relative rounded-[calc(2rem-1px)] bg-white overflow-hidden">
@@ -515,13 +513,12 @@ function HrMockup() {
                   </span>
                   <div
                     aria-hidden="true"
-                    className={`w-full h-9 rounded-md border ${
-                      isToday
-                        ? "bg-primary border-primary shadow-sm shadow-primary/30"
-                        : onLeave
-                          ? "bg-accent/30 border-accent/30"
-                          : "bg-white border-primary/10"
-                    }`}
+                    className={`w-full h-9 rounded-md border ${isToday
+                      ? "bg-primary border-primary shadow-sm shadow-primary/30"
+                      : onLeave
+                        ? "bg-accent/30 border-accent/30"
+                        : "bg-white border-primary/10"
+                      }`}
                   />
                 </div>
               );
@@ -690,36 +687,36 @@ function KanbanMockup() {
     dot: string;
     cards: { title: string; tag: string; progress?: number; due?: string }[];
   }[] = [
-    {
-      title: "To Do",
-      dot: "bg-body/40",
-      cards: [
-        { title: "User research interviews", tag: "Design", due: "Apr 28" },
-        { title: "API spec review", tag: "Eng", due: "Apr 30" },
-      ],
-    },
-    {
-      title: "In Progress",
-      dot: "bg-primary",
-      cards: [
-        {
-          title: "Launch page rebuild",
-          tag: "Marketing",
-          progress: 65,
-        },
-        {
-          title: "Onboarding flow v2",
-          tag: "Product",
-          progress: 30,
-        },
-      ],
-    },
-    {
-      title: "Done",
-      dot: "bg-accent",
-      cards: [{ title: "Wireframe sign-off", tag: "Design" }],
-    },
-  ];
+      {
+        title: "To Do",
+        dot: "bg-body/40",
+        cards: [
+          { title: "User research interviews", tag: "Design", due: "Apr 28" },
+          { title: "API spec review", tag: "Eng", due: "Apr 30" },
+        ],
+      },
+      {
+        title: "In Progress",
+        dot: "bg-primary",
+        cards: [
+          {
+            title: "Launch page rebuild",
+            tag: "Marketing",
+            progress: 65,
+          },
+          {
+            title: "Onboarding flow v2",
+            tag: "Product",
+            progress: 30,
+          },
+        ],
+      },
+      {
+        title: "Done",
+        dot: "bg-accent",
+        cards: [{ title: "Wireframe sign-off", tag: "Design" }],
+      },
+    ];
 
   return (
     <MockupFrame glow="accent">

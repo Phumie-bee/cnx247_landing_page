@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import WaveDivider from "@/components/WaveDivider";
 import useReveal from "@/hooks/useReveal";
 
@@ -143,6 +144,22 @@ export default function Features() {
                   </p>
                 </div>
               ))}
+            </div>
+
+            {/* Explore all features link */}
+            <div className="text-center mt-10 reveal">
+              <Link
+                href="/products"
+                className="group inline-flex items-center gap-2 text-primary font-semibold text-[15px] hover:text-accent transition-colors duration-200"
+              >
+                Explore all features
+                <span
+                  aria-hidden="true"
+                  className="inline-block motion-safe:transition-transform group-hover:translate-x-1"
+                >
+                  →
+                </span>
+              </Link>
             </div>
           </div>
         </div>
