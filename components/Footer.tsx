@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Image from "next/image";
 import logo from "@/public/cnx247_logo-t.png";
 
@@ -24,22 +25,19 @@ export default function Footer() {
             <h4 className="text-sm font-semibold text-white mb-4">Product</h4>
             <ul className="space-y-2.5 text-sm text-gray-400">
               <li>
-                <a
-                  href="#features"
-                  className="hover:text-primary transition-colors"
-                >
+                <Link href="/#features" className="hover:text-primary transition-colors">
                   Features
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <Link href="/#pricing" className="hover:text-primary transition-colors">
                   Pricing
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
-                  Integrations
-                </a>
+                <Link href="/products" className="hover:text-primary transition-colors">
+                  All Products
+                </Link>
               </li>
               <li>
                 <a href="#" className="hover:text-primary transition-colors">
@@ -68,9 +66,9 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-primary transition-colors">
+                <Link href="/contact" className="hover:text-primary transition-colors">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

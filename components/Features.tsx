@@ -110,9 +110,9 @@ export default function Features() {
             <p className="text-sm font-semibold text-primary tracking-widest uppercase mb-3 reveal">
               Features
             </p>
-            {/* <h2 className="text-3xl md:text-4xl font-extrabold text-heading tracking-tight reveal">
-              Everything you need to run your business
-            </h2> */}
+            <h2 className="text-3xl md:text-4xl font-extrabold text-heading tracking-tight reveal">
+              Everything You Need to Run Your Business
+            </h2>
             <p className="mt-4 text-body text-lg reveal">
               Powerful tools designed to simplify your daily operations and
               drive growth.

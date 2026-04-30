@@ -4,9 +4,9 @@ import Navbar from "@/components/Navbar";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
-  title: "Contact Us | CNX247",
+  title: "Book a Demo | CNX247 Business Management Software",
   description:
-    "Get in touch with the CNX247 team. Whether you have a question, need a demo, or want to explore a partnership — we reply fast.",
+    "Contact CNX247 to book a free demo of Nigeria's leading company management system. Our team responds within 2 hours.",
 };
 
 const contactDetails = [

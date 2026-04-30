@@ -24,9 +24,9 @@ export default function Hero() {
             <div className="bg-surface/80 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-lg overflow-hidden border border-primary/10">
               <Image
                 src={memoImg}
-                alt="Memo"
+                alt="CNX247 memo and internal communication feature"
                 priority
-                className="object-cover w-[140px] lg:w-[180px] xl:w-[220px] h-auto"
+                className="object-cover w-35 lg:w-45 xl:w-55 h-auto"
               />
             </div>
           </div>
@@ -36,9 +36,9 @@ export default function Hero() {
             <div className="bg-surface/80 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-lg overflow-hidden border border-primary/10">
               <Image
                 src={cashReqImg}
-                alt="Approval Request"
+                alt="CNX247 cash requisition and approval workflow"
                 priority
-                className="object-cover w-[140px] lg:w-[180px] xl:w-[220px] h-auto"
+                className="object-cover w-35 lg:w-45 xl:w-55 h-auto"
               />
             </div>
           </div>
@@ -49,9 +49,9 @@ export default function Hero() {
             <div className="bg-surface/80 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-lg overflow-hidden border border-primary/10">
               <Image
                 src={announcement}
-                alt="Announcement"
+                alt="CNX247 company announcement broadcasting tool"
                 priority
-                className="object-cover w-[140px] lg:w-[180px] xl:w-[220px] h-auto"
+                className="object-cover w-35 lg:w-45 xl:w-55 h-auto"
               />
             </div>
           </div>
@@ -62,9 +62,9 @@ export default function Hero() {
             <div className="bg-surface/80 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-lg overflow-hidden border border-primary/10">
               <Image
                 src={chatImg}
-                alt="Chat"
+                alt="CNX247 team chat and real-time collaboration"
                 priority
-                className="object-cover w-[140px] lg:w-[180px] xl:w-[220px] h-auto"
+                className="object-cover w-35 lg:w-45 xl:w-55 h-auto"
               />
             </div>
           </div>
@@ -76,6 +76,11 @@ export default function Hero() {
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
               Now available for teams of all sizes
             </div> */}
+
+            {/* Keyword pre-heading */}
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-4 animate-fade-in">
+              Business Management Software · Nigeria
+            </p>
 
             {/* Heading */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight animate-fade-in-up">

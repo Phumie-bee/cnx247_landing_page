@@ -32,6 +32,12 @@ export default function CtaSection() {
             <Button href="/contact" className="bg-primary! text-white! hover:bg-primary/90! hover:shadow-xl! px-10! py-4! text-base! font-bold">
               Get Started Free
             </Button>
+            <p className="mt-4 text-sm text-white/50">
+              or{" "}
+              <a href="/products" className="text-white/70 underline underline-offset-2 hover:text-primary transition-colors">
+                explore all features →
+              </a>
+            </p>
           </div>
 
           {/* Trust indicators */}

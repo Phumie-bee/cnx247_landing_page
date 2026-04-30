@@ -8,14 +8,15 @@ import Image from "next/image";
 import logo from "@/public/cnx247_logo-t.png";
 
 const navLinks = [
-  // { label: "Why CNX247", href: "/#why" },
-  { label: "Products", href: "/products" },
+  { label: "Why CNX247", href: "/#why" },
+  { label: "Features", href: "/#features" },
   { label: "Pricing", href: "/#pricing" },
-  { label: "Contact", href: "/contact" },
+  // { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
+  const isFocusedPage = pathname === "/contact" || pathname === "/products";
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -43,7 +44,7 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        {pathname === "/contact" && (
+        {isFocusedPage && (
           <Link
             href="/"
             className="flex items-center gap-1.5 text-sm font-medium text-body hover:text-primary transition-colors duration-200"
@@ -56,13 +57,17 @@ export default function Navbar() {
               stroke="currentColor"
               aria-hidden="true"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18"
+              />
             </svg>
             Back to home
           </Link>
         )}
 
-        {pathname !== "/contact" && (
+        {!isFocusedPage && (
           <ul className="hidden md:flex items-center gap-8 text-sm font-medium text-body">
             {navLinks.map((link) => (
               <li key={link.href}>
@@ -77,7 +82,7 @@ export default function Navbar() {
           </ul>
         )}
 
-        {pathname !== "/contact" && (
+        {!isFocusedPage && (
           <div className="flex items-center gap-3">
             <Button
               href="/contact"
@@ -119,7 +124,7 @@ export default function Navbar() {
       </div>
 
       {/* Mobile menu */}
-      {pathname !== "/contact" && (
+      {!isFocusedPage && (
         <div
           className={`md:hidden overflow-hidden transition-all duration-300 ${
             mobileOpen ? "max-h-64 border-t border-gray-100" : "max-h-0"

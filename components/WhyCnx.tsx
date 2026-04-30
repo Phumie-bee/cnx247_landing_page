@@ -48,9 +48,9 @@ export default function WhyCnx() {
             <p className="text-sm font-semibold text-primary tracking-widest uppercase mb-3 reveal">
               Why CNX247
             </p>
-            {/* <h2 className="text-3xl md:text-4xl font-extrabold text-heading tracking-tight reveal">
-              Built for teams that move fast
-            </h2> */}
+            <h2 className="text-3xl md:text-4xl font-extrabold text-heading tracking-tight reveal">
+              Why 2,000+ Nigerian Teams Choose CNX247
+            </h2>
             <p className="mt-5 text-body text-lg leading-relaxed reveal">
               Stop juggling a dozen tools. CNX247 brings everything together so
               your team can focus on what matters most—growing the business.
