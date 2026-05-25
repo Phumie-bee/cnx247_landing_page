@@ -105,6 +105,7 @@ export default function Hero() {
               <Button href="/contact" className="hover:scale-105 bg-primary!">
                 Get Started Free
               </Button>
+
               <Button
                 href="#features"
                 variant="secondary"

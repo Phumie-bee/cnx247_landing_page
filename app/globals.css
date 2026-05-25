@@ -166,3 +166,31 @@ body {
 .animate-blob-slow {
   animation: blob 18s ease-in-out 7s infinite;
 }
+
+/* Explore Features button — shimmer sweep */
+@keyframes shimmer-sweep {
+  0% { transform: translateX(-150%) skewX(-15deg); }
+  100% { transform: translateX(250%) skewX(-15deg); }
+}
+
+.animate-shimmer {
+  animation: shimmer-sweep 2.8s ease-in-out infinite;
+}
+
+/* Explore Features button — pulsing glow ring */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow:
+      0 0 0 0 rgba(46, 147, 125, 0.5),
+      0 4px 20px rgba(46, 147, 125, 0.25);
+  }
+  50% {
+    box-shadow:
+      0 0 0 10px rgba(46, 147, 125, 0),
+      0 4px 20px rgba(46, 147, 125, 0.25);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.4s ease-in-out infinite;
+}

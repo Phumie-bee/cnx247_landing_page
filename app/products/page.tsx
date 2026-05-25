@@ -820,6 +820,57 @@ export default function ProductsPage() {
     <>
       <Navbar />
       <main className="bg-white">
+        {/* Page header */}
+        <section
+          className="relative pt-32 pb-16 md:pt-40 md:pb-20 px-6 md:px-8 text-center overflow-hidden border-b border-gray-100"
+          style={{
+            backgroundColor: "#f8fafc",
+            backgroundImage: "radial-gradient(#dcdcdc 1px, transparent 1px)",
+            backgroundSize: "18px 18px",
+          }}
+        >
+          {/* soft white vignette so dots fade at edges */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_50%,rgba(255,255,255,0)_0%,rgba(255,255,255,0.85)_100%)] pointer-events-none" />
+
+          <div className="relative max-w-3xl mx-auto">
+            {/* badge */}
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-bold tracking-[0.18em] uppercase mb-6">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+              Platform Overview
+            </div>
+
+            <h1 className="text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold text-heading tracking-tight leading-[1.1] mb-5">
+              One Platform.{" "}
+              <span className="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
+                Every Tool You Need.
+              </span>
+            </h1>
+
+            <p className="text-body text-lg max-w-xl mx-auto leading-relaxed">
+              Four interconnected suites — built to work as one so your team
+              can move faster, collaborate better, and scale without friction.
+            </p>
+
+            {/* quick-jump nav pills */}
+            <div className="mt-9 flex flex-wrap justify-center gap-2.5">
+              {[
+                { label: "Customer & Growth", anchor: "#customer-growth" },
+                { label: "Team & HR", anchor: "#team-hr" },
+                { label: "Communication", anchor: "#communication" },
+                { label: "Project & Workflow", anchor: "#project-workflow" },
+              ].map((item) => (
+                <a
+                  key={item.anchor}
+                  href={item.anchor}
+                  className="px-4 py-2 rounded-full border border-gray-200 bg-white text-sm font-medium text-body shadow-sm hover:border-primary hover:text-primary transition-all duration-200"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {products.map((p, i) => (
           <ProductSection
             key={p.anchor}
