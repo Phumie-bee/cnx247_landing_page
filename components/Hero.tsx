@@ -1,155 +1,107 @@
 import Image from "next/image";
-import Button from "@/components/Button";
-import memoImg from "@/public/memo_img.png";
-import cashReqImg from "@/public/cash_req_img.png";
-import chatImg from "@/public/chat_img.png";
-import announcement from "@/public/announcement.png";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import { Playfair_Display } from "next/font/google";
+import heroBg from "@/public/handsAndComp.png";
+
+/* Cinematic photographic hero — full-bleed dark image under a transparent
+   navbar, oversized headline with a serif-italic accent, pill CTAs, and
+   floating module tags. */
+
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  style: ["italic"],
+  weight: ["500"],
+});
+
+const modules = [
+  "Memos",
+  "Approvals",
+  "Cash Requisitions",
+  "Team Chat",
+  "E-meeting",
+  "Announcements",
+];
 
 export default function Hero() {
   return (
-    <>
-      {/* Bottom fade for seamless transition */}
-      <div className="bg-white px-4 md:px-6 lg:px-8 pt-4  mt-14 h-[calc(100vh-3rem)]">
-        <section
-          className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center px-4 md:px-6 lg:px-8 rounded-3xl md:rounded-4xl border border-gray-200  h-full overflow-hidden"
-          style={{
-            backgroundColor: "#f8fafc",
-            backgroundImage: "radial-gradient(#dcdcdc 1px, transparent 1px)",
-            backgroundSize: "16px 16px",
-          }}
-        >
-          {/* Floating Cards — hidden on small screens */}
-          {/* Top Left — Memo */}
-          <div className="hidden md:block absolute left-6 lg:left-12 xl:left-20 top-10 lg:top-16 xl:top-24 animate-float -rotate-2">
-            <div className="bg-surface/80 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-lg overflow-hidden border border-primary/10">
-              <Image
-                src={memoImg}
-                alt="CNX247 memo and internal communication feature"
-                priority
-                className="object-cover w-35 lg:w-45 xl:w-55 h-auto"
-              />
-            </div>
-          </div>
+    <section className="relative isolate flex min-h-screen items-end overflow-hidden  text-white">
+      {/* Background photo */}
+      <Image
+        src={heroBg}
+        alt="A team member managing approvals and operations on CNX247"
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover object-[62%_center]"
+      />
+      {/* Legibility overlays */}
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-linear-to-r from-black/85 via-black/45 to-black/10"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-black/40"
+      />
 
-          {/* Top Right — Approval Request */}
-          <div className="hidden md:block absolute right-6 lg:right-12 xl:right-20 top-10 lg:top-16 xl:top-24 animate-float-reverse rotate-2">
-            <div className="bg-surface/80 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-lg overflow-hidden border border-primary/10">
-              <Image
-                src={cashReqImg}
-                alt="CNX247 cash requisition and approval workflow"
-                priority
-                className="object-cover w-35 lg:w-45 xl:w-55 h-auto"
-              />
-            </div>
-          </div>
+      {/* Content */}
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pb-12 md:px-10 md:pb-16 lg:px-14">
+        <h1 className="max-w-4xl animate-fade-in-up">
+          <span className="block text-4xl font-bold leading-[1.02] tracking-tight sm:text-5xl lg:text-7xl">
+            All Your Business Operations,
+          </span>
+          <span
+            className={`${playfair.className} mt-1 block text-5xl italic leading-[1.05] text-accent sm:text-6xl lg:text-8xl`}
+          >
+            Reimagined.
+          </span>
+        </h1>
 
-          {/* Bottom Right — Dashboard */}
+        <p className="mt-5 max-w-xl text-sm italic leading-relaxed text-white/80 md:text-base animate-fade-in-up animate-delay-200">
+          Where your teams, processes, and data come together — giving you the
+          clarity, control, and automation to run operations and scale faster.
+        </p>
 
-          <div className="hidden md:block absolute left-6 lg:left-12 xl:left-20 bottom-16 lg:bottom-24 xl:bottom-32 animate-float-slow rotate-2">
-            <div className="bg-surface/80 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-lg overflow-hidden border border-primary/10">
-              <Image
-                src={announcement}
-                alt="CNX247 company announcement broadcasting tool"
-                priority
-                className="object-cover w-35 lg:w-45 xl:w-55 h-auto"
-              />
-            </div>
-          </div>
+        {/* CTAs */}
+        <div className="mt-7 flex flex-wrap items-center gap-3 animate-fade-in-up animate-delay-300">
+          <Link
+            href="/contact"
+            className="rounded-full bg-white px-7 py-3.5 font-semibold text-heading transition-colors duration-300 hover:bg-accent hover:text-white"
+          >
+            Book a Demo
+          </Link>
+          <Link
+            href="#features"
+            className="group inline-flex items-center gap-3 rounded-full border border-white/40 py-1.5 pl-5 pr-1.5 font-semibold text-white transition-colors duration-300 hover:bg-white/10"
+          >
+            How It Works
+            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-heading transition-colors duration-300 group-hover:bg-accent group-hover:text-white">
+              <ArrowUpRight className="h-4 w-4" />
+            </span>
+          </Link>
+        </div>
 
-          {/* Bottom Left — Chat */}
-
-          <div className="hidden md:block absolute right-6 lg:right-12 xl:right-20 bottom-16 lg:bottom-24 xl:bottom-32 animate-float-delay -rotate-2">
-            <div className="bg-surface/80 backdrop-blur-sm rounded-xl lg:rounded-2xl shadow-lg overflow-hidden border border-primary/10">
-              <Image
-                src={chatImg}
-                alt="CNX247 team chat and real-time collaboration"
-                priority
-                className="object-cover w-35 lg:w-45 xl:w-55 h-auto"
-              />
-            </div>
-          </div>
-
-          {/* Center Content */}
-          <div className="relative z-10 max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto px-4 md:px-6 py-16 md:py-20 lg:py-24 text-center">
-            {/* Badge */}
-            {/* <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold tracking-wide mb-6 animate-fade-in">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-              Now available for teams of all sizes
-            </div> */}
-
-            {/* Keyword pre-heading */}
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-4 animate-fade-in">
-              Business Management Software · Nigeria
-            </p>
-
-            {/* Heading */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight animate-fade-in-up">
-              <span className="text-heading">
-                All Your Business Operations.
-              </span>
-              <br />
-              <span className="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
-                One Intelligent System.
-              </span>
-            </h1>
-
-            {/* Subtext */}
-            <p className="text-body text-base md:text-lg mt-5 md:mt-6 max-w-md md:max-w-lg lg:max-w-xl mx-auto leading-relaxed animate-fade-in-up animate-delay-200">
-              CNX247 brings your teams, processes, and data together into a
-              single platform—so you can manage operations, automate workflows,
-              and scale faster without complexity.
-            </p>
-
-            {/* Buttons */}
-            <div className="flex flex-col sm:flex-row justify-center gap-3 mt-8 md:mt-10 animate-fade-in-up animate-delay-300">
-              <Button href="/contact" className="hover:scale-105 bg-primary!">
-                Get Started Free
-              </Button>
-
-              <Button
-                href="#features"
-                variant="secondary"
-                className="hover:scale-105"
+        {/* Footer row: attribution + module tags */}
+        <div className="mt-10 flex flex-col gap-6 border-t border-white/15 pt-6 lg:flex-row lg:items-center lg:justify-between animate-fade-in animate-delay-500">
+          <p className="text-xs uppercase tracking-[0.2em] text-white/55">
+            Powered by{" "}
+            <span className="font-semibold text-white">
+              Connexxion Telecoms
+            </span>
+          </p>
+          <div className="flex flex-wrap gap-2 lg:justify-end">
+            {modules.map((m) => (
+              <span
+                key={m}
+                className="rounded-full border border-white/25 bg-white/5 px-4 py-1.5 text-sm font-medium text-white/90 backdrop-blur-sm"
               >
-                See How It Works
-              </Button>
-            </div>
-
-            {/* Social proof */}
-            <div className="mt-10 md:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in animate-delay-500">
-              <div className="flex -space-x-2.5">
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="w-9 h-9 rounded-full border-2 border-white bg-primary/15 flex items-center justify-center text-xs font-bold text-primary shadow-sm"
-                  >
-                    {["JA", "BK", "CR", "DS", "EL"][i]}
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-col items-center sm:items-start">
-                <div className="flex items-center gap-0.5 text-amber-400">
-                  {[...Array(5)].map((_, i) => (
-                    <svg
-                      key={i}
-                      className="w-4 h-4"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                    </svg>
-                  ))}
-                </div>
-                <p className="text-xs text-body mt-0.5">
-                  Trusted by{" "}
-                  <span className="font-semibold text-heading">2,000+</span>{" "}
-                  teams
-                </p>
-              </div>
-            </div>
+                {m}
+              </span>
+            ))}
           </div>
-        </section>
+        </div>
       </div>
-    </>
+    </section>
   );
 }

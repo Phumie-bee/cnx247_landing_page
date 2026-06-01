@@ -36,7 +36,7 @@ export default function WhyCnx() {
     <section
       id="why"
       ref={sectionRef}
-      className="relative py-20 md:py-28 overflow-hidden"
+      className="relative py-16 md:py-24 overflow-hidden"
     >
       {/* Single soft accent glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-primary/4 rounded-full blur-[160px] pointer-events-none" />

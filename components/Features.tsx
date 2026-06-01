@@ -1,192 +1,280 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import WaveDivider from "@/components/WaveDivider";
-import useReveal from "@/hooks/useReveal";
+import {
+  TrendingUp,
+  Briefcase,
+  MessageCircle,
+  Kanban,
+  Users,
+  CreditCard,
+  BarChart2,
+  UserCheck,
+  Calendar,
+  DollarSign,
+  MessageSquare,
+  Video,
+  FolderOpen,
+  CheckSquare,
+  GitBranch,
+  Activity,
+  ArrowRight,
+  type LucideIcon,
+} from "lucide-react";
 
-const features = [
+type Feature = { icon: LucideIcon; title: string; description: string };
+type Suite = {
+  icon: LucideIcon;
+  label: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  features: Feature[];
+};
+
+const suites: Suite[] = [
   {
-    title: "Workflow Automation",
+    icon: TrendingUp,
+    label: "Customer & Growth",
+    title: "Customer & Growth Tools",
+    subtitle: "Build relationships and grow revenue",
     description:
-      "Automate repetitive tasks and streamline your team's workflows with powerful drag-and-drop builders.",
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-        />
-      </svg>
-    ),
+      "Give your sales team real-time visibility into leads, clients, and invoices — so no deal ever slips through the cracks.",
+    features: [
+      {
+        icon: Users,
+        title: "CRM (Customer Management)",
+        description: "Track leads, manage deals, and monitor interactions.",
+      },
+      {
+        icon: CreditCard,
+        title: "Sales & Invoicing",
+        description: "Convert leads into paying customers seamlessly.",
+      },
+      {
+        icon: BarChart2,
+        title: "Analytics & Reports",
+        description: "Get insights to make smarter business decisions.",
+      },
+    ],
   },
   {
-    title: "Customer Management",
+    icon: Briefcase,
+    label: "Team & HR",
+    title: "Team & HR Management",
+    subtitle: "Empower your workforce",
     description:
-      "Keep track of every interaction, manage contacts, and build stronger relationships from one hub.",
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"
-        />
-      </svg>
-    ),
+      "Manage your people from a single hub — attendance, performance, payroll, and leave requests handled with zero friction.",
+    features: [
+      {
+        icon: UserCheck,
+        title: "Employee Management",
+        description: "Monitor staff, attendance, and performance centrally.",
+      },
+      {
+        icon: Calendar,
+        title: "Leave & Workflow",
+        description: "Automate approvals and internal processes.",
+      },
+      {
+        icon: DollarSign,
+        title: "Payroll & Records",
+        description: "Keep everything organized and accessible.",
+      },
+    ],
   },
   {
-    title: "Real-Time Analytics",
+    icon: MessageCircle,
+    label: "Communication",
+    title: "Communication & Collaboration",
+    subtitle: "Work smarter together",
     description:
-      "Get instant insights into your business performance with live dashboards and custom reports.",
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z"
-        />
-      </svg>
-    ),
+      "From instant chat to video meetings and shared drives, keep every conversation and file in one connected workspace.",
+    features: [
+      {
+        icon: MessageSquare,
+        title: "Chat & Calls",
+        description: "Instant messaging and voice calls across teams.",
+      },
+      {
+        icon: Video,
+        title: "Video Meetings",
+        description: "Host meetings and webinars effortlessly.",
+      },
+      {
+        icon: FolderOpen,
+        title: "Shared Workspace",
+        description: "Store, share, and collaborate on files.",
+      },
+    ],
   },
   {
-    title: "Team Collaboration",
+    icon: Kanban,
+    label: "Project & Workflow",
+    title: "Project & Workflow Management",
+    subtitle: "Deliver projects faster",
     description:
-      "Chat, assign tasks, share files, and keep your entire team aligned in one integrated workspace.",
-    icon: (
-      <svg
-        className="w-5 h-5"
-        fill="none"
-        viewBox="0 0 24 24"
-        strokeWidth={1.5}
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"
-        />
-      </svg>
-    ),
+      "Track every project from kickoff to completion with automated workflows that eliminate bottlenecks and keep teams moving.",
+    features: [
+      {
+        icon: CheckSquare,
+        title: "Task Management",
+        description: "Break projects into manageable, trackable tasks.",
+      },
+      {
+        icon: GitBranch,
+        title: "Workflow Automation",
+        description: "Automate approvals and multi-step processes.",
+      },
+      {
+        icon: Activity,
+        title: "Activity Tracking",
+        description: "Monitor progress and bottlenecks in real time.",
+      },
+    ],
   },
 ];
 
 export default function Features() {
-  const sectionRef = useReveal();
+  const [active, setActive] = useState(0);
+  const suite = suites[active];
+  const SuiteIcon = suite.icon;
 
   return (
-    <>
-      {/* Wave transition from previous section */}
-      <WaveDivider fill="#e4f3ee" />
+    <section
+      id="features"
+      className="relative overflow-hidden bg-[#0c0e0d] py-16 text-white md:py-24"
+    >
+      {/* Ambient glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-32 top-0 h-[30rem] w-[30rem] rounded-full bg-primary/20 blur-3xl"
+      />
 
-      <section
-        id="features"
-        ref={sectionRef}
-        className="relative bg-bg-light pb-20 md:pb-28 pt-10 md:pt-16 overflow-hidden"
-      >
-        <div className="relative max-w-7xl mx-auto px-6 md:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <p className="text-sm font-semibold text-primary tracking-widest uppercase mb-3 reveal">
-              Features
-            </p>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-heading tracking-tight reveal">
-              Everything You Need to Run Your Business
-            </h2>
-            <p className="mt-4 text-body text-lg reveal">
-              Powerful tools designed to simplify your daily operations and
-              drive growth.
-            </p>
+      <div className="relative mx-auto max-w-7xl px-6 md:px-8 lg:px-12">
+        {/* Header */}
+        <div className="relative max-w-2xl">
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">
+            Platform
+          </p>
+          <h2 className="mt-3 text-3xl font-bold leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
+            Everything you need to run your business,{" "}
+            <span className="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
+              in one place.
+            </span>
+          </h2>
+          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/60">
+            Four connected suites replace the dozens of disconnected tools your
+            team juggles today.
+          </p>
+        </div>
+
+        {/* Showcase */}
+        <div className="relative mt-10 grid items-center gap-10 lg:mt-14 lg:grid-cols-[minmax(0,0.9fr)_1.1fr] lg:gap-6">
+          {/* Left: suite selector */}
+          <div>
+            <ul className="space-y-2">
+              {suites.map((s, i) => {
+                const Icon = s.icon;
+                const isActive = i === active;
+                return (
+                  <li key={s.label}>
+                    <button
+                      type="button"
+                      onClick={() => setActive(i)}
+                      aria-pressed={isActive}
+                      className={`group flex w-full items-center gap-4 rounded-2xl px-4 py-3.5 text-left transition-all duration-300 ${
+                        isActive
+                          ? "bg-primary shadow-lg shadow-primary/25"
+                          : "hover:bg-white/5"
+                      }`}
+                    >
+                      <span
+                        className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-colors duration-300 ${
+                          isActive
+                            ? "bg-white/20 text-white"
+                            : "bg-white/5 text-white/70 group-hover:bg-white/10"
+                        }`}
+                      >
+                        <Icon className="h-5 w-5" strokeWidth={2} />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span
+                          className={`block font-semibold ${
+                            isActive ? "text-white" : "text-white/85"
+                          }`}
+                        >
+                          {s.label}
+                        </span>
+                        <span
+                          className={`block truncate text-sm ${
+                            isActive ? "text-white/80" : "text-white/40"
+                          }`}
+                        >
+                          {s.subtitle}
+                        </span>
+                      </span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <Link
+              href="/contact"
+              className="mt-5 inline-flex items-center gap-2 px-4 text-sm font-semibold text-accent transition-all duration-300 hover:gap-3"
+            >
+              See it in action
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
 
-          {/* 2×2 grid */}
-          <div className="max-w-5xl mx-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-              {features.map((feature, i) => (
-                <div
-                  key={feature.title}
-                  className="reveal group bg-white rounded-2xl p-6 sm:p-7 border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-primary/20 transition-all duration-300"
-                  style={{ animationDelay: `${i * 0.1}s` }}
-                >
-                  {/* Icon */}
-                  <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
-                    {feature.icon}
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-lg font-bold text-heading mb-2">
-                    {feature.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-body text-sm leading-relaxed">
-                    {feature.description}
-                  </p>
+          {/* Right: live preview */}
+          <div className="relative lg:translate-x-6">
+            <div
+              className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] shadow-2xl backdrop-blur-sm lg:origin-left lg:[transform:perspective(1800px)_rotateY(-13deg)]"
+            >
+              {/* Top bar */}
+              <div className="flex items-center gap-2 border-b border-white/10 px-5 py-4">
+                <span className="h-3 w-3 rounded-full bg-white/15" />
+                <span className="h-3 w-3 rounded-full bg-white/15" />
+                <span className="h-3 w-3 rounded-full bg-white/15" />
+                <div className="ml-3 flex items-center gap-2 text-sm font-medium text-white/80">
+                  <SuiteIcon className="h-4 w-4 text-accent" strokeWidth={2} />
+                  {suite.title}
                 </div>
-              ))}
-            </div>
+              </div>
 
-            {/* Explore all features CTA */}
-            <div className="mt-14 reveal flex justify-center">
-              <Link
-                href="/products"
-                className="group relative inline-flex items-center justify-center gap-2.5 px-9 py-4 rounded-xl font-bold text-base text-white overflow-hidden transition-all duration-300 hover:scale-105 animate-pulse-glow"
-                style={{
-                  background:
-                    "linear-gradient(135deg, #2e937d 0%, #5db89e 40%, #a9cf46 100%)",
-                }}
-              >
-                {/* shimmer sweep */}
-                <span
-                  className="animate-shimmer absolute inset-0 pointer-events-none"
-                  style={{
-                    background:
-                      "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%)",
-                    width: "60%",
-                  }}
-                />
-                <span className="relative">Explore All Features</span>
-                <svg
-                  className="relative w-4 h-4 transition-transform duration-300 group-hover:translate-x-1"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2.5}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-                  />
-                </svg>
-              </Link>
+              {/* Body — swaps per suite */}
+              <div key={active} className="animate-fade-in space-y-3 p-5">
+                <p className="text-sm leading-relaxed text-white/55">
+                  {suite.description}
+                </p>
+                {suite.features.map((f) => {
+                  const FIcon = f.icon;
+                  return (
+                    <div
+                      key={f.title}
+                      className="flex items-start gap-4 rounded-xl border border-white/10 bg-white/[0.03] p-4"
+                    >
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-accent">
+                        <FIcon className="h-5 w-5" strokeWidth={2} />
+                      </span>
+                      <div className="min-w-0">
+                        <p className="font-semibold text-white">{f.title}</p>
+                        <p className="text-sm leading-relaxed text-white/55">
+                          {f.description}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Wave transition to next section */}
-      <WaveDivider fill="#ffffff" flip className="bg-bg-light" />
-    </>
+      </div>
+    </section>
   );
 }

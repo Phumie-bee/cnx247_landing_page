@@ -1,7 +1,16 @@
 {
   "permissions": {
     "allow": [
-      "Bash(node -e \"const l = require\\('./node_modules/lucide-react/dist/cjs/lucide-react.js'\\); console.log\\('CheckSquare:', !!l.CheckSquare, 'SquareCheck:', !!l.SquareCheck, 'CreditCard:', !!l.CreditCard\\);\")"
+      "Bash(node -e \"const l = require\\('./node_modules/lucide-react/dist/cjs/lucide-react.js'\\); console.log\\('CheckSquare:', !!l.CheckSquare, 'SquareCheck:', !!l.SquareCheck, 'CreditCard:', !!l.CreditCard\\);\")",
+      "Bash(curl -s http://localhost:3000)",
+      "Bash(break)",
+      "mcp__plugin_playwright_playwright__browser_resize",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__plugin_playwright_playwright__browser_run_code_unsafe",
+      "mcp__plugin_playwright_playwright__browser_evaluate",
+      "Bash(rm -f components/HeroCentrilix.tsx components/HeroMap.tsx components/HeroBento.tsx components/HeroEditorial.tsx)",
+      "Bash(rm -rf app/preview)",
+      "Bash(rm -f hero-desktop.png hero-mobile.png concept-a-map.png concept-b-bento.png concept-b-bento2.png concept-c-editorial.png concept-d-desktop.png concept-d-mobile.png)"
     ]
   }
 }

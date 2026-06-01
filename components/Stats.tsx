@@ -2,11 +2,14 @@
 
 import useReveal from "@/hooks/useReveal";
 
+// Grounded, verifiable facts — no fabricated adoption or rating numbers.
+// "16+" = the SMB plan's tool count (Enterprise has more); "₦10k" = the
+// Startup entry price; "24/7" is core to the brand; uptime is an SLA.
 const stats = [
-  { value: "2,000+", label: "Teams worldwide" },
-  { value: "99.9%", label: "Uptime guarantee" },
-  { value: "5000", label: "Tasks completed" },
-  { value: "4.9/5", label: "Customer rating" },
+  { value: "16+", label: "Integrated tools, one platform" },
+  { value: "₦10k", label: "Starting price, per month" },
+  { value: "24/7", label: "Always-on cloud access" },
+  { value: "99.9%", label: "Uptime SLA" },
 ];
 
 export default function Stats() {
