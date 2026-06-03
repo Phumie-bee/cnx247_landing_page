@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import useReveal from "@/hooks/useReveal";
 import {
   TrendingUp,
   Briefcase,
@@ -138,12 +139,14 @@ const suites: Suite[] = [
 
 export default function Features() {
   const [active, setActive] = useState(0);
+  const sectionRef = useReveal();
   const suite = suites[active];
   const SuiteIcon = suite.icon;
 
   return (
     <section
       id="features"
+      ref={sectionRef}
       className="relative overflow-hidden bg-[#0c0e0d] py-16 text-white md:py-24"
     >
       {/* Ambient glow */}
@@ -155,16 +158,16 @@ export default function Features() {
       <div className="relative mx-auto max-w-7xl px-6 md:px-8 lg:px-12">
         {/* Header */}
         <div className="relative max-w-2xl">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-accent">
-            Platform
+          <p className="reveal text-xs font-bold uppercase tracking-[0.2em] text-accent">
+            Features
           </p>
-          <h2 className="mt-3 text-3xl font-bold leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
+          <h2 className="reveal mt-3 text-3xl font-bold leading-[1.1] tracking-tight md:text-4xl lg:text-5xl">
             Everything you need to run your business,{" "}
             <span className="bg-linear-to-r from-primary to-accent bg-clip-text text-transparent">
               in one place.
             </span>
           </h2>
-          <p className="mt-4 max-w-xl text-base leading-relaxed text-white/60">
+          <p className="reveal mt-4 max-w-xl text-base leading-relaxed text-white/60">
             Four connected suites replace the dozens of disconnected tools your
             team juggles today.
           </p>
@@ -179,7 +182,7 @@ export default function Features() {
                 const Icon = s.icon;
                 const isActive = i === active;
                 return (
-                  <li key={s.label}>
+                  <li key={s.label} className="reveal">
                     <button
                       type="button"
                       onClick={() => setActive(i)}
@@ -223,7 +226,7 @@ export default function Features() {
 
             <Link
               href="/contact"
-              className="mt-5 inline-flex items-center gap-2 px-4 text-sm font-semibold text-accent transition-all duration-300 hover:gap-3"
+              className="reveal mt-5 inline-flex items-center gap-2 px-4 text-sm font-semibold text-accent transition-all duration-300 hover:gap-3"
             >
               See it in action
               <ArrowRight className="h-4 w-4" />
@@ -231,32 +234,37 @@ export default function Features() {
           </div>
 
           {/* Right: live preview */}
-          <div className="relative lg:translate-x-6">
-            <div
-              className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] shadow-2xl backdrop-blur-sm lg:origin-left lg:[transform:perspective(1800px)_rotateY(-13deg)]"
-            >
+          <div className="reveal relative lg:translate-x-6">
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] shadow-2xl backdrop-blur-sm lg:origin-left lg:[transform:perspective(1800px)_rotateY(-13deg)]">
               {/* Top bar */}
               <div className="flex items-center gap-2 border-b border-white/10 px-5 py-4">
                 <span className="h-3 w-3 rounded-full bg-white/15" />
                 <span className="h-3 w-3 rounded-full bg-white/15" />
                 <span className="h-3 w-3 rounded-full bg-white/15" />
-                <div className="ml-3 flex items-center gap-2 text-sm font-medium text-white/80">
+                <div
+                  key={active}
+                  className="animate-features-in ml-3 flex items-center gap-2 text-sm font-medium text-white/80"
+                >
                   <SuiteIcon className="h-4 w-4 text-accent" strokeWidth={2} />
                   {suite.title}
                 </div>
               </div>
 
-              {/* Body — swaps per suite */}
-              <div key={active} className="animate-fade-in space-y-3 p-5">
-                <p className="text-sm leading-relaxed text-white/55">
+              {/* Body — swaps per suite with staggered entrance */}
+              <div key={active} className="space-y-3 p-5">
+                <p
+                  className="animate-features-in text-sm leading-relaxed text-white/55"
+                  style={{ animationDelay: "0ms" }}
+                >
                   {suite.description}
                 </p>
-                {suite.features.map((f) => {
+                {suite.features.map((f, i) => {
                   const FIcon = f.icon;
                   return (
                     <div
                       key={f.title}
-                      className="flex items-start gap-4 rounded-xl border border-white/10 bg-white/[0.03] p-4"
+                      style={{ animationDelay: `${(i + 1) * 70}ms` }}
+                      className="animate-features-in flex items-start gap-4 rounded-xl border border-white/10 bg-white/[0.03] p-4"
                     >
                       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-accent">
                         <FIcon className="h-5 w-5" strokeWidth={2} />

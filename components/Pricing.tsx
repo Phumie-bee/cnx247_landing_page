@@ -1,4 +1,7 @@
+"use client";
+
 import { CheckCircle2 } from "lucide-react";
+import useReveal from "@/hooks/useReveal";
 
 type Plan = {
   name: string;
@@ -81,21 +84,24 @@ const plans: Plan[] = [
 ];
 
 export default function Pricing() {
+  const sectionRef = useReveal();
+
   return (
     <section
       id="pricing"
+      ref={sectionRef}
       className="relative overflow-hidden bg-white py-20 md:py-28"
     >
       {/* Giant watermark heading */}
       <h2
         aria-label="Pricing"
-        className="pointer-events-none absolute inset-x-0 top-10 select-none text-center text-[26vw] font-extrabold leading-none tracking-tight text-heading/[0.06] md:top-16 md:text-[17rem]"
+        className="pointer-events-none absolute inset-x-0 top-1 select-none text-center text-[26vw] font-extrabold leading-none tracking-tight text-heading/6 md:top-1 md:text-[17rem]"
       >
         Pricing
       </h2>
 
       <div className="relative mx-auto max-w-7xl px-6 md:px-8">
-        <div className="mt-[24vw] grid items-start gap-6 md:mt-40 lg:grid-cols-3 lg:gap-7">
+        <div className="mt-14 grid items-start gap-6 md:mt-14 lg:grid-cols-3 lg:gap-7">
           {plans.map((plan, i) => {
             const prev = i > 0 ? plans[i - 1] : null;
             const extras = prev
@@ -105,7 +111,8 @@ export default function Pricing() {
             return (
               <div
                 key={plan.name}
-                className="flex flex-col rounded-3xl border border-gray-200 bg-gradient-to-b from-white to-gray-50/40 p-7 shadow-sm transition-shadow duration-300 hover:shadow-md md:p-8"
+                style={{ "--plan-accent": plan.accent } as React.CSSProperties}
+                className="group reveal flex flex-col rounded-3xl border border-gray-200 bg-gradient-to-b from-white to-gray-50/40 p-7 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-[var(--plan-accent)] hover:shadow-xl md:p-8"
               >
                 <h3
                   className="text-2xl font-bold"
@@ -124,13 +131,13 @@ export default function Pricing() {
                       <span className="mt-2 self-start text-2xl font-bold text-heading">
                         ₦
                       </span>
-                      <span className="text-5xl font-extrabold tracking-tight text-heading md:text-6xl">
+                      <span className="inline-block text-5xl font-extrabold tracking-tight text-heading transition-transform duration-300 group-hover:scale-105 md:text-6xl">
                         {plan.amount}
                       </span>
                       <span className="mb-2 text-sm text-body">/month</span>
                     </>
                   ) : (
-                    <span className="text-5xl font-extrabold tracking-tight text-heading md:text-6xl">
+                    <span className="inline-block text-5xl font-extrabold tracking-tight text-heading transition-transform duration-300 group-hover:scale-105 md:text-6xl">
                       {plan.priceLabel}
                     </span>
                   )}
@@ -139,7 +146,7 @@ export default function Pricing() {
                 {/* CTA */}
                 <a
                   href="/contact"
-                  className="mt-7 block rounded-xl border border-gray-300 py-3.5 text-center font-semibold text-heading transition-all duration-300 hover:border-primary hover:text-primary"
+                  className="mt-7 block rounded-xl border border-gray-300 py-3.5 text-center font-semibold text-heading transition-all duration-300 hover:border-[var(--plan-accent)] hover:bg-[var(--plan-accent)] hover:text-white"
                 >
                   Get Started
                 </a>
@@ -154,10 +161,10 @@ export default function Pricing() {
                   {extras.map((feature) => (
                     <li
                       key={feature}
-                      className="flex items-center gap-2.5 text-sm text-body"
+                      className="group/item flex cursor-default items-center gap-2.5 text-sm text-body transition-transform duration-200 hover:translate-x-1"
                     >
                       <CheckCircle2
-                        className="h-5 w-5 shrink-0"
+                        className="h-5 w-5 shrink-0 transition-transform duration-200 group-hover/item:scale-110"
                         strokeWidth={2}
                         style={{ color: plan.accent }}
                       />
