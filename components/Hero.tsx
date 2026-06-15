@@ -36,6 +36,7 @@ export default function Hero() {
         alt="A Nigerian team collaborating on business operations with CNX247"
         fill
         priority
+        placeholder="blur"
         sizes="100vw"
         className="animate-hero-zoom object-cover object-[70%_center]"
       />

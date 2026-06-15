@@ -10,7 +10,7 @@ export default function CtaSection() {
       >
         {/* Background image */}
         <Image
-          src="/handsAndComp.png"
+          src="/handsAndComp.jpg"
           alt=""
           fill
           className="object-cover opacity-65"
