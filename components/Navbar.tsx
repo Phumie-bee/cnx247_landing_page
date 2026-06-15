@@ -8,10 +8,8 @@ import Image from "next/image";
 import logo from "@/public/cnx247_logo-t.png";
 
 const navLinks = [
-  { label: "Why CNX247", href: "/#why" },
   { label: "Features", href: "/#features" },
   { label: "Pricing", href: "/#pricing" },
-  // { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
@@ -39,7 +37,7 @@ export default function Navbar() {
           ? "bg-transparent border-b border-transparent"
           : isHome
             ? "bg-black/65 backdrop-blur-xl border-b border-white/10 shadow-sm"
-            : "bg-white/80 backdrop-blur-xl border-b border-gray-200 shadow-sm"
+            : "bg-white/80 backdrop-blur-xl border-b border-border shadow-sm"
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-8 flex items-center justify-between h-16">
@@ -75,40 +73,38 @@ export default function Navbar() {
         )}
 
         {!isFocusedPage && (
-          <ul
-            className={`hidden md:flex items-center gap-8 text-sm font-medium transition-colors duration-300 ${
-              lightText ? "text-white/85" : "text-body"
-            }`}
-          >
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={`transition-colors duration-200 ${
-                    lightText ? "hover:text-accent" : "hover:text-primary"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        )}
+          <div className="flex items-center gap-6 md:gap-8">
+            <ul
+              className={`hidden md:flex items-center gap-8 text-sm font-medium transition-colors duration-300 ${
+                lightText ? "text-white/85" : "text-body"
+              }`}
+            >
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={`transition-colors duration-200 ${
+                      lightText ? "hover:text-accent" : "hover:text-primary"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
 
-        {!isFocusedPage && (
-          <div className="flex items-center gap-3">
             <Button
               href="/contact"
-              className="hidden md:inline-flex px-5! py-2! text-sm! bg-primary!"
+              className="hidden md:inline-flex px-5! py-2! text-sm! bg-white! text-heading! rounded-full! hover:bg-accent! transition-colors duration-300 "
             >
-              Get Started
+              Contact Us
             </Button>
 
             {/* Mobile hamburger */}
             <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className={`md:hidden p-2 rounded-lg transition-colors ${
-                lightText ? "hover:bg-white/10" : "hover:bg-gray-100"
+                lightText ? "hover:bg-white/10" : "hover:bg-subtle"
               }`}
               aria-label="Toggle menu"
             >
@@ -143,7 +139,7 @@ export default function Navbar() {
         <div
           className={`md:hidden overflow-hidden transition-all duration-300 ${
             mobileOpen
-              ? `max-h-64 border-t ${lightText ? "border-white/10" : "border-gray-100"}`
+              ? `max-h-64 border-t ${lightText ? "border-white/10" : "border-border"}`
               : "max-h-0"
           }`}
         >
@@ -170,7 +166,7 @@ export default function Navbar() {
               href="/contact"
               className="w-full mt-2 px-5! py-2.5! text-sm! bg-primary!"
             >
-              Get Started
+              Contact Us
             </Button>
           </div>
         </div>

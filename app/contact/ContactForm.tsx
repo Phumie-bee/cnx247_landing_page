@@ -115,7 +115,7 @@ export default function ContactForm() {
 
   const base =
     "w-full rounded-xl border px-4 py-3 text-[14px] text-heading placeholder:text-body/40 bg-white outline-none motion-safe:transition-all duration-200 focus:ring-2 focus:ring-offset-0";
-  const normal = "border-gray-200 focus:border-primary/40 focus:ring-primary/15";
+  const normal = "border-border focus:border-primary/40 focus:ring-primary/15";
   const errored = "border-red-300 focus:border-red-400 focus:ring-red-100";
 
   return (

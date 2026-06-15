@@ -1,0 +1,322 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "CNX247 Logo" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "CNX247 Logo" [ref=e5]
+      - generic [ref=e6]:
+        - link "Contact Us" [ref=e7] [cursor=pointer]:
+          - /url: /contact
+        - button "Toggle menu" [ref=e8]:
+          - img [ref=e9]
+    - generic [ref=e11]:
+      - link "Features" [ref=e12] [cursor=pointer]:
+        - /url: /#features
+      - link "Pricing" [ref=e13] [cursor=pointer]:
+        - /url: /#pricing
+      - link "Contact Us" [ref=e14] [cursor=pointer]:
+        - /url: /contact
+  - generic [ref=e15]:
+    - img "A Nigerian team collaborating on business operations with CNX247" [ref=e16]
+    - generic [ref=e19]:
+      - heading "Your Whole Business, Reimagined." [level=1] [ref=e20]:
+        - generic [ref=e21]: Your Whole Business,
+        - generic [ref=e22]: Reimagined.
+      - paragraph [ref=e23]: Where your teams, processes, and data come together — giving you the clarity, control, and automation to run operations and scale faster.
+      - generic [ref=e24]:
+        - generic [ref=e25]:
+          - list [ref=e26]:
+            - listitem [ref=e27]:
+              - img [ref=e29]
+              - text: CRM, HR, payroll, projects & chat — in one login
+            - listitem [ref=e31]:
+              - img [ref=e33]
+              - text: Automate approvals, requisitions & workflows
+            - listitem [ref=e35]:
+              - img [ref=e37]
+              - text: Built for how Nigerian teams actually run
+          - generic [ref=e39]:
+            - link "Book a Demo" [ref=e40] [cursor=pointer]:
+              - /url: /contact
+            - link "How It Works" [ref=e41] [cursor=pointer]:
+              - /url: "#features"
+              - text: How It Works
+              - img [ref=e43]
+          - paragraph [ref=e46]: Powered by Connexxion Telecoms
+        - generic [ref=e47]:
+          - generic [ref=e49]: Memos
+          - generic [ref=e50]:
+            - generic [ref=e51]: Approvals
+            - generic [ref=e52]: Cash Requisitions
+          - generic [ref=e53]:
+            - generic [ref=e54]: Team Chat
+            - generic [ref=e55]: E-meeting
+            - generic [ref=e56]: Announcements
+          - generic [ref=e57]:
+            - generic [ref=e58]: CRM
+            - generic [ref=e59]: Workflow
+            - generic [ref=e60]: Attendance
+            - generic [ref=e61]: Performance
+  - generic [ref=e65]:
+    - paragraph [ref=e66]: Why CNX247
+    - heading "Why 2,000+ Nigerian Teams Choose CNX247" [level=2] [ref=e67]
+    - paragraph [ref=e68]: Stop juggling a dozen tools. CNX247 brings everything together so your team can focus on what matters most—growing the business.
+    - list [ref=e69]:
+      - listitem [ref=e70]:
+        - img [ref=e71]
+        - generic [ref=e73]: Unified platform for CRM, tasks, HR, and more
+      - listitem [ref=e74]:
+        - img [ref=e75]
+        - generic [ref=e77]: Real-time collaboration across departments
+      - listitem [ref=e78]:
+        - img [ref=e79]
+        - generic [ref=e81]: Powerful automations that save hours every week
+      - listitem [ref=e82]:
+        - img [ref=e83]
+        - generic [ref=e85]: Enterprise-grade security and compliance
+      - listitem [ref=e86]:
+        - img [ref=e87]
+        - generic [ref=e89]: Seamless integrations with your existing tools
+      - listitem [ref=e90]:
+        - img [ref=e91]
+        - generic [ref=e93]: Dedicated support and onboarding assistance
+  - generic [ref=e97]:
+    - generic [ref=e98]:
+      - paragraph [ref=e99]: 16+
+      - paragraph [ref=e100]: Integrated tools, one platform
+    - generic [ref=e101]:
+      - paragraph [ref=e102]: ₦10k
+      - paragraph [ref=e103]: Starting price, per month
+    - generic [ref=e104]:
+      - paragraph [ref=e105]: 24/7
+      - paragraph [ref=e106]: Always-on cloud access
+    - generic [ref=e107]:
+      - paragraph [ref=e108]: 99.9%
+      - paragraph [ref=e109]: Uptime SLA
+  - generic [ref=e111]:
+    - generic [ref=e112]:
+      - paragraph [ref=e113]: Features
+      - heading "Everything you need to run your business, in one place." [level=2] [ref=e114]
+      - paragraph [ref=e115]: Four connected suites replace the dozens of disconnected tools your team juggles today.
+    - generic [ref=e116]:
+      - generic [ref=e117]:
+        - list [ref=e118]:
+          - listitem [ref=e119]:
+            - button "Customer & Growth Build relationships and grow revenue" [pressed] [ref=e120]:
+              - img [ref=e122]
+              - generic [ref=e125]:
+                - generic [ref=e126]: Customer & Growth
+                - generic [ref=e127]: Build relationships and grow revenue
+          - listitem [ref=e128]:
+            - button "Team & HR Empower your workforce" [ref=e129]:
+              - img [ref=e131]
+              - generic [ref=e134]:
+                - generic [ref=e135]: Team & HR
+                - generic [ref=e136]: Empower your workforce
+          - listitem [ref=e137]:
+            - button "Communication Work smarter together" [ref=e138]:
+              - img [ref=e140]
+              - generic [ref=e142]:
+                - generic [ref=e143]: Communication
+                - generic [ref=e144]: Work smarter together
+          - listitem [ref=e145]:
+            - button "Project & Workflow Deliver projects faster" [ref=e146]:
+              - img [ref=e148]
+              - generic [ref=e149]:
+                - generic [ref=e150]: Project & Workflow
+                - generic [ref=e151]: Deliver projects faster
+        - link "See it in action" [ref=e152] [cursor=pointer]:
+          - /url: /contact
+          - text: See it in action
+          - img [ref=e153]
+      - generic [ref=e156]:
+        - generic [ref=e161]:
+          - img [ref=e162]
+          - text: Customer & Growth Tools
+        - generic [ref=e165]:
+          - paragraph [ref=e166]: Give your sales team real-time visibility into leads, clients, and invoices — so no deal ever slips through the cracks.
+          - generic [ref=e167]:
+            - img [ref=e169]
+            - generic [ref=e174]:
+              - paragraph [ref=e175]: CRM (Customer Management)
+              - paragraph [ref=e176]: Track leads, manage deals, and monitor interactions.
+          - generic [ref=e177]:
+            - img [ref=e179]
+            - generic [ref=e181]:
+              - paragraph [ref=e182]: Sales & Invoicing
+              - paragraph [ref=e183]: Convert leads into paying customers seamlessly.
+          - generic [ref=e184]:
+            - img [ref=e186]
+            - generic [ref=e187]:
+              - paragraph [ref=e188]: Analytics & Reports
+              - paragraph [ref=e189]: Get insights to make smarter business decisions.
+  - generic [ref=e190]:
+    - heading "Pricing" [level=2]
+    - generic [ref=e192]:
+      - generic [ref=e193]:
+        - heading "Startup" [level=3] [ref=e194]
+        - paragraph [ref=e195]: Best for beginners who want to explore the platform.
+        - generic [ref=e196]:
+          - generic [ref=e197]: ₦
+          - generic [ref=e198]: 10,000
+          - generic [ref=e199]: /month
+        - link "Get Started" [ref=e200] [cursor=pointer]:
+          - /url: /contact
+        - list [ref=e201]:
+          - listitem [ref=e202]:
+            - img [ref=e203]
+            - generic [ref=e206]: Email
+          - listitem [ref=e207]:
+            - img [ref=e208]
+            - generic [ref=e211]: Announcement
+          - listitem [ref=e212]:
+            - img [ref=e213]
+            - generic [ref=e216]: Workgroup
+          - listitem [ref=e217]:
+            - img [ref=e218]
+            - generic [ref=e221]: Cash Requisition
+          - listitem [ref=e222]:
+            - img [ref=e223]
+            - generic [ref=e226]: Trainings
+          - listitem [ref=e227]:
+            - img [ref=e228]
+            - generic [ref=e231]: Reminders
+          - listitem [ref=e232]:
+            - img [ref=e233]
+            - generic [ref=e236]: CRM
+          - listitem [ref=e237]:
+            - img [ref=e238]
+            - generic [ref=e241]: Mobile App
+      - generic [ref=e242]:
+        - heading "SMB" [level=3] [ref=e243]
+        - paragraph [ref=e244]: Perfect for professionals who need advanced tools.
+        - generic [ref=e245]:
+          - generic [ref=e246]: ₦
+          - generic [ref=e247]: 18,000
+          - generic [ref=e248]: /month
+        - link "Get Started" [ref=e249] [cursor=pointer]:
+          - /url: /contact
+        - list [ref=e250]:
+          - listitem [ref=e251]: "Everything in Startup, plus:"
+          - listitem [ref=e252]:
+            - img [ref=e253]
+            - generic [ref=e256]: Chat
+          - listitem [ref=e257]:
+            - img [ref=e258]
+            - generic [ref=e261]: Query
+          - listitem [ref=e262]:
+            - img [ref=e263]
+            - generic [ref=e266]: Workflow
+          - listitem [ref=e267]:
+            - img [ref=e268]
+            - generic [ref=e271]: GDrive
+          - listitem [ref=e272]:
+            - img [ref=e273]
+            - generic [ref=e276]: eMeeting
+          - listitem [ref=e277]:
+            - img [ref=e278]
+            - generic [ref=e281]: Leave Administration
+          - listitem [ref=e282]:
+            - img [ref=e283]
+            - generic [ref=e286]: Performance Management
+          - listitem [ref=e287]:
+            - img [ref=e288]
+            - generic [ref=e291]: Attendance
+      - generic [ref=e292]:
+        - heading "Enterprise" [level=3] [ref=e293]
+        - paragraph [ref=e294]: For businesses and power users who want it all.
+        - generic [ref=e296]: Custom
+        - link "Get Started" [ref=e297] [cursor=pointer]:
+          - /url: /contact
+        - list [ref=e298]:
+          - listitem [ref=e299]: "Everything in SMB, plus:"
+          - listitem [ref=e300]:
+            - img [ref=e301]
+            - generic [ref=e304]: Memo
+          - listitem [ref=e305]:
+            - img [ref=e306]
+            - generic [ref=e309]: Circular
+          - listitem [ref=e310]:
+            - img [ref=e311]
+            - generic [ref=e314]: Registry
+  - generic [ref=e317]:
+    - heading "Start using CNX247 today" [level=2] [ref=e318]
+    - paragraph [ref=e319]: Join thousands of teams already transforming their operations. No credit card required.
+    - link "Get Started Free" [ref=e321] [cursor=pointer]:
+      - /url: /contact
+    - generic [ref=e322]:
+      - generic [ref=e323]:
+        - img [ref=e324]
+        - text: No credit card required
+      - generic [ref=e326]:
+        - img [ref=e327]
+        - text: 14-day free trial
+      - generic [ref=e329]:
+        - img [ref=e330]
+        - text: Cancel anytime
+  - contentinfo [ref=e332]:
+    - generic [ref=e333]:
+      - generic [ref=e334]:
+        - generic [ref=e335]:
+          - link "CNX247 Logo" [ref=e336] [cursor=pointer]:
+            - /url: "#"
+            - img "CNX247 Logo" [ref=e337]
+          - paragraph [ref=e338]: Smarter business operations, all in one platform.
+        - generic [ref=e339]:
+          - heading "Product" [level=4] [ref=e340]
+          - list [ref=e341]:
+            - listitem [ref=e342]:
+              - link "Features" [ref=e343] [cursor=pointer]:
+                - /url: /#features
+            - listitem [ref=e344]:
+              - link "Pricing" [ref=e345] [cursor=pointer]:
+                - /url: /#pricing
+            - listitem [ref=e346]:
+              - link "All Products" [ref=e347] [cursor=pointer]:
+                - /url: /#features
+            - listitem [ref=e348]:
+              - link "Changelog" [ref=e349] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e350]:
+          - heading "Company" [level=4] [ref=e351]
+          - list [ref=e352]:
+            - listitem [ref=e353]:
+              - link "About" [ref=e354] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e355]:
+              - link "Blog" [ref=e356] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e357]:
+              - link "Careers" [ref=e358] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e359]:
+              - link "Contact" [ref=e360] [cursor=pointer]:
+                - /url: /contact
+        - generic [ref=e361]:
+          - heading "Legal" [level=4] [ref=e362]
+          - list [ref=e363]:
+            - listitem [ref=e364]:
+              - link "Privacy Policy" [ref=e365] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e366]:
+              - link "Terms of Service" [ref=e367] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e368]:
+              - link "Cookies" [ref=e369] [cursor=pointer]:
+                - /url: "#"
+      - generic [ref=e370]:
+        - generic [ref=e371]:
+          - paragraph [ref=e372]: © 2026 CNX247. All rights reserved.
+          - paragraph [ref=e373]: Powered by Connexxion Telecoms
+        - generic [ref=e374]:
+          - link "Twitter" [ref=e375] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e376]
+          - link "LinkedIn" [ref=e378] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e379]
+          - link "GitHub" [ref=e381] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e382]
+  - button "Open Next.js Dev Tools" [ref=e389] [cursor=pointer]:
+    - img [ref=e390]

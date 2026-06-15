@@ -1,0 +1,367 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e2]:
+    - generic [ref=e3]:
+      - link "CNX247 Logo" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img "CNX247 Logo" [ref=e5]
+      - link "Back to home" [ref=e6] [cursor=pointer]:
+        - /url: /
+        - img [ref=e7]
+        - text: Back to home
+  - main [ref=e9]:
+    - generic [ref=e11]:
+      - generic [ref=e12]: Platform Overview
+      - heading "One Platform. Every Tool You Need." [level=1] [ref=e14]
+      - paragraph [ref=e15]: Four interconnected suites — built to work as one so your team can move faster, collaborate better, and scale without friction.
+      - generic [ref=e16]:
+        - link "Customer & Growth" [ref=e17] [cursor=pointer]:
+          - /url: "#customer-growth"
+        - link "Team & HR" [ref=e18] [cursor=pointer]:
+          - /url: "#team-hr"
+        - link "Communication" [ref=e19] [cursor=pointer]:
+          - /url: "#communication"
+        - link "Project & Workflow" [ref=e20] [cursor=pointer]:
+          - /url: "#project-workflow"
+    - generic [ref=e23]:
+      - generic [ref=e25]:
+        - heading "Customer & Growth Tools" [level=2] [ref=e26]
+        - paragraph [ref=e27]: Build relationships and grow revenue.
+        - list [ref=e28]:
+          - listitem [ref=e29]:
+            - img [ref=e31]
+            - generic [ref=e36]:
+              - heading "CRM (Customer Management)" [level=3] [ref=e37]
+              - paragraph [ref=e38]: Track leads, manage deals, and monitor every customer interaction from a single dashboard.
+          - listitem [ref=e39]:
+            - img [ref=e41]
+            - generic [ref=e43]:
+              - heading "Sales & Invoicing" [level=3] [ref=e44]
+              - paragraph [ref=e45]: Convert qualified leads into paying customers with branded invoices and automated reminders.
+          - listitem [ref=e46]:
+            - img [ref=e48]
+            - generic [ref=e49]:
+              - heading "Analytics & Reports" [level=3] [ref=e50]
+              - paragraph [ref=e51]: Real-time dashboards turn raw activity into the insights your sales leaders actually use.
+        - link "Try now" [ref=e52] [cursor=pointer]:
+          - /url: /contact
+          - text: Try now
+          - img [ref=e53]
+      - generic [ref=e60]:
+        - generic [ref=e61]:
+          - generic [ref=e62]:
+            - paragraph [ref=e63]: Pipeline
+            - heading "₦4.2M" [level=4] [ref=e64]
+            - paragraph [ref=e65]: +12% vs. last quarter
+          - button "New deal" [ref=e66]:
+            - img [ref=e67]
+        - generic [ref=e68]:
+          - generic [ref=e70]: M
+          - generic [ref=e72]: T
+          - generic [ref=e74]: W
+          - generic [ref=e76]: T
+          - generic [ref=e78]: F
+          - generic [ref=e80]: S
+          - generic [ref=e82]: S
+        - generic [ref=e83]:
+          - generic [ref=e84]:
+            - paragraph [ref=e85]: Top deals
+            - paragraph [ref=e86]: View all
+          - generic [ref=e87]:
+            - generic [ref=e88]: AC
+            - generic [ref=e89]:
+              - paragraph [ref=e90]: Acme Industries
+              - paragraph [ref=e93]: Closing
+            - generic [ref=e94]: ₦890K
+          - generic [ref=e95]:
+            - generic [ref=e96]: OL
+            - generic [ref=e97]:
+              - paragraph [ref=e98]: Olojo & Co.
+              - paragraph [ref=e101]: Negotiation
+            - generic [ref=e102]: ₦450K
+          - generic [ref=e103]:
+            - generic [ref=e104]: LT
+            - generic [ref=e105]:
+              - paragraph [ref=e106]: Lateef Technologies
+              - paragraph [ref=e109]: Discovery
+            - generic [ref=e110]: ₦230K
+    - generic [ref=e113]:
+      - generic [ref=e115]:
+        - heading "Team & HR Management" [level=2] [ref=e116]
+        - paragraph [ref=e117]: Empower your workforce.
+        - list [ref=e118]:
+          - listitem [ref=e119]:
+            - img [ref=e121]
+            - generic [ref=e125]:
+              - heading "Employee Management" [level=3] [ref=e126]
+              - paragraph [ref=e127]: A central directory for every staff record, role, and reporting line — kept current automatically.
+          - listitem [ref=e128]:
+            - img [ref=e130]
+            - generic [ref=e132]:
+              - heading "Leave & Workflow Automation" [level=3] [ref=e133]
+              - paragraph [ref=e134]: Multi-step approvals for leave, expenses, and internal requests — no more email chains.
+          - listitem [ref=e135]:
+            - img [ref=e137]
+            - generic [ref=e139]:
+              - heading "Payroll & Records" [level=3] [ref=e140]
+              - paragraph [ref=e141]: Compliant payroll runs, payslips, and statutory filings, organised and auditable.
+        - link "Try now" [ref=e142] [cursor=pointer]:
+          - /url: /contact
+          - text: Try now
+          - img [ref=e143]
+      - generic [ref=e150]:
+        - generic [ref=e151]:
+          - generic [ref=e152]:
+            - paragraph [ref=e153]: Team
+            - heading "42 Members" [level=4] [ref=e154]
+            - paragraph [ref=e155]: 38 active today
+          - generic [ref=e156]: 3 on leave
+        - generic [ref=e158]:
+          - generic [ref=e159]:
+            - generic [ref=e161]: BK
+            - paragraph [ref=e163]: Sales
+          - generic [ref=e164]:
+            - generic [ref=e166]: AM
+            - paragraph [ref=e168]: Engineering
+          - generic [ref=e169]:
+            - generic [ref=e171]: TO
+            - paragraph [ref=e173]: Design
+          - generic [ref=e174]:
+            - generic [ref=e176]: SR
+            - paragraph [ref=e178]: Operations
+          - generic [ref=e179]:
+            - generic [ref=e181]: JN
+            - paragraph [ref=e183]: People
+          - generic [ref=e184]:
+            - generic [ref=e186]: DK
+            - paragraph [ref=e188]: Finance
+          - generic [ref=e189]:
+            - generic [ref=e191]: EL
+            - paragraph [ref=e193]: Marketing
+          - generic [ref=e194]:
+            - generic [ref=e196]: PA
+            - paragraph [ref=e198]: Support
+        - generic [ref=e199]:
+          - generic [ref=e200]:
+            - paragraph [ref=e201]: This week
+            - paragraph [ref=e202]: View calendar
+          - generic [ref=e203]:
+            - generic [ref=e205]: M
+            - generic [ref=e208]: T
+            - generic [ref=e211]: W
+            - generic [ref=e214]: T
+            - generic [ref=e217]: F
+            - generic [ref=e220]: S
+            - generic [ref=e223]: S
+    - generic [ref=e227]:
+      - generic [ref=e229]:
+        - heading "Communication & Collaboration" [level=2] [ref=e230]
+        - paragraph [ref=e231]: Work smarter together.
+        - list [ref=e232]:
+          - listitem [ref=e233]:
+            - img [ref=e235]
+            - generic [ref=e237]:
+              - heading "Chat & Calls" [level=3] [ref=e238]
+              - paragraph [ref=e239]: Channels, DMs, and threaded replies for every team — searchable, persistent, and always in context.
+          - listitem [ref=e240]:
+            - img [ref=e242]
+            - generic [ref=e245]:
+              - heading "Video Meetings (Stream)" [level=3] [ref=e246]
+              - paragraph [ref=e247]: HD meetings, webinars, and screen sharing built directly into the workspace your team already uses.
+          - listitem [ref=e248]:
+            - img [ref=e250]
+            - generic [ref=e252]:
+              - heading "Shared Workspace (Drive)" [level=3] [ref=e253]
+              - paragraph [ref=e254]: One source of truth for every file — versioned, permissioned, and effortless to share.
+        - link "Try now" [ref=e255] [cursor=pointer]:
+          - /url: /contact
+          - text: Try now
+          - img [ref=e256]
+      - generic [ref=e263]:
+        - generic [ref=e264]:
+          - img [ref=e266]
+          - generic [ref=e269]:
+            - paragraph [ref=e270]: general
+            - paragraph [ref=e271]: 12 members · 4 online
+          - generic [ref=e272]:
+            - button "Search" [ref=e273]:
+              - img [ref=e274]
+            - button "Notifications" [ref=e277]:
+              - img [ref=e278]
+        - generic [ref=e281]:
+          - generic [ref=e282]:
+            - generic [ref=e283]: JN
+            - generic [ref=e284]:
+              - generic [ref=e285]:
+                - paragraph [ref=e286]: Jumoke
+                - paragraph [ref=e287]: 10:24 AM
+              - paragraph [ref=e289]: Q3 numbers are looking strong — pipeline is healthy.
+          - generic [ref=e290]:
+            - generic [ref=e291]: YO
+            - generic [ref=e292]:
+              - generic [ref=e293]:
+                - paragraph [ref=e294]: 10:25 AM
+                - paragraph [ref=e295]: You
+              - paragraph [ref=e297]: Awesome — let's review on Friday's call.
+          - generic [ref=e298]:
+            - generic [ref=e299]: BK
+            - generic [ref=e300]:
+              - generic [ref=e301]:
+                - paragraph [ref=e302]: Babatunde
+                - paragraph [ref=e303]: 10:26 AM
+              - paragraph [ref=e305]: In — bringing the deck. 📊
+          - generic [ref=e307]: Adaeze is typing
+        - generic [ref=e312]:
+          - generic [ref=e313]: Reply to thread...
+          - button "Send" [ref=e314]:
+            - img [ref=e315]
+    - generic [ref=e320]:
+      - generic [ref=e322]:
+        - heading "Project & Workflow Management" [level=2] [ref=e323]
+        - paragraph [ref=e324]: Deliver projects faster.
+        - list [ref=e325]:
+          - listitem [ref=e326]:
+            - img [ref=e328]
+            - generic [ref=e331]:
+              - heading "Task Management" [level=3] [ref=e332]
+              - paragraph [ref=e333]: Break ambitious projects into trackable tasks with owners, deadlines, and dependencies.
+          - listitem [ref=e334]:
+            - img [ref=e336]
+            - generic [ref=e340]:
+              - heading "Workflow Automation" [level=3] [ref=e341]
+              - paragraph [ref=e342]: Codify your approval and review processes once — then let the platform run them on autopilot.
+          - listitem [ref=e343]:
+            - img [ref=e345]
+            - generic [ref=e347]:
+              - heading "Activity Tracking" [level=3] [ref=e348]
+              - paragraph [ref=e349]: Live progress, bottleneck alerts, and a complete audit trail across every project and team.
+        - link "Try now" [ref=e350] [cursor=pointer]:
+          - /url: /contact
+          - text: Try now
+          - img [ref=e351]
+      - generic [ref=e358]:
+        - generic [ref=e359]:
+          - generic [ref=e360]:
+            - paragraph [ref=e361]: Sprint 24
+            - heading "Q2 Roadmap" [level=4] [ref=e362]
+            - paragraph [ref=e363]: 5 tasks · 62% complete
+          - button "More" [ref=e364]:
+            - img [ref=e365]
+        - generic [ref=e369]:
+          - generic [ref=e370]:
+            - generic [ref=e371]:
+              - paragraph [ref=e373]: To Do
+              - generic [ref=e374]: "2"
+            - generic [ref=e375]:
+              - generic [ref=e376]:
+                - paragraph [ref=e377]: User research interviews
+                - generic [ref=e378]:
+                  - generic [ref=e379]: Design
+                  - generic [ref=e380]: Apr 28
+              - generic [ref=e381]:
+                - paragraph [ref=e382]: API spec review
+                - generic [ref=e383]:
+                  - generic [ref=e384]: Eng
+                  - generic [ref=e385]: Apr 30
+              - button "Add task to To Do" [ref=e386]: + Add task
+          - generic [ref=e387]:
+            - generic [ref=e388]:
+              - paragraph [ref=e390]: In Progress
+              - generic [ref=e391]: "2"
+            - generic [ref=e392]:
+              - generic [ref=e393]:
+                - paragraph [ref=e394]: Launch page rebuild
+                - generic [ref=e396]: Marketing
+              - generic [ref=e399]:
+                - paragraph [ref=e400]: Onboarding flow v2
+                - generic [ref=e402]: Product
+              - button "Add task to In Progress" [ref=e405]: + Add task
+          - generic [ref=e406]:
+            - generic [ref=e407]:
+              - paragraph [ref=e409]: Done
+              - generic [ref=e410]: "1"
+            - generic [ref=e411]:
+              - generic [ref=e412]:
+                - paragraph [ref=e413]: Wireframe sign-off
+                - generic [ref=e415]: Design
+              - button "Add task to Done" [ref=e416]: + Add task
+    - generic [ref=e419]:
+      - heading "Start using CNX247 today" [level=2] [ref=e420]
+      - paragraph [ref=e421]: Join thousands of teams already transforming their operations. No credit card required.
+      - link "Get Started Free" [ref=e423] [cursor=pointer]:
+        - /url: /contact
+      - generic [ref=e424]:
+        - generic [ref=e425]:
+          - img [ref=e426]
+          - text: No credit card required
+        - generic [ref=e428]:
+          - img [ref=e429]
+          - text: 14-day free trial
+        - generic [ref=e431]:
+          - img [ref=e432]
+          - text: Cancel anytime
+  - contentinfo [ref=e434]:
+    - generic [ref=e435]:
+      - generic [ref=e436]:
+        - generic [ref=e437]:
+          - link "CNX247 Logo" [ref=e438] [cursor=pointer]:
+            - /url: "#"
+            - img "CNX247 Logo" [ref=e439]
+          - paragraph [ref=e440]: Smarter business operations, all in one platform.
+        - generic [ref=e441]:
+          - heading "Product" [level=4] [ref=e442]
+          - list [ref=e443]:
+            - listitem [ref=e444]:
+              - link "Features" [ref=e445] [cursor=pointer]:
+                - /url: /#features
+            - listitem [ref=e446]:
+              - link "Pricing" [ref=e447] [cursor=pointer]:
+                - /url: /#pricing
+            - listitem [ref=e448]:
+              - link "All Products" [ref=e449] [cursor=pointer]:
+                - /url: /#features
+            - listitem [ref=e450]:
+              - link "Changelog" [ref=e451] [cursor=pointer]:
+                - /url: "#"
+        - generic [ref=e452]:
+          - heading "Company" [level=4] [ref=e453]
+          - list [ref=e454]:
+            - listitem [ref=e455]:
+              - link "About" [ref=e456] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e457]:
+              - link "Blog" [ref=e458] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e459]:
+              - link "Careers" [ref=e460] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e461]:
+              - link "Contact" [ref=e462] [cursor=pointer]:
+                - /url: /contact
+        - generic [ref=e463]:
+          - heading "Legal" [level=4] [ref=e464]
+          - list [ref=e465]:
+            - listitem [ref=e466]:
+              - link "Privacy Policy" [ref=e467] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e468]:
+              - link "Terms of Service" [ref=e469] [cursor=pointer]:
+                - /url: "#"
+            - listitem [ref=e470]:
+              - link "Cookies" [ref=e471] [cursor=pointer]:
+                - /url: "#"
+      - generic [ref=e472]:
+        - generic [ref=e473]:
+          - paragraph [ref=e474]: © 2026 CNX247. All rights reserved.
+          - paragraph [ref=e475]: Powered by Connexxion Telecoms
+        - generic [ref=e476]:
+          - link "Twitter" [ref=e477] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e478]
+          - link "LinkedIn" [ref=e480] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e481]
+          - link "GitHub" [ref=e483] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e484]
+  - button "Open Next.js Dev Tools" [ref=e491] [cursor=pointer]:
+    - img [ref=e492]

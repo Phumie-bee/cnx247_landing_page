@@ -21,7 +21,7 @@ export default function Stats() {
       className="relative py-16 md:py-20 bg-white overflow-hidden"
     >
       {/* Subtle top divider */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-linear-to-r from-transparent via-gray-200 to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2/3 h-px bg-linear-to-r from-transparent via-border to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">

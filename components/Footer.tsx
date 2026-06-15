@@ -15,7 +15,7 @@ export default function Footer() {
             >
               <Image src={logo} alt="CNX247 Logo" width={120} height={120} />
             </a>
-            <p className="mt-3 text-sm text-gray-400 leading-relaxed">
+            <p className="mt-3 text-sm text-muted leading-relaxed">
               Smarter business operations, all in one platform.
             </p>
           </div>
@@ -23,7 +23,7 @@ export default function Footer() {
           {/* Links */}
           <div>
             <h4 className="text-sm font-semibold text-white mb-4">Product</h4>
-            <ul className="space-y-2.5 text-sm text-gray-400">
+            <ul className="space-y-2.5 text-sm text-muted">
               <li>
                 <Link href="/#features" className="hover:text-primary transition-colors">
                   Features
@@ -49,7 +49,7 @@ export default function Footer() {
 
           <div>
             <h4 className="text-sm font-semibold text-white mb-4">Company</h4>
-            <ul className="space-y-2.5 text-sm text-gray-400">
+            <ul className="space-y-2.5 text-sm text-muted">
               <li>
                 <a href="#" className="hover:text-primary transition-colors">
                   About
@@ -75,7 +75,7 @@ export default function Footer() {
 
           <div>
             <h4 className="text-sm font-semibold text-white mb-4">Legal</h4>
-            <ul className="space-y-2.5 text-sm text-gray-400">
+            <ul className="space-y-2.5 text-sm text-muted">
               <li>
                 <a href="#" className="hover:text-primary transition-colors">
                   Privacy Policy
@@ -97,7 +97,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex flex-col items-center md:items-start gap-1">
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-muted">
               &copy; {new Date().getFullYear()} CNX247. All rights reserved.
             </p>
             <p className="text-[11px] text-white/25">
@@ -108,7 +108,7 @@ export default function Footer() {
             {/* Twitter/X */}
             <a
               href="#"
-              className="text-gray-400 hover:text-primary transition-colors"
+              className="text-muted hover:text-primary transition-colors"
               aria-label="Twitter"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -118,7 +118,7 @@ export default function Footer() {
             {/* LinkedIn */}
             <a
               href="#"
-              className="text-gray-400 hover:text-primary transition-colors"
+              className="text-muted hover:text-primary transition-colors"
               aria-label="LinkedIn"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -128,7 +128,7 @@ export default function Footer() {
             {/* GitHub */}
             <a
               href="#"
-              className="text-gray-400 hover:text-primary transition-colors"
+              className="text-muted hover:text-primary transition-colors"
               aria-label="GitHub"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">

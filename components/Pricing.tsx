@@ -112,7 +112,7 @@ export default function Pricing() {
               <div
                 key={plan.name}
                 style={{ "--plan-accent": plan.accent } as React.CSSProperties}
-                className="group reveal flex flex-col rounded-3xl border border-gray-200 bg-gradient-to-b from-white to-gray-50/40 p-7 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-[var(--plan-accent)] hover:shadow-xl md:p-8"
+                className="group reveal flex flex-col rounded-3xl border border-border bg-gradient-to-b from-white to-subtle/40 p-7 shadow-sm transition-all duration-300 hover:-translate-y-2 hover:border-[var(--plan-accent)] hover:shadow-xl md:p-8"
               >
                 <h3
                   className="text-2xl font-bold"
@@ -146,7 +146,7 @@ export default function Pricing() {
                 {/* CTA */}
                 <a
                   href="/contact"
-                  className="mt-7 block rounded-xl border border-gray-300 py-3.5 text-center font-semibold text-heading transition-all duration-300 hover:border-[var(--plan-accent)] hover:bg-[var(--plan-accent)] hover:text-white"
+                  className="mt-7 block rounded-xl border border-border py-3.5 text-center font-semibold text-heading transition-all duration-300 hover:border-[var(--plan-accent)] hover:bg-[var(--plan-accent)] hover:text-white"
                 >
                   Get Started
                 </a>

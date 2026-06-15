@@ -257,15 +257,15 @@ function ProductSection({
   return (
     <section
       id={product.anchor}
-      className={`relative scroll-mt-20 ${isFirst ? "pt-28 md:pt-32 pb-20 md:pb-28 lg:pb-32" : "py-20 md:py-28 lg:py-32"
+      className={`relative scroll-mt-20 overflow-x-clip ${isFirst ? "pt-28 md:pt-32 pb-20 md:pb-28 lg:pb-32" : "py-20 md:py-28 lg:py-32"
         } ${altBg ? "bg-bg-light/40" : "bg-white"}`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-8">
         <div className="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
-          <div className={reverse ? "lg:order-2" : "lg:order-1"}>
+          <div className={`min-w-0 ${reverse ? "lg:order-2" : "lg:order-1"}`}>
             {TextSide}
           </div>
-          <div className={reverse ? "lg:order-1" : "lg:order-2"}>
+          <div className={`min-w-0 ${reverse ? "lg:order-1" : "lg:order-2"}`}>
             {VisualSide}
           </div>
         </div>
@@ -822,10 +822,9 @@ export default function ProductsPage() {
       <main className="bg-white">
         {/* Page header */}
         <section
-          className="relative pt-32 pb-16 md:pt-40 md:pb-20 px-6 md:px-8 text-center overflow-hidden border-b border-gray-100"
+          className="relative pt-32 pb-16 md:pt-40 md:pb-20 px-6 md:px-8 text-center overflow-hidden border-b border-border bg-subtle"
           style={{
-            backgroundColor: "#f8fafc",
-            backgroundImage: "radial-gradient(#dcdcdc 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(var(--color-border) 1px, transparent 1px)",
             backgroundSize: "18px 18px",
           }}
         >
@@ -862,7 +861,7 @@ export default function ProductsPage() {
                 <a
                   key={item.anchor}
                   href={item.anchor}
-                  className="px-4 py-2 rounded-full border border-gray-200 bg-white text-sm font-medium text-body shadow-sm hover:border-primary hover:text-primary transition-all duration-200"
+                  className="px-4 py-2 rounded-full border border-border bg-white text-sm font-medium text-body shadow-sm hover:border-primary hover:text-primary transition-all duration-200"
                 >
                   {item.label}
                 </a>

@@ -147,7 +147,7 @@ export default function Features() {
     <section
       id="features"
       ref={sectionRef}
-      className="relative overflow-hidden bg-[#0c0e0d] py-16 text-white md:py-24"
+      className="relative overflow-hidden bg-heading py-16 text-white md:py-24"
     >
       {/* Ambient glow */}
       <div

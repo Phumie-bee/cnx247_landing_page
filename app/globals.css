@@ -11,6 +11,16 @@
   --font-sans: var(--font-plus-jakarta);
 }
 
+/* Neutral tokens. Kept in a non-inline @theme block (unlike the brand colours
+   above) so they're ALSO emitted as :root CSS variables — that lets us
+   reference them via var(--color-*) inside inline style props, e.g. the
+   dot-pattern background on the Products page. */
+@theme {
+  --color-muted: #9ca3af; /* tertiary / muted text (was gray-400) */
+  --color-border: #e5e7eb; /* borders & hairlines (was gray-100/200/300) */
+  --color-subtle: #f8fafc; /* faint off-white surfaces (was gray-50/100, #f8fafc) */
+}
+
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 4rem;
@@ -105,6 +115,20 @@ body {
 
 .animate-float-delay {
   animation: float-reverse 5.5s ease-in-out 1s infinite;
+}
+
+/* Hero background — slow ambient zoom-in on load (GPU-composited transform) */
+@keyframes hero-zoom {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.animate-hero-zoom {
+  animation: hero-zoom 16s ease-out both;
 }
 
 /* Scroll-triggered reveal */
@@ -220,4 +244,20 @@ body {
 
 .animate-features-in {
   animation: features-in 0.32s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Accessibility — honour the OS "reduce motion" setting.
+   Animations/transitions snap to their final state (no movement),
+   infinite loops (floats, blobs, hero zoom) stop, and smooth scroll is off. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
 }

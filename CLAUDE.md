@@ -19,9 +19,14 @@ A single-page marketing/landing site for **CNX247**, a Nigerian SaaS business-op
 | `--color-accent` | `#a9cf46` | Lime green — hover/accent states |
 | `--color-heading` | `#111111` | Near-black — all headings and dark backgrounds |
 | `--color-body` | `#555555` | Mid-grey — body copy |
+| `--color-muted` | `#9ca3af` | Light-grey — muted/tertiary text (e.g. footer links) |
+| `--color-border` | `#e5e7eb` | Borders & hairlines |
+| `--color-subtle` | `#f8fafc` | Faint off-white surfaces / hover backgrounds |
 | `--color-bg-light` | `#e4f3ee` | Light teal tint — section backgrounds |
 | `--color-bg-alt` | `#e7f3db` | Light green tint — alternate cards |
 | `--color-surface` | `#ffffff` | White |
+
+The neutrals (`muted`, `border`, `subtle`) live in a separate non-inline `@theme` block in `globals.css` so they're also emitted as `:root` CSS variables — usable via `var(--color-*)` inside inline `style` props (e.g. the Products page dot pattern).
 
 Use these tokens via Tailwind utilities: `text-primary`, `bg-heading`, `text-body`, etc.
 

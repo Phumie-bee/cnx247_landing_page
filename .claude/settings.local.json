@@ -10,7 +10,15 @@
       "mcp__plugin_playwright_playwright__browser_evaluate",
       "Bash(rm -f components/HeroCentrilix.tsx components/HeroMap.tsx components/HeroBento.tsx components/HeroEditorial.tsx)",
       "Bash(rm -rf app/preview)",
-      "Bash(rm -f hero-desktop.png hero-mobile.png concept-a-map.png concept-b-bento.png concept-b-bento2.png concept-c-editorial.png concept-d-desktop.png concept-d-mobile.png)"
+      "Bash(rm -f hero-desktop.png hero-mobile.png concept-a-map.png concept-b-bento.png concept-b-bento2.png concept-c-editorial.png concept-d-desktop.png concept-d-mobile.png)",
+      "WebFetch(domain:unsplash.com)",
+      "Bash(curl -sL \"https://images.unsplash.com/photo-1528901166007-3784c7dd3653?w=2400&q=80&fit=crop&auto=format\" -o \"c:/Projects/cnx247_landing_page/public/hero-cnx247.jpg\")",
+      "Bash(curl -sL \"https://images.unsplash.com/photo-1551584877-f94a33cc2e8b?w=1400&q=80&fit=crop&auto=format\" -o \"/tmp/cand-portrait.jpg\")",
+      "Bash(curl -sL \"https://images.unsplash.com/photo-1637904743105-3118bbe3ed8b?w=2400&q=80&fit=crop&auto=format\" -o \"/tmp/cand-laptop.jpg\")",
+      "Bash(curl -sL \"https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1600&ar=16:9&fit=crop&q=80&auto=format\" -o \"/tmp/cand-a.jpg\")",
+      "Bash(curl -sL \"https://images.unsplash.com/photo-1637904743105-3118bbe3ed8b?w=1600&ar=16:9&fit=crop&crop=top&q=80&auto=format\" -o \"/tmp/cand-b.jpg\")",
+      "Bash(curl -sL \"https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1600&ar=16:9&fit=crop&q=80&auto=format\" -o \"C:/tmp/cand-a.jpg\")",
+      "Bash(curl -sL \"https://images.unsplash.com/photo-1637904743105-3118bbe3ed8b?w=1600&ar=16:9&fit=crop&crop=top&q=80&auto=format\" -o \"C:/tmp/cand-b.jpg\")"
     ]
   }
 }
