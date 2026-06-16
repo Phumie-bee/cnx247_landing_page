@@ -29,7 +29,7 @@ const modules = [
 
 export default function Hero() {
   return (
-    <section className="relative isolate flex min-h-screen items-end  overflow-hidden  text-white">
+    <section className="relative isolate flex min-h-screen items-center overflow-hidden text-white lg:items-end">
       {/* Background photo */}
       <Image
         src={heroBg}
@@ -51,7 +51,7 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-24 pb-12 text-center md:px-10 md:pb-16 lg:px-14 lg:text-left">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-16 pb-12 text-center md:px-10 md:pb-16 lg:px-14 lg:pt-24 lg:text-left">
         <h1 className="animate-fade-in-up">
           <span className="block text-4xl font-bold leading-[1.3] tracking-tight sm:text-5xl lg:whitespace-nowrap lg:text-7xl">
             Your Whole Business,
@@ -63,7 +63,7 @@ export default function Hero() {
           </span>
         </h1>
 
-        <p className="mt-5 max-w-xl mx-auto text-sm italic leading-relaxed text-white/80 md:text-base animate-fade-in-up animate-delay-200 lg:mx-0">
+        <p className="mt-6 max-w-xl mx-auto text-sm italic leading-relaxed text-white/80 md:text-base animate-fade-in-up animate-delay-200 lg:mt-5 lg:mx-0">
           Where your teams, processes, and data come together — giving you the
           clarity, control, and automation to run operations and scale faster.
         </p>
@@ -72,7 +72,7 @@ export default function Hero() {
         <div className="mt-12 flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
           {/* Left: value highlights + CTAs + powered-by attribution */}
           <div>
-            <ul className="space-y-3">
+            <ul className="space-y-4 lg:space-y-3">
               {[
                 "CRM, HR, payroll, projects & chat — in one login",
                 "Automate approvals, requisitions & workflows",
@@ -91,7 +91,7 @@ export default function Hero() {
               ))}
             </ul>
 
-            <div className="mt-8 flex items-center justify-center gap-2 animate-fade-in-up animate-delay-300 sm:gap-3 lg:justify-start">
+            <div className="mt-10 flex items-center justify-center gap-2 animate-fade-in-up animate-delay-300 sm:gap-3 lg:mt-8 lg:justify-start">
               <Link
                 href="/contact"
                 className="whitespace-nowrap rounded-full bg-white px-5 py-3 text-sm font-semibold text-heading transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent hover:text-white hover:shadow-lg hover:shadow-black/20 sm:px-7 sm:py-3.5 sm:text-base"
