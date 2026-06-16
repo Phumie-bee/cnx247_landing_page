@@ -21,6 +21,7 @@ import {
   GitBranch,
   Activity,
   ArrowRight,
+  ChevronDown,
   type LucideIcon,
 } from "lucide-react";
 
@@ -173,8 +174,125 @@ export default function Features() {
           </p>
         </div>
 
-        {/* Showcase */}
-        <div className="relative mt-10 grid items-center gap-10 lg:mt-14 lg:grid-cols-[minmax(0,0.9fr)_1.1fr] lg:gap-6">
+        {/* Mobile: accordion — each suite expands its content inline so the
+            content appears directly under the tapped suite (no scrolling). */}
+        <div className="mt-10 space-y-3 lg:hidden">
+          {suites.map((s, i) => {
+            const Icon = s.icon;
+            const isActive = i === active;
+            return (
+              <div
+                key={s.label}
+                style={{ animationDelay: `${i * 80}ms` }}
+                className={`animate-fade-in-up overflow-hidden rounded-2xl border transition-colors duration-300 ${
+                  isActive
+                    ? "border-primary/40 bg-white/[0.04]"
+                    : "border-white/10"
+                }`}
+              >
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    setActive(i);
+                    const btn = e.currentTarget;
+                    // After the expand/collapse settles, bring the opened
+                    // header into view so its content is never left off-screen.
+                    setTimeout(
+                      () =>
+                        btn.scrollIntoView({
+                          behavior: "smooth",
+                          block: "start",
+                        }),
+                      320,
+                    );
+                  }}
+                  aria-expanded={isActive}
+                  className="flex w-full scroll-mt-24 items-center gap-4 px-4 py-3.5 text-left"
+                >
+                  <span
+                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-colors duration-300 ${
+                      isActive
+                        ? "bg-primary text-white"
+                        : "bg-white/5 text-white/70"
+                    }`}
+                  >
+                    <Icon className="h-5 w-5" strokeWidth={2} />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span
+                      className={`block font-semibold ${
+                        isActive ? "text-white" : "text-white/85"
+                      }`}
+                    >
+                      {s.label}
+                    </span>
+                    <span
+                      className={`block truncate text-sm ${
+                        isActive ? "text-white/70" : "text-white/40"
+                      }`}
+                    >
+                      {s.subtitle}
+                    </span>
+                  </span>
+                  <ChevronDown
+                    className={`h-5 w-5 shrink-0 text-white/50 transition-transform duration-300 ${
+                      isActive ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+
+                {/* Collapsible content (CSS grid-rows trick for smooth height) */}
+                <div
+                  className={`grid transition-all duration-300 ${
+                    isActive
+                      ? "grid-rows-[1fr] opacity-100"
+                      : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="min-h-0 overflow-hidden">
+                    <div className="space-y-3 px-4 pb-4">
+                      <p className="text-sm leading-relaxed text-white/55">
+                        {s.description}
+                      </p>
+                      {s.features.map((f) => {
+                        const FIcon = f.icon;
+                        return (
+                          <div
+                            key={f.title}
+                            className="flex items-start gap-4 rounded-xl border border-white/10 bg-white/[0.03] p-4"
+                          >
+                            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/15 text-accent">
+                              <FIcon className="h-5 w-5" strokeWidth={2} />
+                            </span>
+                            <div className="min-w-0">
+                              <p className="font-semibold text-white">
+                                {f.title}
+                              </p>
+                              <p className="text-sm leading-relaxed text-white/55">
+                                {f.description}
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+
+          <Link
+            href="/contact"
+            className="animate-fade-in-up mt-1 inline-flex items-center gap-2 px-1 text-sm font-semibold text-accent transition-all duration-300 hover:gap-3"
+          >
+            See it in action
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
+        {/* Showcase (desktop) */}
+        <div className="relative mt-10 hidden items-center gap-10 lg:mt-14 lg:grid lg:grid-cols-[minmax(0,0.9fr)_1.1fr] lg:gap-6">
           {/* Left: suite selector */}
           <div>
             <ul className="space-y-2">

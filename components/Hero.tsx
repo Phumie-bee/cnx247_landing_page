@@ -51,7 +51,7 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-24 pb-12 md:px-10 md:pb-16 lg:px-14">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-24 pb-12 text-center md:px-10 md:pb-16 lg:px-14 lg:text-left">
         <h1 className="animate-fade-in-up">
           <span className="block text-4xl font-bold leading-[1.3] tracking-tight sm:text-5xl lg:whitespace-nowrap lg:text-7xl">
             Your Whole Business,
@@ -63,7 +63,7 @@ export default function Hero() {
           </span>
         </h1>
 
-        <p className="mt-5 max-w-xl text-sm italic leading-relaxed text-white/80 md:text-base animate-fade-in-up animate-delay-200">
+        <p className="mt-5 max-w-xl mx-auto text-sm italic leading-relaxed text-white/80 md:text-base animate-fade-in-up animate-delay-200 lg:mx-0">
           Where your teams, processes, and data come together — giving you the
           clarity, control, and automation to run operations and scale faster.
         </p>
@@ -81,7 +81,7 @@ export default function Hero() {
                 <li
                   key={point}
                   style={{ animationDelay: `${300 + i * 120}ms` }}
-                  className="flex animate-fade-in-up items-center gap-3 text-sm text-white/85 md:text-base"
+                  className="flex animate-fade-in-up items-center justify-center gap-3 text-sm text-white/85 md:text-base lg:justify-start"
                 >
                   <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent/20 text-accent">
                     <Check className="h-3 w-3" strokeWidth={3} />
@@ -91,16 +91,16 @@ export default function Hero() {
               ))}
             </ul>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3 animate-fade-in-up animate-delay-300">
+            <div className="mt-8 flex items-center justify-center gap-2 animate-fade-in-up animate-delay-300 sm:gap-3 lg:justify-start">
               <Link
                 href="/contact"
-                className="rounded-full bg-white px-7 py-3.5 font-semibold text-heading transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent hover:text-white hover:shadow-lg hover:shadow-black/20"
+                className="whitespace-nowrap rounded-full bg-white px-5 py-3 text-sm font-semibold text-heading transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent hover:text-white hover:shadow-lg hover:shadow-black/20 sm:px-7 sm:py-3.5 sm:text-base"
               >
                 Book a Demo
               </Link>
               <Link
                 href="#features"
-                className="group inline-flex items-center gap-3 rounded-full border border-white/40 py-1.5 pl-5 pr-1.5 font-semibold text-white transition-colors duration-300 hover:bg-white/10"
+                className="group inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-white/40 py-1.5 pl-4 pr-1.5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-white/10 sm:gap-3 sm:pl-5 sm:text-base"
               >
                 How It Works
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-heading transition-colors duration-300 group-hover:bg-accent group-hover:text-white">
@@ -116,8 +116,8 @@ export default function Hero() {
             </p>
           </div>
 
-          {/* Right: 1-2-3-4 pyramid of module tags */}
-          <div className="flex flex-col items-start gap-2 lg:items-end">
+          {/* Right: 1-2-3-4 pyramid of module tags (desktop only) */}
+          <div className="hidden flex-col items-start gap-2 lg:flex lg:items-end">
             {[
               modules.slice(0, 1),
               modules.slice(1, 3),
