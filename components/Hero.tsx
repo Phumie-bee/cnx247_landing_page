@@ -51,7 +51,7 @@ export default function Hero() {
       />
 
       {/* Content */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-16 pb-12 text-center md:px-10 md:pb-16 lg:px-14 lg:pt-24 lg:text-left">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-16 pb-18 text-center md:px-10 md:pb-23 lg:px-14 lg:pt-24 lg:text-left">
         <h1 className="animate-fade-in-up">
           <span className="block text-4xl font-bold leading-[1.3] tracking-tight sm:text-5xl lg:whitespace-nowrap lg:text-7xl">
             Your Whole Business,
