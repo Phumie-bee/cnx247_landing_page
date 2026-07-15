@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { ArrowRight, CheckCircle } from "lucide-react";
 
 type FormData = {
@@ -49,6 +49,12 @@ export default function ContactForm() {
   const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  // Shown when the network request itself fails — so we never falsely tell a
+  // customer their message was received when it wasn't.
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  // Honeypot: a hidden field real users never see. Bots fill every field, so a
+  // non-empty value here means "spam" and we silently drop the submission.
+  const botRef = useRef<HTMLInputElement>(null);
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -72,6 +78,8 @@ export default function ContactForm() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    setSubmitError(null);
+
     const fieldErrors = validate(form);
     if (Object.keys(fieldErrors).length > 0) {
       setErrors(fieldErrors);
@@ -79,16 +87,63 @@ export default function ContactForm() {
       document.getElementById(firstKey)?.focus();
       return;
     }
+
+    // Bot detected via honeypot — pretend success so the bot moves on, but
+    // never actually send or count it.
+    if (botRef.current?.value) {
+      setSubmitted(true);
+      return;
+    }
+
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setSubmitError(
+        "Sorry, the form isn't set up correctly right now. Please email info@cnx247.com directly.",
+      );
+      return;
+    }
+
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 1600));
-    setLoading(false);
-    setSubmitted(true);
+    try {
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          subject: `New demo request: ${form.topic} — ${form.name}`,
+          from_name: "CNX247 Website",
+          name: form.name,
+          email: form.email,
+          company: form.company || "Not provided",
+          topic: form.topic,
+          message: form.message,
+        }),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        setSubmitted(true);
+      } else {
+        setSubmitError(
+          "We couldn't send your message. Please try again, or email info@cnx247.com directly.",
+        );
+      }
+    } catch {
+      setSubmitError(
+        "Network error — please check your connection and try again, or email info@cnx247.com directly.",
+      );
+    } finally {
+      setLoading(false);
+    }
   }
 
   if (submitted) {
     return (
       <div
-        className="flex flex-col items-center justify-center py-14 text-center"
+        className="flex flex-col items-start py-4 text-left"
         role="status"
         aria-live="polite"
       >
@@ -96,7 +151,7 @@ export default function ContactForm() {
           <CheckCircle size={28} className="text-primary" aria-hidden="true" />
         </div>
         <h3 className="text-2xl font-bold text-heading mb-3">Message received!</h3>
-        <p className="text-body text-[15px] leading-relaxed max-w-[280px]">
+        <p className="text-body text-[15px] leading-relaxed max-w-sm">
           Thanks for reaching out. We typically respond within 2 business hours.
         </p>
         <button
@@ -120,6 +175,17 @@ export default function ContactForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate aria-label="Contact form" className="space-y-5">
+      {/* Honeypot — hidden from people, catches bots. Leave empty; do not remove. */}
+      <input
+        ref={botRef}
+        type="text"
+        name="botcheck"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="hidden"
+      />
+
       <div className="grid sm:grid-cols-2 gap-5">
         {/* Name */}
         <div>
@@ -252,6 +318,16 @@ export default function ContactForm() {
           </p>
         )}
       </div>
+
+      {/* Submission error — shown only when the send actually fails */}
+      {submitError && (
+        <p
+          role="alert"
+          className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[13px] leading-relaxed text-red-600"
+        >
+          {submitError}
+        </p>
+      )}
 
       {/* Submit */}
       <button
