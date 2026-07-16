@@ -34,8 +34,9 @@ function validate(form: FormData): FormErrors {
   if (!form.topic) errors.topic = "Please select a topic.";
   if (!form.message.trim()) {
     errors.message = "A message is required.";
-  } else if (form.message.trim().length < 20) {
-    errors.message = "Please give us a bit more detail (at least 20 characters).";
+  } else if (form.message.trim().length < 15) {
+    errors.message =
+      "Please give us a bit more detail (at least 15 characters).";
   }
   return errors;
 }
@@ -63,7 +64,9 @@ export default function ContactForm() {
   const today = new Date().toISOString().split("T")[0];
 
   function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
@@ -73,7 +76,9 @@ export default function ContactForm() {
   }
 
   function handleBlur(
-    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.FocusEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >,
   ) {
     const field = e.target.name as keyof FormData;
     const fieldErrors = validate(form);
@@ -158,13 +163,23 @@ export default function ContactForm() {
         <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6">
           <CheckCircle size={28} className="text-primary" aria-hidden="true" />
         </div>
-        <h3 className="text-2xl font-bold text-heading mb-3">Message received!</h3>
+        <h3 className="text-2xl font-bold text-heading mb-3">
+          Message received!
+        </h3>
         <p className="text-body text-[15px] leading-relaxed max-w-sm">
           Thanks for reaching out. We typically respond within 2 business hours.
         </p>
         <button
           onClick={() => {
-            setForm({ name: "", email: "", company: "", topic: "", preferredDate: "", preferredTime: "", message: "" });
+            setForm({
+              name: "",
+              email: "",
+              company: "",
+              topic: "",
+              preferredDate: "",
+              preferredTime: "",
+              message: "",
+            });
             setErrors({});
             setSubmitted(false);
           }}
@@ -182,7 +197,12 @@ export default function ContactForm() {
   const errored = "border-red-300 focus:border-red-400 focus:ring-red-100";
 
   return (
-    <form onSubmit={handleSubmit} noValidate aria-label="Contact form" className="space-y-5">
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      aria-label="Contact form"
+      className="space-y-5"
+    >
       {/* Honeypot — hidden from people, catches bots. Leave empty; do not remove. */}
       <input
         ref={botRef}
@@ -197,8 +217,14 @@ export default function ContactForm() {
       <div className="grid sm:grid-cols-2 gap-5">
         {/* Name */}
         <div>
-          <label htmlFor="name" className="block text-[13px] font-semibold text-heading mb-2">
-            Full name <span className="text-red-400" aria-hidden="true">*</span>
+          <label
+            htmlFor="name"
+            className="block text-[13px] font-semibold text-heading mb-2"
+          >
+            Full name{" "}
+            <span className="text-red-400" aria-hidden="true">
+              *
+            </span>
           </label>
           <input
             id="name"
@@ -215,7 +241,11 @@ export default function ContactForm() {
             className={`${base} ${errors.name ? errored : normal}`}
           />
           {errors.name && (
-            <p id="name-err" role="alert" className="mt-1.5 text-[12px] text-red-500">
+            <p
+              id="name-err"
+              role="alert"
+              className="mt-1.5 text-[12px] text-red-500"
+            >
               {errors.name}
             </p>
           )}
@@ -223,8 +253,14 @@ export default function ContactForm() {
 
         {/* Email */}
         <div>
-          <label htmlFor="email" className="block text-[13px] font-semibold text-heading mb-2">
-            Email address <span className="text-red-400" aria-hidden="true">*</span>
+          <label
+            htmlFor="email"
+            className="block text-[13px] font-semibold text-heading mb-2"
+          >
+            Email address{" "}
+            <span className="text-red-400" aria-hidden="true">
+              *
+            </span>
           </label>
           <input
             id="email"
@@ -241,7 +277,11 @@ export default function ContactForm() {
             className={`${base} ${errors.email ? errored : normal}`}
           />
           {errors.email && (
-            <p id="email-err" role="alert" className="mt-1.5 text-[12px] text-red-500">
+            <p
+              id="email-err"
+              role="alert"
+              className="mt-1.5 text-[12px] text-red-500"
+            >
               {errors.email}
             </p>
           )}
@@ -251,9 +291,14 @@ export default function ContactForm() {
       <div className="grid sm:grid-cols-2 gap-5">
         {/* Company */}
         <div>
-          <label htmlFor="company" className="block text-[13px] font-semibold text-heading mb-2">
+          <label
+            htmlFor="company"
+            className="block text-[13px] font-semibold text-heading mb-2"
+          >
             Company{" "}
-            <span className="text-[12px] font-normal text-body/50">(optional)</span>
+            <span className="text-[12px] font-normal text-body/50">
+              (optional)
+            </span>
           </label>
           <input
             id="company"
@@ -269,8 +314,14 @@ export default function ContactForm() {
 
         {/* Topic */}
         <div>
-          <label htmlFor="topic" className="block text-[13px] font-semibold text-heading mb-2">
-            How can we help? <span className="text-red-400" aria-hidden="true">*</span>
+          <label
+            htmlFor="topic"
+            className="block text-[13px] font-semibold text-heading mb-2"
+          >
+            How can we help?{" "}
+            <span className="text-red-400" aria-hidden="true">
+              *
+            </span>
           </label>
           <select
             id="topic"
@@ -295,7 +346,11 @@ export default function ContactForm() {
             ))}
           </select>
           {errors.topic && (
-            <p id="topic-err" role="alert" className="mt-1.5 text-[12px] text-red-500">
+            <p
+              id="topic-err"
+              role="alert"
+              className="mt-1.5 text-[12px] text-red-500"
+            >
               {errors.topic}
             </p>
           )}
@@ -305,9 +360,14 @@ export default function ContactForm() {
       {/* Preferred demo date & time (optional) */}
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
-          <label htmlFor="preferredDate" className="block text-[13px] font-semibold text-heading mb-2">
+          <label
+            htmlFor="preferredDate"
+            className="block text-[13px] font-semibold text-heading mb-2"
+          >
             Preferred demo date{" "}
-            <span className="text-[12px] font-normal text-body/50">(optional)</span>
+            <span className="text-[12px] font-normal text-body/50">
+              (optional)
+            </span>
           </label>
           <input
             id="preferredDate"
@@ -323,9 +383,14 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label htmlFor="preferredTime" className="block text-[13px] font-semibold text-heading mb-2">
+          <label
+            htmlFor="preferredTime"
+            className="block text-[13px] font-semibold text-heading mb-2"
+          >
             Preferred time{" "}
-            <span className="text-[12px] font-normal text-body/50">(optional)</span>
+            <span className="text-[12px] font-normal text-body/50">
+              (optional)
+            </span>
           </label>
           <input
             id="preferredTime"
@@ -342,8 +407,14 @@ export default function ContactForm() {
 
       {/* Message */}
       <div>
-        <label htmlFor="message" className="block text-[13px] font-semibold text-heading mb-2">
-          Message <span className="text-red-400" aria-hidden="true">*</span>
+        <label
+          htmlFor="message"
+          className="block text-[13px] font-semibold text-heading mb-2"
+        >
+          Message{" "}
+          <span className="text-red-400" aria-hidden="true">
+            *
+          </span>
         </label>
         <textarea
           id="message"
@@ -359,7 +430,11 @@ export default function ContactForm() {
           className={`${base} resize-none ${errors.message ? errored : normal}`}
         />
         {errors.message && (
-          <p id="message-err" role="alert" className="mt-1.5 text-[12px] text-red-500">
+          <p
+            id="message-err"
+            role="alert"
+            className="mt-1.5 text-[12px] text-red-500"
+          >
             {errors.message}
           </p>
         )}
@@ -403,7 +478,8 @@ export default function ContactForm() {
       </button>
 
       <p className="text-center text-[11px] text-body/50 leading-relaxed">
-        We respect your privacy. Your details are never shared with third parties.
+        We respect your privacy. Your details are never shared with third
+        parties.
       </p>
     </form>
   );
