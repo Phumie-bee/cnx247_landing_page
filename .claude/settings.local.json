@@ -19,7 +19,8 @@
       "Bash(curl -sL \"https://images.unsplash.com/photo-1637904743105-3118bbe3ed8b?w=1600&ar=16:9&fit=crop&crop=top&q=80&auto=format\" -o \"/tmp/cand-b.jpg\")",
       "Bash(curl -sL \"https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1600&ar=16:9&fit=crop&q=80&auto=format\" -o \"C:/tmp/cand-a.jpg\")",
       "Bash(curl -sL \"https://images.unsplash.com/photo-1637904743105-3118bbe3ed8b?w=1600&ar=16:9&fit=crop&crop=top&q=80&auto=format\" -o \"C:/tmp/cand-b.jpg\")",
-      "Bash(file corporate-noir.*)"
+      "Bash(file corporate-noir.*)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }

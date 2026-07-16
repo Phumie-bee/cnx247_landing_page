@@ -8,6 +8,8 @@ type FormData = {
   email: string;
   company: string;
   topic: string;
+  preferredDate: string;
+  preferredTime: string;
   message: string;
 };
 
@@ -44,6 +46,8 @@ export default function ContactForm() {
     email: "",
     company: "",
     topic: "",
+    preferredDate: "",
+    preferredTime: "",
     message: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
@@ -55,6 +59,8 @@ export default function ContactForm() {
   // Honeypot: a hidden field real users never see. Bots fill every field, so a
   // non-empty value here means "spam" and we silently drop the submission.
   const botRef = useRef<HTMLInputElement>(null);
+  // Earliest date a demo can be booked for — today (blocks past dates).
+  const today = new Date().toISOString().split("T")[0];
 
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -119,6 +125,8 @@ export default function ContactForm() {
           email: form.email,
           company: form.company || "Not provided",
           topic: form.topic,
+          preferred_date: form.preferredDate || "No preference",
+          preferred_time: form.preferredTime || "No preference",
           message: form.message,
         }),
       });
@@ -156,7 +164,7 @@ export default function ContactForm() {
         </p>
         <button
           onClick={() => {
-            setForm({ name: "", email: "", company: "", topic: "", message: "" });
+            setForm({ name: "", email: "", company: "", topic: "", preferredDate: "", preferredTime: "", message: "" });
             setErrors({});
             setSubmitted(false);
           }}
@@ -291,6 +299,44 @@ export default function ContactForm() {
               {errors.topic}
             </p>
           )}
+        </div>
+      </div>
+
+      {/* Preferred demo date & time (optional) */}
+      <div className="grid sm:grid-cols-2 gap-5">
+        <div>
+          <label htmlFor="preferredDate" className="block text-[13px] font-semibold text-heading mb-2">
+            Preferred demo date{" "}
+            <span className="text-[12px] font-normal text-body/50">(optional)</span>
+          </label>
+          <input
+            id="preferredDate"
+            name="preferredDate"
+            type="date"
+            min={today}
+            value={form.preferredDate}
+            onChange={handleChange}
+            className={`${base} ${normal} cursor-pointer ${
+              !form.preferredDate ? "text-body/40" : "text-heading"
+            }`}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="preferredTime" className="block text-[13px] font-semibold text-heading mb-2">
+            Preferred time{" "}
+            <span className="text-[12px] font-normal text-body/50">(optional)</span>
+          </label>
+          <input
+            id="preferredTime"
+            name="preferredTime"
+            type="time"
+            value={form.preferredTime}
+            onChange={handleChange}
+            className={`${base} ${normal} cursor-pointer ${
+              !form.preferredTime ? "text-body/40" : "text-heading"
+            }`}
+          />
         </div>
       </div>
 
