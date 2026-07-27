@@ -8,6 +8,7 @@ type FormData = {
   email: string;
   company: string;
   topic: string;
+  meetingType: string;
   preferredDate: string;
   preferredTime: string;
   message: string;
@@ -47,6 +48,7 @@ export default function ContactForm() {
     email: "",
     company: "",
     topic: "",
+    meetingType: "",
     preferredDate: "",
     preferredTime: "",
     message: "",
@@ -106,42 +108,32 @@ export default function ContactForm() {
       return;
     }
 
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
-    if (!accessKey) {
-      setSubmitError(
-        "Sorry, the form isn't set up correctly right now. Please email info@cnx247.com directly.",
-      );
-      return;
-    }
-
     setLoading(true);
     try {
-      const res = await fetch("https://api.web3forms.com/submit", {
+      const res = await fetch("/api/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: accessKey,
-          subject: `New demo request: ${form.topic} — ${form.name}`,
-          from_name: "CNX247 Website",
           name: form.name,
           email: form.email,
-          company: form.company || "Not provided",
+          company: form.company,
           topic: form.topic,
-          preferred_date: form.preferredDate || "No preference",
-          preferred_time: form.preferredTime || "No preference",
+          meetingType: form.meetingType,
+          preferredDate: form.preferredDate,
+          preferredTime: form.preferredTime,
           message: form.message,
         }),
       });
       const data = await res.json();
 
-      if (data.success) {
+      if (res.ok && data.success) {
         setSubmitted(true);
       } else {
         setSubmitError(
-          "We couldn't send your message. Please try again, or email info@cnx247.com directly.",
+          "We couldn't send your request. Please try again, or email info@cnx247.com directly.",
         );
       }
     } catch {
@@ -176,6 +168,7 @@ export default function ContactForm() {
               email: "",
               company: "",
               topic: "",
+              meetingType: "",
               preferredDate: "",
               preferredTime: "",
               message: "",
@@ -355,6 +348,27 @@ export default function ContactForm() {
             </p>
           )}
         </div>
+      </div>
+
+      {/* Preferred meeting type (optional) */}
+      <div>
+        <label htmlFor="meetingType" className="block text-[13px] font-semibold text-heading mb-2">
+          Preferred meeting type{" "}
+          <span className="text-[12px] font-normal text-body/50">(optional)</span>
+        </label>
+        <select
+          id="meetingType"
+          name="meetingType"
+          value={form.meetingType}
+          onChange={handleChange}
+          className={`${base} cursor-pointer appearance-none ${normal} ${
+            !form.meetingType ? "text-body/40" : "text-heading"
+          }`}
+        >
+          <option value="">No preference</option>
+          <option value="Onsite">Onsite</option>
+          <option value="Virtual">Virtual</option>
+        </select>
       </div>
 
       {/* Preferred demo date & time (optional) */}
