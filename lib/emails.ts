@@ -192,13 +192,20 @@ ${BRAND.signature}`;
 export function reminder24h(p: {
   leadName: string;
   teaserVideoUrl?: string;
+  meetingType?: string;
+  meetingLink?: string;
 }): EmailContent {
   const videoUrl = p.teaserVideoUrl || BRAND.teaserVideoUrl;
+  const hasJoin = p.meetingType === "Virtual" && !!p.meetingLink;
+  const joinHtml = hasJoin ? button("Join the meeting", p.meetingLink!) : "";
+  const joinText = hasJoin ? `\nJoin the meeting: ${p.meetingLink}\n` : "";
+
   const inner = `
     ${heading("Looking forward to our CNX247 demo tomorrow!")}
     ${paragraph(`Hi ${escapeHtml(p.leadName)}, just a reminder about our demo tomorrow.`)}
     ${paragraph("Here's a short teaser video to give you a preview of the product before we meet:")}
     ${button("Watch the teaser", videoUrl)}
+    ${joinHtml}
     ${paragraph("See you soon!")}
     ${signoff("Regards,")}
   `;
@@ -207,7 +214,7 @@ export function reminder24h(p: {
 Hi ${p.leadName}, just a reminder about our demo tomorrow.
 
 Here's a short teaser video to preview the product: ${videoUrl}
-
+${joinText}
 See you soon!
 
 Regards,

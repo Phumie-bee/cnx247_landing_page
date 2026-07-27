@@ -17,12 +17,13 @@ export const TEAM_EMAILS = ["info@cnx247.com", "info@connexxiontelecom.com"];
 export function sendEmail(
   to: string | string[],
   content: EmailContent,
-  opts?: { replyTo?: string },
+  opts?: { replyTo?: string; bcc?: string | string[] },
 ) {
   return resend.emails.send({
     from: EMAIL_FROM,
     to,
     replyTo: opts?.replyTo,
+    bcc: opts?.bcc,
     subject: content.subject,
     html: content.html,
     text: content.text,
