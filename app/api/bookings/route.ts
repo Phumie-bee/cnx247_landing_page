@@ -63,15 +63,23 @@ export async function POST(req: Request) {
     );
   }
 
+  // Honour the client's chosen time — the demo is confirmed at booking.
+  // Staff only step in for the rare reschedule.
+  const confirmedAt =
+    preferredDate && preferredTime
+      ? `${preferredDate}T${preferredTime}:00+01:00`
+      : null;
+  const status = confirmedAt ? "confirmed" : "new";
+
   // 1) Save the lead first — the database is the source of truth. If email
   //    later fails, the lead is still captured.
   try {
     await sql`
       INSERT INTO bookings
-        (name, email, company, topic, meeting_type, preferred_date, preferred_time, message)
+        (name, email, company, topic, meeting_type, preferred_date, preferred_time, message, confirmed_at, status)
       VALUES
         (${name}, ${email}, ${company || null}, ${topic}, ${meetingType || null},
-         ${preferredDate || null}, ${preferredTime || null}, ${message})
+         ${preferredDate || null}, ${preferredTime || null}, ${message}, ${confirmedAt}, ${status})
     `;
   } catch (err) {
     console.error("[bookings] DB insert failed:", err);

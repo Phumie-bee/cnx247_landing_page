@@ -157,44 +157,47 @@ export function leadConfirmation(p: {
   preferredDate?: string; // YYYY-MM-DD
   preferredTime?: string; // HH:MM
 }): EmailContent {
-  const isVirtual = p.meetingType === "Virtual";
-  const typeWordHtml = p.meetingType
-    ? `<strong>${escapeHtml(p.meetingType.toLowerCase())}</strong> `
-    : "";
-  const typeWordText = p.meetingType ? `${p.meetingType.toLowerCase()} ` : "";
-
-  const pref =
+  const when =
     p.preferredDate && p.preferredTime
-      ? `${prettyDate(p.preferredDate)} at ${p.preferredTime}`
+      ? `${prettyDate(p.preferredDate)} at ${p.preferredTime} WAT`
       : p.preferredDate
         ? prettyDate(p.preferredDate)
-        : p.preferredTime || "";
+        : p.preferredTime
+          ? `${p.preferredTime} WAT`
+          : "";
 
-  const nextLine = isVirtual
-    ? "Once the time is confirmed, we'll send you a link to join the virtual session."
-    : p.meetingType === "Onsite"
-      ? "Once the time is confirmed, we'll sort out the location with you."
-      : "Once the time is confirmed, we'll share everything you need.";
+  const bookedHtml = when
+    ? `Your demo is booked for <strong>${escapeHtml(when)}</strong>.`
+    : "Your demo is booked.";
+  const bookedText = when ? `Your demo is booked for ${when}.` : "Your demo is booked.";
+
+  // Onsite still needs the location clarified (our office vs theirs); virtual
+  // gets a meeting link. Mirrors the marketing brief's two confirmation drafts.
+  const nextLine =
+    p.meetingType === "Virtual"
+      ? "We'll send you a meeting link for the virtual session."
+      : p.meetingType === "Onsite"
+        ? "Just let us know whether you'd like us to visit your office, or you'd prefer to visit ours."
+        : "We'll be in touch with everything you need before we meet.";
 
   const inner = `
-    ${heading("Thanks for booking your CNX247 demo!")}
-    ${paragraph(`Hi ${escapeHtml(p.leadName)}, thanks — we've received your ${typeWordHtml}demo request.`)}
-    ${pref ? paragraph(`Your preferred time: <strong>${escapeHtml(pref)}</strong>.`) : ""}
-    ${paragraph(`Our team will reach out shortly to confirm a time. ${nextLine}`)}
-    ${signoff("Talk soon,")}
+    ${heading("Your CNX247 Demo is Booked!")}
+    ${paragraph(`Hi ${escapeHtml(p.leadName)}, thanks for booking! ${bookedHtml}`)}
+    ${paragraph(nextLine)}
+    ${signoff()}
   `;
 
-  const text = `Thanks for booking your CNX247 demo!
+  const text = `Your CNX247 Demo is Booked!
 
-Hi ${p.leadName}, thanks — we've received your ${typeWordText}demo request.
-${pref ? `\nYour preferred time: ${pref}.\n` : ""}
-Our team will reach out shortly to confirm a time. ${nextLine}
+Hi ${p.leadName}, thanks for booking! ${bookedText}
 
-Talk soon,
+${nextLine}
+
+Cheers,
 ${BRAND.signature}`;
 
   return {
-    subject: "We've received your CNX247 demo request",
+    subject: "Confirmation: Your CNX247 Demo is Booked!",
     html: layout(inner),
     text,
   };
@@ -217,8 +220,8 @@ export function reminder24h(p: {
 
   const inner = `
     ${heading("Looking forward to our CNX247 demo tomorrow!")}
-    ${paragraph(`Hi ${escapeHtml(p.leadName)}, just a reminder about our demo tomorrow.`)}
-    ${paragraph("Here's a short teaser video to give you a preview of the product before we meet:")}
+    ${paragraph(`Hi ${escapeHtml(p.leadName)}, reminder for tomorrow.`)}
+    ${paragraph("Here's a teaser video to give you a preview of the product specs:")}
     ${button("Watch the teaser", videoUrl)}
     ${joinHtml}
     ${paragraph("See you soon!")}
@@ -226,9 +229,9 @@ export function reminder24h(p: {
   `;
   const text = `Looking forward to our CNX247 demo tomorrow!
 
-Hi ${p.leadName}, just a reminder about our demo tomorrow.
+Hi ${p.leadName}, reminder for tomorrow.
 
-Here's a short teaser video to preview the product: ${videoUrl}
+Here's a teaser video to give you a preview of the product specs: ${videoUrl}
 ${joinText}
 See you soon!
 
@@ -291,17 +294,17 @@ export function postDemoFollowUpNotReady(p: {
   const portfolioUrl = p.portfolioUrl || BRAND.portfolioUrl;
   const inner = `
     ${heading("Staying in touch — CNX247")}
-    ${paragraph(`Hi ${escapeHtml(p.leadName)}, we understand now might not be the right moment.`)}
-    ${paragraph("Here's a portfolio you can download to keep on file:")}
+    ${paragraph(`Hi ${escapeHtml(p.leadName)}, understood — now might not be the right moment.`)}
+    ${paragraph("Here is a portfolio download:")}
     ${button("Download portfolio", portfolioUrl)}
     ${paragraph("We'll check back in soon.")}
     ${signoff()}
   `;
   const text = `Staying in touch — CNX247
 
-Hi ${p.leadName}, we understand now might not be the right moment.
+Hi ${p.leadName}, understood — now might not be the right moment.
 
-Here's a portfolio you can download: ${portfolioUrl}
+Here is a portfolio download: ${portfolioUrl}
 
 We'll check back in soon.
 
@@ -315,10 +318,10 @@ ${BRAND.signature}`;
 }
 
 /* ------------------------------------------------------------------ */
-/*  6. Demo Confirmed — sent when staff set the agreed date/time      */
+/*  6a. Demo Rescheduled — staff changed the demo time                */
 /* ------------------------------------------------------------------ */
 
-export function demoConfirmedTime(p: {
+export function demoRescheduled(p: {
   leadName: string;
   when: string; // human-readable, e.g. "Tuesday, 28 July 2026, 16:03 WAT"
   meetingType?: string; // "Onsite" | "Virtual"
@@ -329,14 +332,14 @@ export function demoConfirmedTime(p: {
     ? p.meetingLink
       ? button("Join the meeting", p.meetingLink)
       : paragraph("We'll send your meeting link ahead of the session.")
-    : paragraph("We'll be in touch shortly to confirm the location.");
+    : paragraph("We'll be in touch about the location.");
 
   const inner = `
-    ${heading("Your CNX247 demo is confirmed")}
-    ${paragraph(`Hi ${escapeHtml(p.leadName)}, your demo is confirmed for:`)}
+    ${heading("Your CNX247 demo has been rescheduled")}
+    ${paragraph(`Hi ${escapeHtml(p.leadName)}, your demo has been moved to:`)}
     <p style="margin:0 0 16px;font-size:17px;font-weight:bold;color:${BRAND.heading};">${escapeHtml(p.when)}</p>
     ${detailHtml}
-    ${paragraph("Looking forward to it!")}
+    ${paragraph("Apologies for any inconvenience — see you then!")}
     ${signoff()}
   `;
 
@@ -344,21 +347,55 @@ export function demoConfirmedTime(p: {
     ? p.meetingLink
       ? `Join the meeting: ${p.meetingLink}`
       : "We'll send your meeting link ahead of the session."
-    : "We'll be in touch shortly to confirm the location.";
+    : "We'll be in touch about the location.";
 
-  const text = `Your CNX247 demo is confirmed
+  const text = `Your CNX247 demo has been rescheduled
 
-Hi ${p.leadName}, your demo is confirmed for:
+Hi ${p.leadName}, your demo has been moved to:
 ${p.when}
 
 ${detailText}
 
-Looking forward to it!
+Apologies for any inconvenience — see you then!
 
 Cheers,
 ${BRAND.signature}`;
 
-  return { subject: "Your CNX247 demo is confirmed", html: layout(inner), text };
+  return {
+    subject: "Your CNX247 demo has been rescheduled",
+    html: layout(inner),
+    text,
+  };
+}
+
+/* ------------------------------------------------------------------ */
+/*  6b. Demo Meeting Link — staff added/changed a virtual link        */
+/* ------------------------------------------------------------------ */
+
+export function demoMeetingLink(p: {
+  leadName: string;
+  when: string;
+  meetingLink?: string;
+}): EmailContent {
+  const inner = `
+    ${heading("Your CNX247 demo details")}
+    ${paragraph(`Hi ${escapeHtml(p.leadName)}, here's the link to join your demo on <strong>${escapeHtml(p.when)}</strong>:`)}
+    ${p.meetingLink ? button("Join the meeting", p.meetingLink) : ""}
+    ${paragraph("See you then!")}
+    ${signoff()}
+  `;
+
+  const text = `Your CNX247 demo details
+
+Hi ${p.leadName}, here's the link to join your demo on ${p.when}:
+${p.meetingLink ? p.meetingLink : ""}
+
+See you then!
+
+Cheers,
+${BRAND.signature}`;
+
+  return { subject: "Your CNX247 demo details", html: layout(inner), text };
 }
 
 /* ------------------------------------------------------------------ */

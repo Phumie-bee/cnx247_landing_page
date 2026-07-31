@@ -4,7 +4,8 @@ import { sql } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { sendEmail } from "@/lib/mailer";
 import {
-  demoConfirmedTime,
+  demoRescheduled,
+  demoMeetingLink,
   postDemoActionPlan,
   postDemoFollowUpNotReady,
 } from "@/lib/emails";
@@ -104,19 +105,26 @@ export async function updateBooking(formData: FormData) {
     WHERE id = ${id}
   `;
 
-  // Email the client when there's a confirmed time and the time or the
-  // meeting link changed (so adding a link later re-sends the confirmation).
+  // Notify the client when something they care about changed. A time change is
+  // a reschedule; a link-only change just delivers the meeting link.
   if (newConfirmedAt && (timeChanged || linkChanged)) {
-    const content = demoConfirmedTime({
-      leadName: current.name,
-      when: formatWhenWat(newConfirmedAt),
-      meetingType: current.meeting_type ?? undefined,
-      meetingLink: meetingLink || undefined,
-    });
+    const when = formatWhenWat(newConfirmedAt);
+    const content = timeChanged
+      ? demoRescheduled({
+          leadName: current.name,
+          when,
+          meetingType: current.meeting_type ?? undefined,
+          meetingLink: meetingLink || undefined,
+        })
+      : demoMeetingLink({
+          leadName: current.name,
+          when,
+          meetingLink: meetingLink || undefined,
+        });
     try {
       await sendEmail(current.email, content);
     } catch (err) {
-      console.error("[admin] confirmation-time email failed:", err);
+      console.error("[admin] client notification email failed:", err);
     }
   }
 
