@@ -2,8 +2,7 @@ import { NextResponse } from "next/server";
 import { sql } from "@/lib/db";
 import {
   internalBookingAlert,
-  leadConfirmationOnsite,
-  leadConfirmationVirtual,
+  leadConfirmation,
   type Booking,
 } from "@/lib/emails";
 import { sendEmail, TEAM_EMAILS } from "@/lib/mailer";
@@ -39,11 +38,25 @@ export async function POST(req: Request) {
   const topic = (body.topic ?? "").trim();
   const company = (body.company ?? "").trim();
   const meetingType = (body.meetingType ?? body.meeting_type ?? "").trim();
-  const preferredDate = (body.preferredDate ?? body.preferred_date ?? "").trim();
-  const preferredTime = (body.preferredTime ?? body.preferred_time ?? "").trim();
+  const preferredDate = (
+    body.preferredDate ??
+    body.preferred_date ??
+    ""
+  ).trim();
+  const preferredTime = (
+    body.preferredTime ??
+    body.preferred_time ??
+    ""
+  ).trim();
 
   // Server-side validation (never trust the client alone).
-  if (!name || !email || !isValidEmail(email) || !topic || message.length < 20) {
+  if (
+    !name ||
+    !email ||
+    !isValidEmail(email) ||
+    !topic ||
+    message.length < 15
+  ) {
     return NextResponse.json(
       { success: false, error: "Please complete the form correctly." },
       { status: 422 },
@@ -63,7 +76,10 @@ export async function POST(req: Request) {
   } catch (err) {
     console.error("[bookings] DB insert failed:", err);
     return NextResponse.json(
-      { success: false, error: "Could not save your request. Please try again." },
+      {
+        success: false,
+        error: "Could not save your request. Please try again.",
+      },
       { status: 500 },
     );
   }
@@ -82,10 +98,12 @@ export async function POST(req: Request) {
   };
 
   const internal = internalBookingAlert(booking);
-  const confirmation =
-    meetingType === "Virtual"
-      ? leadConfirmationVirtual({ leadName: name })
-      : leadConfirmationOnsite({ leadName: name });
+  const confirmation = leadConfirmation({
+    leadName: name,
+    meetingType,
+    preferredDate,
+    preferredTime,
+  });
 
   const results = await Promise.allSettled([
     sendEmail(TEAM_EMAILS, internal, { replyTo: email }),
@@ -94,9 +112,15 @@ export async function POST(req: Request) {
 
   results.forEach((r, i) => {
     if (r.status === "rejected") {
-      console.error(`[bookings] email ${i === 0 ? "internal alert" : "confirmation"} failed:`, r.reason);
+      console.error(
+        `[bookings] email ${i === 0 ? "internal alert" : "confirmation"} failed:`,
+        r.reason,
+      );
     } else if (r.value.error) {
-      console.error(`[bookings] email ${i === 0 ? "internal alert" : "confirmation"} error:`, r.value.error);
+      console.error(
+        `[bookings] email ${i === 0 ? "internal alert" : "confirmation"} error:`,
+        r.value.error,
+      );
     }
   });
 

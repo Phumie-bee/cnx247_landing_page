@@ -134,52 +134,67 @@ ${rows.map(([k, v]) => `${k}: ${v}`).join("\n")}
 }
 
 /* ------------------------------------------------------------------ */
-/*  2a. Lead Confirmation — Onsite                                     */
+/*  2. Lead Confirmation — sent immediately on booking                */
 /* ------------------------------------------------------------------ */
 
-export function leadConfirmationOnsite(p: { leadName: string }): EmailContent {
-  const inner = `
-    ${heading("Your CNX247 Demo is Booked!")}
-    ${paragraph(`Hi ${escapeHtml(p.leadName)}, thanks for booking!`)}
-    ${paragraph("Based on your preferred type, let us know whether you'd like us to visit your office, or you'd prefer to visit ours — and we'll lock in the details.")}
-    ${signoff()}
-  `;
-  const text = `Your CNX247 Demo is Booked!
-
-Hi ${p.leadName}, thanks for booking!
-
-Based on your preferred type, let us know whether you'd like us to visit your office or you'd prefer to visit ours, and we'll lock in the details.
-
-Cheers,
-${BRAND.signature}`;
-  return {
-    subject: "Confirmation: Your CNX247 Demo is Booked!",
-    html: layout(inner),
-    text,
-  };
+/** Formats a "YYYY-MM-DD" date as e.g. "5 August 2026" (WAT-safe). */
+function prettyDate(d: string): string {
+  try {
+    return new Intl.DateTimeFormat("en-GB", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      timeZone: "Africa/Lagos",
+    }).format(new Date(`${d}T12:00:00+01:00`));
+  } catch {
+    return d;
+  }
 }
 
-/* ------------------------------------------------------------------ */
-/*  2b. Lead Confirmation — Virtual                                    */
-/* ------------------------------------------------------------------ */
+export function leadConfirmation(p: {
+  leadName: string;
+  meetingType?: string; // "Onsite" | "Virtual"
+  preferredDate?: string; // YYYY-MM-DD
+  preferredTime?: string; // HH:MM
+}): EmailContent {
+  const isVirtual = p.meetingType === "Virtual";
+  const typeWordHtml = p.meetingType
+    ? `<strong>${escapeHtml(p.meetingType.toLowerCase())}</strong> `
+    : "";
+  const typeWordText = p.meetingType ? `${p.meetingType.toLowerCase()} ` : "";
 
-export function leadConfirmationVirtual(p: { leadName: string }): EmailContent {
+  const pref =
+    p.preferredDate && p.preferredTime
+      ? `${prettyDate(p.preferredDate)} at ${p.preferredTime}`
+      : p.preferredDate
+        ? prettyDate(p.preferredDate)
+        : p.preferredTime || "";
+
+  const nextLine = isVirtual
+    ? "Once the time is confirmed, we'll send you a link to join the virtual session."
+    : p.meetingType === "Onsite"
+      ? "Once the time is confirmed, we'll sort out the location with you."
+      : "Once the time is confirmed, we'll share everything you need.";
+
   const inner = `
-    ${heading("Your CNX247 Demo is Booked!")}
-    ${paragraph(`Hi ${escapeHtml(p.leadName)}, thanks for booking!`)}
-    ${paragraph("Based on your preferred type, we'll send you a meeting link for the virtual session shortly.")}
-    ${signoff()}
+    ${heading("Thanks for booking your CNX247 demo!")}
+    ${paragraph(`Hi ${escapeHtml(p.leadName)}, thanks — we've received your ${typeWordHtml}demo request.`)}
+    ${pref ? paragraph(`Your preferred time: <strong>${escapeHtml(pref)}</strong>.`) : ""}
+    ${paragraph(`Our team will reach out shortly to confirm a time. ${nextLine}`)}
+    ${signoff("Talk soon,")}
   `;
-  const text = `Your CNX247 Demo is Booked!
 
-Hi ${p.leadName}, thanks for booking!
+  const text = `Thanks for booking your CNX247 demo!
 
-Based on your preferred type, we'll send you a meeting link for the virtual session shortly.
+Hi ${p.leadName}, thanks — we've received your ${typeWordText}demo request.
+${pref ? `\nYour preferred time: ${pref}.\n` : ""}
+Our team will reach out shortly to confirm a time. ${nextLine}
 
-Cheers,
+Talk soon,
 ${BRAND.signature}`;
+
   return {
-    subject: "Confirmation: Your CNX247 Demo is Booked!",
+    subject: "We've received your CNX247 demo request",
     html: layout(inner),
     text,
   };

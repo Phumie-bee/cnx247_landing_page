@@ -17,6 +17,7 @@ type FormData = {
 type FormErrors = Partial<Record<keyof FormData, string>>;
 
 const topics = [
+  "Book a Demo",
   "General Inquiry",
   "Sales & Pricing",
   "Technical Support",
@@ -33,6 +34,15 @@ function validate(form: FormData): FormErrors {
     errors.email = "Please enter a valid email address.";
   }
   if (!form.topic) errors.topic = "Please select a topic.";
+  // Date & time are required only when booking a demo.
+  if (form.topic === "Book a Demo") {
+    if (!form.meetingType)
+      errors.meetingType = "Please choose onsite or virtual.";
+    if (!form.preferredDate)
+      errors.preferredDate = "Please pick a preferred date.";
+    if (!form.preferredTime)
+      errors.preferredTime = "Please pick a preferred time.";
+  }
   if (!form.message.trim()) {
     errors.message = "A message is required.";
   } else if (form.message.trim().length < 15) {
@@ -71,7 +81,23 @@ export default function ContactForm() {
     >,
   ) {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setForm((prev) => {
+      const next = { ...prev, [name]: value };
+      // Booking fields only apply to "Book a Demo" — clear them otherwise.
+      if (name === "topic" && value !== "Book a Demo") {
+        next.meetingType = "";
+        next.preferredDate = "";
+        next.preferredTime = "";
+      }
+      return next;
+    });
+    if (name === "topic" && value !== "Book a Demo") {
+      setErrors((prev) => ({
+        ...prev,
+        preferredDate: undefined,
+        preferredTime: undefined,
+      }));
+    }
     if (errors[name as keyof FormData]) {
       setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
@@ -350,74 +376,102 @@ export default function ContactForm() {
         </div>
       </div>
 
-      {/* Preferred meeting type (optional) */}
-      <div>
-        <label htmlFor="meetingType" className="block text-[13px] font-semibold text-heading mb-2">
-          Preferred meeting type{" "}
-          <span className="text-[12px] font-normal text-body/50">(optional)</span>
-        </label>
-        <select
-          id="meetingType"
-          name="meetingType"
-          value={form.meetingType}
-          onChange={handleChange}
-          className={`${base} cursor-pointer appearance-none ${normal} ${
-            !form.meetingType ? "text-body/40" : "text-heading"
-          }`}
-        >
-          <option value="">No preference</option>
-          <option value="Onsite">Onsite</option>
-          <option value="Virtual">Virtual</option>
-        </select>
-      </div>
+      {/* Booking details — shown only when "Book a Demo" is selected */}
+      {form.topic === "Book a Demo" && (
+        <>
+          <div>
+            <label htmlFor="meetingType" className="block text-[13px] font-semibold text-heading mb-2">
+              Meeting type{" "}
+              <span className="text-red-400" aria-hidden="true">*</span>
+            </label>
+            <select
+              id="meetingType"
+              name="meetingType"
+              value={form.meetingType}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              aria-required="true"
+              aria-invalid={!!errors.meetingType}
+              aria-describedby={errors.meetingType ? "meetingType-err" : undefined}
+              className={`${base} cursor-pointer appearance-none ${errors.meetingType ? errored : normal} ${
+                !form.meetingType ? "text-body/40" : "text-heading"
+              }`}
+            >
+              <option value="" disabled>
+                Select meeting type…
+              </option>
+              <option value="Onsite">Onsite</option>
+              <option value="Virtual">Virtual</option>
+            </select>
+            {errors.meetingType && (
+              <p id="meetingType-err" role="alert" className="mt-1.5 text-[12px] text-red-500">
+                {errors.meetingType}
+              </p>
+            )}
+          </div>
 
-      {/* Preferred demo date & time (optional) */}
-      <div className="grid sm:grid-cols-2 gap-5">
-        <div>
-          <label
-            htmlFor="preferredDate"
-            className="block text-[13px] font-semibold text-heading mb-2"
-          >
-            Preferred demo date{" "}
-            <span className="text-[12px] font-normal text-body/50">
-              (optional)
-            </span>
-          </label>
-          <input
-            id="preferredDate"
-            name="preferredDate"
-            type="date"
-            min={today}
-            value={form.preferredDate}
-            onChange={handleChange}
-            className={`${base} ${normal} cursor-pointer ${
-              !form.preferredDate ? "text-body/40" : "text-heading"
-            }`}
-          />
-        </div>
+          <div className="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label
+                htmlFor="preferredDate"
+                className="block text-[13px] font-semibold text-heading mb-2"
+              >
+                Preferred demo date{" "}
+                <span className="text-red-400" aria-hidden="true">*</span>
+              </label>
+              <input
+                id="preferredDate"
+                name="preferredDate"
+                type="date"
+                min={today}
+                value={form.preferredDate}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                aria-required="true"
+                aria-invalid={!!errors.preferredDate}
+                aria-describedby={errors.preferredDate ? "preferredDate-err" : undefined}
+                className={`${base} cursor-pointer ${errors.preferredDate ? errored : normal} ${
+                  !form.preferredDate ? "text-body/40" : "text-heading"
+                }`}
+              />
+              {errors.preferredDate && (
+                <p id="preferredDate-err" role="alert" className="mt-1.5 text-[12px] text-red-500">
+                  {errors.preferredDate}
+                </p>
+              )}
+            </div>
 
-        <div>
-          <label
-            htmlFor="preferredTime"
-            className="block text-[13px] font-semibold text-heading mb-2"
-          >
-            Preferred time{" "}
-            <span className="text-[12px] font-normal text-body/50">
-              (optional)
-            </span>
-          </label>
-          <input
-            id="preferredTime"
-            name="preferredTime"
-            type="time"
-            value={form.preferredTime}
-            onChange={handleChange}
-            className={`${base} ${normal} cursor-pointer ${
-              !form.preferredTime ? "text-body/40" : "text-heading"
-            }`}
-          />
-        </div>
-      </div>
+            <div>
+              <label
+                htmlFor="preferredTime"
+                className="block text-[13px] font-semibold text-heading mb-2"
+              >
+                Preferred time{" "}
+                <span className="text-red-400" aria-hidden="true">*</span>
+              </label>
+              <input
+                id="preferredTime"
+                name="preferredTime"
+                type="time"
+                value={form.preferredTime}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                aria-required="true"
+                aria-invalid={!!errors.preferredTime}
+                aria-describedby={errors.preferredTime ? "preferredTime-err" : undefined}
+                className={`${base} cursor-pointer ${errors.preferredTime ? errored : normal} ${
+                  !form.preferredTime ? "text-body/40" : "text-heading"
+                }`}
+              />
+              {errors.preferredTime && (
+                <p id="preferredTime-err" role="alert" className="mt-1.5 text-[12px] text-red-500">
+                  {errors.preferredTime}
+                </p>
+              )}
+            </div>
+          </div>
+        </>
+      )}
 
       {/* Message */}
       <div>

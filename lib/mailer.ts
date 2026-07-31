@@ -9,7 +9,8 @@ import type { EmailContent } from "@/lib/emails";
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Sender address — must be on a Resend-verified domain to actually deliver.
-export const EMAIL_FROM = process.env.EMAIL_FROM || "CNX247 <noreply@cnx247.com>";
+export const EMAIL_FROM =
+  process.env.EMAIL_FROM || "CNX247 <noreply@cnx247.com>";
 // Internal booking-alert recipients (both mailboxes per the marketing brief).
 export const TEAM_EMAILS = ["info@cnx247.com", "info@connexxiontelecom.com"];
 
