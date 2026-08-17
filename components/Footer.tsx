@@ -70,6 +70,11 @@ export default function Footer() {
                   Contact
                 </Link>
               </li>
+              <li>
+                <Link href="/book-demo" className="hover:text-primary transition-colors">
+                  Book a Demo
+                </Link>
+              </li>
             </ul>
           </div>
 

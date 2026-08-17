@@ -39,5 +39,22 @@ await sql`
 // Added later: optional meeting link for virtual demos (safe to re-run).
 await sql`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS meeting_link text`;
 
+// Added later: distinguishes /book-demo bookings from /contact enquiries.
+await sql`
+  ALTER TABLE bookings
+  ADD COLUMN IF NOT EXISTS kind text NOT NULL DEFAULT 'enquiry'
+`;
+
+// Backfill rows created before `kind` existed, when one form did both jobs:
+// anything that carried a preferred slot or the old "Book a Demo" topic was a
+// demo. Re-running is safe but not a no-op — it would re-flag any such row that
+// was later set back to 'enquiry' by hand.
+await sql`
+  UPDATE bookings
+  SET kind = 'demo'
+  WHERE kind = 'enquiry'
+    AND (preferred_date IS NOT NULL OR topic = 'Book a Demo')
+`;
+
 const [{ count }] = await sql`SELECT count(*)::int AS count FROM bookings`;
 console.log(`✓ 'bookings' table ready (currently ${count} rows)`);

@@ -1,7 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { Playfair_Display } from "next/font/google";
+import WatchDemoButton from "@/components/WatchDemoButton";
 import heroBg from "@/public/corporate-noir.jpeg";
 
 /* Cinematic photographic hero — full-bleed dark image under a transparent
@@ -93,20 +94,14 @@ export default function Hero() {
 
             <div className="mt-10 flex items-center justify-center gap-2 animate-fade-in-up animate-delay-300 sm:gap-3 lg:mt-8 lg:justify-start">
               <Link
-                href="/contact"
+                href="/book-demo"
                 className="whitespace-nowrap rounded-full bg-white px-5 py-3 text-sm font-semibold text-heading transition-all duration-300 hover:-translate-y-0.5 hover:bg-accent hover:text-white hover:shadow-lg hover:shadow-black/20 sm:px-7 sm:py-3.5 sm:text-base"
               >
                 Book a Demo
               </Link>
-              <Link
-                href="#features"
-                className="group inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-white/40 py-1.5 pl-4 pr-1.5 text-sm font-semibold text-white transition-colors duration-300 hover:bg-white/10 sm:gap-3 sm:pl-5 sm:text-base"
-              >
-                How It Works
-                <span className="flex h-9 w-9 items-center justify-center rounded-full bg-white text-heading transition-colors duration-300 group-hover:bg-accent group-hover:text-white">
-                  <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-                </span>
-              </Link>
+              {/* Opens the demo video — the label asks a question the video
+                  answers directly, without leaving the page. */}
+              <WatchDemoButton variant="pill" label="How It Works" />
             </div>
             <p className="mt-8 text-xs uppercase tracking-[0.2em] text-white/55 animate-fade-in animate-delay-500">
               Powered by{" "}

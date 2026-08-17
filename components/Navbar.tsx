@@ -10,11 +10,16 @@ import logo from "@/public/cnx247_logo-t.png";
 const navLinks = [
   { label: "Features", href: "/#features" },
   { label: "Pricing", href: "/#pricing" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
-  const isFocusedPage = pathname === "/contact" || pathname === "/products";
+  // Single-purpose pages hide the nav and offer a way back instead.
+  const isFocusedPage =
+    pathname === "/contact" ||
+    pathname === "/book-demo" ||
+    pathname === "/products";
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -94,10 +99,10 @@ export default function Navbar() {
             </ul>
 
             <Button
-              href="/contact"
+              href="/book-demo"
               className="hidden md:inline-flex px-5! py-2! text-sm! bg-white! text-heading! rounded-full! hover:bg-accent! transition-colors duration-300 "
             >
-              Contact Us
+              Book a Demo
             </Button>
 
             {/* Mobile hamburger */}
@@ -163,10 +168,10 @@ export default function Navbar() {
               </Link>
             ))}
             <Button
-              href="/contact"
+              href="/book-demo"
               className="w-full mt-2 px-5! py-2.5! text-sm! bg-primary!"
             >
-              Contact Us
+              Book a Demo
             </Button>
           </div>
         </div>

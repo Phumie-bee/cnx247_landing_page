@@ -10,6 +10,8 @@
  * Placeholders like [Lead_Name] are replaced by the typed params below.
  */
 
+import { DEMO_VIDEO_URL } from "@/lib/video";
+
 const BRAND = {
   name: "CNX247",
   primary: "#2e937d",
@@ -19,8 +21,8 @@ const BRAND = {
   border: "#e5e7eb",
   poweredBy: "Connexxion Telecoms",
   signature: "The CNX247 Team",
-  // Update these once the assets exist:
-  teaserVideoUrl: "https://cnx247.com", // TODO: real teaser video link
+  // Overridable via TEASER_VIDEO_URL if a demo-specific teaser is cut later.
+  teaserVideoUrl: DEMO_VIDEO_URL,
   portfolioUrl: "https://cnx247.com", // TODO: real portfolio download link
   pricingUrl: "https://cnx247.com/#pricing",
 };
@@ -32,9 +34,6 @@ export type Booking = {
   email: string;
   company?: string;
   topic?: string;
-  meetingType?: string; // "Onsite" | "Virtual" | "No preference"
-  preferredDate?: string;
-  preferredTime?: string;
   message?: string;
 };
 
@@ -89,19 +88,34 @@ function button(label: string, href: string): string {
   return `<p style="margin:22px 0;"><a href="${href}" style="background:${BRAND.primary};color:#ffffff;text-decoration:none;padding:12px 22px;border-radius:8px;font-weight:bold;display:inline-block;">${label}</a></p>`;
 }
 
+/**
+ * Human-readable WAT datetime for emails, e.g. "Tuesday, 28 July 2026, 16:03 WAT".
+ * Nigeria is UTC+1 year-round (no daylight saving), so this is unambiguous.
+ */
+export function formatWhenWat(iso: string): string {
+  return (
+    new Intl.DateTimeFormat("en-GB", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      timeZone: "Africa/Lagos",
+    }).format(new Date(iso)) + " WAT"
+  );
+}
+
 /* ------------------------------------------------------------------ */
-/*  1. Internal Booking Alert  →  team inboxes                         */
+/*  1. Internal Enquiry Alert  →  team inboxes                         */
 /* ------------------------------------------------------------------ */
 
-export function internalBookingAlert(b: Booking): EmailContent {
+export function internalEnquiryAlert(b: Booking): EmailContent {
   const rows: [string, string][] = [
     ["Name", b.leadName],
     ["Email", b.email],
     ["Company", b.company || "—"],
     ["Topic", b.topic || "—"],
-    ["Meeting type", b.meetingType || "No preference"],
-    ["Preferred date", b.preferredDate || "No preference"],
-    ["Preferred time", b.preferredTime || "No preference"],
     ["Message", b.message || "—"],
   ];
 
@@ -113,85 +127,163 @@ export function internalBookingAlert(b: Booking): EmailContent {
     .join("");
 
   const inner = `
-    ${heading("New Demo Booking Received")}
-    ${paragraph("Hi Team, a new demo has been booked. Details below — please update the CRM accordingly.")}
+    ${heading("New Enquiry Received")}
+    ${paragraph("Hi Team, a new enquiry has come in. Details below — please update the CRM and follow up. If it warrants a demo, schedule it from the admin dashboard.")}
     <table role="presentation" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;">${detailHtml}</table>
   `;
 
-  const text = `New Demo Booking Received
+  const text = `New Enquiry Received
 
-Hi Team, a new demo has been booked. Please update the CRM accordingly.
+Hi Team, a new enquiry has come in. Please update the CRM and follow up. If it
+warrants a demo, schedule it from the admin dashboard.
 
 ${rows.map(([k, v]) => `${k}: ${v}`).join("\n")}
 
 — ${BRAND.signature}`;
 
   return {
-    subject: "New Demo Booking Received",
+    subject: "New Enquiry Received",
     html: layout(inner),
     text,
   };
 }
 
 /* ------------------------------------------------------------------ */
-/*  2. Lead Confirmation — sent immediately on booking                */
+/*  1b. Internal Demo Alert  →  team inboxes                           */
 /* ------------------------------------------------------------------ */
 
-/** Formats a "YYYY-MM-DD" date as e.g. "5 August 2026" (WAT-safe). */
-function prettyDate(d: string): string {
-  try {
-    return new Intl.DateTimeFormat("en-GB", {
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      timeZone: "Africa/Lagos",
-    }).format(new Date(`${d}T12:00:00+01:00`));
-  } catch {
-    return d;
-  }
+/**
+ * Sent when someone books through /book-demo. Unlike an enquiry, the slot is
+ * already confirmed — the team needs to show up, not schedule it.
+ */
+export function internalDemoAlert(
+  b: Booking & { meetingType?: string; when?: string },
+): EmailContent {
+  const rows: [string, string][] = [
+    ["Name", b.leadName],
+    ["Email", b.email],
+    ["Company", b.company || "—"],
+    ["Meeting type", b.meetingType || "—"],
+    ["Demo time", b.when || "—"],
+    ["Notes", b.message || "—"],
+  ];
+
+  const detailHtml = rows
+    .map(
+      ([k, v]) =>
+        `<tr><td style="padding:6px 12px 6px 0;color:#9ca3af;font-size:13px;vertical-align:top;white-space:nowrap;">${k}</td><td style="padding:6px 0;color:${BRAND.heading};font-size:14px;">${escapeHtml(v)}</td></tr>`,
+    )
+    .join("");
+
+  const inner = `
+    ${heading("New Demo Booked")}
+    ${paragraph("Hi Team, a demo has been booked and the client has already been sent a confirmation for the slot below. Please add it to the calendar and update the CRM.")}
+    <table role="presentation" cellpadding="0" cellspacing="0" style="margin:8px 0 4px;">${detailHtml}</table>
+    ${paragraph(`If it's a virtual session, add the meeting link in the admin dashboard so it reaches the client.`)}
+  `;
+
+  const text = `New Demo Booked
+
+Hi Team, a demo has been booked and the client has already been sent a
+confirmation for the slot below. Please add it to the calendar and update the CRM.
+
+${rows.map(([k, v]) => `${k}: ${v}`).join("\n")}
+
+If it's a virtual session, add the meeting link in the admin dashboard so it
+reaches the client.
+
+— ${BRAND.signature}`;
+
+  return {
+    subject: "New Demo Booked",
+    html: layout(inner),
+    text,
+  };
 }
+
+/* ------------------------------------------------------------------ */
+/*  2a. Enquiry Acknowledgement — sent immediately on form submit      */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Generic "we got your message" reply. The contact form no longer books demos,
+ * so every submission gets this regardless of topic — never a demo confirmation.
+ */
+export function enquiryConfirmation(p: {
+  leadName: string;
+  topic?: string;
+}): EmailContent {
+  const about = p.topic ? ` about <strong>${escapeHtml(p.topic)}</strong>` : "";
+  const aboutText = p.topic ? ` about ${p.topic}` : "";
+
+  const inner = `
+    ${heading("Thanks for getting in touch")}
+    ${paragraph(`Hi ${escapeHtml(p.leadName)}, we've received your message${about} and a member of our team will get back to you shortly — usually within 2 business hours.`)}
+    ${paragraph("In the meantime, feel free to browse our pricing:")}
+    ${button("View pricing", BRAND.pricingUrl)}
+    ${signoff()}
+  `;
+
+  const text = `Thanks for getting in touch
+
+Hi ${p.leadName}, we've received your message${aboutText} and a member of our team
+will get back to you shortly — usually within 2 business hours.
+
+In the meantime, feel free to browse our pricing: ${BRAND.pricingUrl}
+
+Cheers,
+${BRAND.signature}`;
+
+  return {
+    subject: "We've received your message — CNX247",
+    html: layout(inner),
+    text,
+  };
+}
+
+/* ------------------------------------------------------------------ */
+/*  2b. Demo Confirmation — staff scheduled a demo for the first time  */
+/* ------------------------------------------------------------------ */
 
 export function leadConfirmation(p: {
   leadName: string;
+  when: string; // human-readable, e.g. "Tuesday, 28 July 2026, 16:03 WAT"
   meetingType?: string; // "Onsite" | "Virtual"
-  preferredDate?: string; // YYYY-MM-DD
-  preferredTime?: string; // HH:MM
+  meetingLink?: string;
 }): EmailContent {
-  const when =
-    p.preferredDate && p.preferredTime
-      ? `${prettyDate(p.preferredDate)} at ${p.preferredTime} WAT`
-      : p.preferredDate
-        ? prettyDate(p.preferredDate)
-        : p.preferredTime
-          ? `${p.preferredTime} WAT`
-          : "";
+  // A link means it's a virtual session even when meeting_type was never set.
+  const nextHtml = p.meetingLink
+    ? button("Join the meeting", p.meetingLink)
+    : p.meetingType === "Virtual"
+      ? paragraph("We'll send you a meeting link before the session.")
+      : p.meetingType === "Onsite"
+        ? paragraph(
+            "Just let us know whether you'd like us to visit your office, or you'd prefer to visit ours.",
+          )
+        : paragraph("We'll be in touch with everything you need before we meet.");
 
-  const bookedHtml = when
-    ? `Your demo is booked for <strong>${escapeHtml(when)}</strong>.`
-    : "Your demo is booked.";
-  const bookedText = when ? `Your demo is booked for ${when}.` : "Your demo is booked.";
+  const inner = `
+    ${heading("Your CNX247 Demo is Booked!")}
+    ${paragraph(`Hi ${escapeHtml(p.leadName)}, your demo is confirmed for:`)}
+    <p style="margin:0 0 16px;font-size:17px;font-weight:bold;color:${BRAND.heading};">${escapeHtml(p.when)}</p>
+    ${nextHtml}
+    ${signoff()}
+  `;
 
-  // Onsite still needs the location clarified (our office vs theirs); virtual
-  // gets a meeting link. Mirrors the marketing brief's two confirmation drafts.
-  const nextLine =
-    p.meetingType === "Virtual"
-      ? "We'll send you a meeting link for the virtual session."
+  const nextText = p.meetingLink
+    ? `Join the meeting: ${p.meetingLink}`
+    : p.meetingType === "Virtual"
+      ? "We'll send you a meeting link before the session."
       : p.meetingType === "Onsite"
         ? "Just let us know whether you'd like us to visit your office, or you'd prefer to visit ours."
         : "We'll be in touch with everything you need before we meet.";
 
-  const inner = `
-    ${heading("Your CNX247 Demo is Booked!")}
-    ${paragraph(`Hi ${escapeHtml(p.leadName)}, thanks for booking! ${bookedHtml}`)}
-    ${paragraph(nextLine)}
-    ${signoff()}
-  `;
-
   const text = `Your CNX247 Demo is Booked!
 
-Hi ${p.leadName}, thanks for booking! ${bookedText}
+Hi ${p.leadName}, your demo is confirmed for:
+${p.when}
 
-${nextLine}
+${nextText}
 
 Cheers,
 ${BRAND.signature}`;
@@ -210,13 +302,16 @@ ${BRAND.signature}`;
 export function reminder24h(p: {
   leadName: string;
   teaserVideoUrl?: string;
-  meetingType?: string;
   meetingLink?: string;
 }): EmailContent {
   const videoUrl = p.teaserVideoUrl || BRAND.teaserVideoUrl;
-  const hasJoin = p.meetingType === "Virtual" && !!p.meetingLink;
-  const joinHtml = hasJoin ? button("Join the meeting", p.meetingLink!) : "";
-  const joinText = hasJoin ? `\nJoin the meeting: ${p.meetingLink}\n` : "";
+  // Presence of a link is what matters — meeting_type is often unset.
+  const joinHtml = p.meetingLink
+    ? button("Join the meeting", p.meetingLink)
+    : "";
+  const joinText = p.meetingLink
+    ? `\nJoin the meeting: ${p.meetingLink}\n`
+    : "";
 
   const inner = `
     ${heading("Looking forward to our CNX247 demo tomorrow!")}
@@ -327,12 +422,12 @@ export function demoRescheduled(p: {
   meetingType?: string; // "Onsite" | "Virtual"
   meetingLink?: string; // optional join link for virtual demos
 }): EmailContent {
-  const isVirtual = p.meetingType === "Virtual";
-  const detailHtml = isVirtual
-    ? p.meetingLink
-      ? button("Join the meeting", p.meetingLink)
-      : paragraph("We'll send your meeting link ahead of the session.")
-    : paragraph("We'll be in touch about the location.");
+  // A link means it's a virtual session even when meeting_type was never set.
+  const detailHtml = p.meetingLink
+    ? button("Join the meeting", p.meetingLink)
+    : p.meetingType === "Virtual"
+      ? paragraph("We'll send your meeting link ahead of the session.")
+      : paragraph("We'll be in touch about the location.");
 
   const inner = `
     ${heading("Your CNX247 demo has been rescheduled")}
@@ -343,11 +438,11 @@ export function demoRescheduled(p: {
     ${signoff()}
   `;
 
-  const detailText = isVirtual
-    ? p.meetingLink
-      ? `Join the meeting: ${p.meetingLink}`
-      : "We'll send your meeting link ahead of the session."
-    : "We'll be in touch about the location.";
+  const detailText = p.meetingLink
+    ? `Join the meeting: ${p.meetingLink}`
+    : p.meetingType === "Virtual"
+      ? "We'll send your meeting link ahead of the session."
+      : "We'll be in touch about the location.";
 
   const text = `Your CNX247 demo has been rescheduled
 

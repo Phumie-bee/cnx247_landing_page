@@ -4,26 +4,13 @@ import { sql } from "@/lib/db";
 import { revalidatePath } from "next/cache";
 import { sendEmail } from "@/lib/mailer";
 import {
+  leadConfirmation,
   demoRescheduled,
   demoMeetingLink,
   postDemoActionPlan,
   postDemoFollowUpNotReady,
+  formatWhenWat,
 } from "@/lib/emails";
-
-/** Human-readable WAT datetime for emails, e.g. "Tuesday, 28 July 2026, 16:03 WAT". */
-function formatWhenWat(iso: string): string {
-  return (
-    new Intl.DateTimeFormat("en-GB", {
-      weekday: "long",
-      day: "numeric",
-      month: "long",
-      year: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-      timeZone: "Africa/Lagos",
-    }).format(new Date(iso)) + " WAT"
-  );
-}
 
 /** "Save" updates the confirmed time / meeting link (and auto-confirms);
  *  "done"/"not_ready" set those statuses directly and send the post-demo email. */
@@ -105,22 +92,32 @@ export async function updateBooking(formData: FormData) {
     WHERE id = ${id}
   `;
 
-  // Notify the client when something they care about changed. A time change is
-  // a reschedule; a link-only change just delivers the meeting link.
+  // Notify the client when something they care about changed. Scheduling a demo
+  // for the first time is a confirmation, not a reschedule — enquiries arrive
+  // with no confirmed_at, so this is now the common path. A later time change is
+  // a genuine reschedule; a link-only change just delivers the meeting link.
   if (newConfirmedAt && (timeChanged || linkChanged)) {
     const when = formatWhenWat(newConfirmedAt);
-    const content = timeChanged
-      ? demoRescheduled({
+    const isFirstConfirmation = prevMs === null;
+    const content = !timeChanged
+      ? demoMeetingLink({
           leadName: current.name,
           when,
-          meetingType: current.meeting_type ?? undefined,
           meetingLink: meetingLink || undefined,
         })
-      : demoMeetingLink({
-          leadName: current.name,
-          when,
-          meetingLink: meetingLink || undefined,
-        });
+      : isFirstConfirmation
+        ? leadConfirmation({
+            leadName: current.name,
+            when,
+            meetingType: current.meeting_type ?? undefined,
+            meetingLink: meetingLink || undefined,
+          })
+        : demoRescheduled({
+            leadName: current.name,
+            when,
+            meetingType: current.meeting_type ?? undefined,
+            meetingLink: meetingLink || undefined,
+          });
     try {
       await sendEmail(current.email, content);
     } catch (err) {

@@ -283,7 +283,7 @@ export default function Features() {
           })}
 
           <Link
-            href="/contact"
+            href="/book-demo"
             className="animate-fade-in-up mt-1 inline-flex items-center gap-2 px-1 text-sm font-semibold text-accent transition-all duration-300 hover:gap-3"
           >
             See it in action
@@ -343,7 +343,7 @@ export default function Features() {
             </ul>
 
             <Link
-              href="/contact"
+              href="/book-demo"
               className="reveal mt-5 inline-flex items-center gap-2 px-4 text-sm font-semibold text-accent transition-all duration-300 hover:gap-3"
             >
               See it in action

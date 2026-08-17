@@ -145,7 +145,7 @@ export default function Pricing() {
 
                 {/* CTA */}
                 <a
-                  href="/contact"
+                  href="/book-demo"
                   className="mt-7 block rounded-xl border border-border py-3.5 text-center font-semibold text-heading transition-all duration-300 hover:border-[var(--plan-accent)] hover:bg-[var(--plan-accent)] hover:text-white"
                 >
                   Get Started

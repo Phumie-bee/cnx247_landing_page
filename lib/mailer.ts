@@ -12,7 +12,10 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export const EMAIL_FROM =
   process.env.EMAIL_FROM || "CNX247 <noreply@cnx247.com>";
 // Internal booking-alert recipients (both mailboxes per the marketing brief).
-export const TEAM_EMAILS = ["info@cnx247.com", "info@connexxiontelecom.com"];
+export const TEAM_EMAILS = [
+  "enquiry@connexxiongroup.com",
+  "info@connexxiontelecom.com",
+];
 
 /** Send one prepared email. Returns Resend's { data, error } result. */
 export function sendEmail(

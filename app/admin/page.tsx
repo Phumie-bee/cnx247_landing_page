@@ -7,26 +7,20 @@ export const dynamic = "force-dynamic";
 export default async function AdminPage() {
   const bookings = (await sql`
     SELECT id, name, email, company, topic, meeting_type, preferred_date,
-           preferred_time, message, status, confirmed_at, meeting_link, created_at
+           preferred_time, message, status, kind, confirmed_at, meeting_link,
+           created_at
     FROM bookings
     ORDER BY created_at DESC
   `) as BookingRow[];
-
-  const counts = bookings.reduce<Record<string, number>>((acc, b) => {
-    acc[b.status] = (acc[b.status] || 0) + 1;
-    return acc;
-  }, {});
 
   return (
     <main className="min-h-screen bg-subtle p-6 md:p-10">
       <div className="mx-auto max-w-7xl">
         <header className="mb-6">
-          <h1 className="text-2xl font-bold text-heading">Demo Bookings</h1>
-          <p className="mt-1 text-sm text-body">
-            {bookings.length} total · New: {counts.new || 0} · Confirmed:{" "}
-            {counts.confirmed || 0} · Done: {counts.done || 0} · Not ready:{" "}
-            {counts.not_ready || 0}
-          </p>
+          <h1 className="text-2xl font-bold text-heading">
+            Demos &amp; Enquiries
+          </h1>
+          <p className="mt-1 text-sm text-body">{bookings.length} total</p>
         </header>
 
         {bookings.length === 0 ? (

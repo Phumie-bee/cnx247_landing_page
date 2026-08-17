@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import { sql } from "@/lib/db";
 import {
-  internalBookingAlert,
-  leadConfirmation,
+  internalEnquiryAlert,
+  enquiryConfirmation,
   type Booking,
 } from "@/lib/emails";
 import { sendEmail, TEAM_EMAILS } from "@/lib/mailer";
@@ -37,17 +37,6 @@ export async function POST(req: Request) {
   const message = (body.message ?? "").trim();
   const topic = (body.topic ?? "").trim();
   const company = (body.company ?? "").trim();
-  const meetingType = (body.meetingType ?? body.meeting_type ?? "").trim();
-  const preferredDate = (
-    body.preferredDate ??
-    body.preferred_date ??
-    ""
-  ).trim();
-  const preferredTime = (
-    body.preferredTime ??
-    body.preferred_time ??
-    ""
-  ).trim();
 
   // Server-side validation (never trust the client alone).
   if (
@@ -63,23 +52,18 @@ export async function POST(req: Request) {
     );
   }
 
-  // Honour the client's chosen time — the demo is confirmed at booking.
-  // Staff only step in for the rare reschedule.
-  const confirmedAt =
-    preferredDate && preferredTime
-      ? `${preferredDate}T${preferredTime}:00+01:00`
-      : null;
-  const status = confirmedAt ? "confirmed" : "new";
-
+  // The form captures enquiries only — it no longer books demos, so nothing
+  // arrives pre-scheduled. Staff schedule a demo from /admin, which sets
+  // confirmed_at and moves the row to "confirmed".
+  //
   // 1) Save the lead first — the database is the source of truth. If email
   //    later fails, the lead is still captured.
   try {
     await sql`
       INSERT INTO bookings
-        (name, email, company, topic, meeting_type, preferred_date, preferred_time, message, confirmed_at, status)
+        (name, email, company, topic, message, status, kind)
       VALUES
-        (${name}, ${email}, ${company || null}, ${topic}, ${meetingType || null},
-         ${preferredDate || null}, ${preferredTime || null}, ${message}, ${confirmedAt}, ${status})
+        (${name}, ${email}, ${company || null}, ${topic}, ${message}, 'new', 'enquiry')
     `;
   } catch (err) {
     console.error("[bookings] DB insert failed:", err);
@@ -99,19 +83,11 @@ export async function POST(req: Request) {
     email,
     company,
     topic,
-    meetingType,
-    preferredDate,
-    preferredTime,
     message,
   };
 
-  const internal = internalBookingAlert(booking);
-  const confirmation = leadConfirmation({
-    leadName: name,
-    meetingType,
-    preferredDate,
-    preferredTime,
-  });
+  const internal = internalEnquiryAlert(booking);
+  const confirmation = enquiryConfirmation({ leadName: name, topic });
 
   const results = await Promise.allSettled([
     sendEmail(TEAM_EMAILS, internal, { replyTo: email }),

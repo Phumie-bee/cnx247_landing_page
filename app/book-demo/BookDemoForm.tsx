@@ -1,25 +1,26 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { ArrowRight, CheckCircle } from "lucide-react";
+import { ArrowRight, CalendarCheck } from "lucide-react";
 
 type FormData = {
   name: string;
   email: string;
   company: string;
-  topic: string;
+  meetingType: string;
+  preferredDate: string;
+  preferredTime: string;
   message: string;
 };
 
 type FormErrors = Partial<Record<keyof FormData, string>>;
 
-const topics = [
-  "General Inquiry",
-  "Sales & Pricing",
-  "Technical Support",
-  "Partnership",
-  "Other",
-];
+/** Local "YYYY-MM-DD" for today — used as the date input's floor. */
+function todayLocal(): string {
+  const now = new Date();
+  const pad = (n: number) => String(n).padStart(2, "0");
+  return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
+}
 
 function validate(form: FormData): FormErrors {
   const errors: FormErrors = {};
@@ -29,33 +30,47 @@ function validate(form: FormData): FormErrors {
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
     errors.email = "Please enter a valid email address.";
   }
-  if (!form.topic) errors.topic = "Please select a topic.";
-  if (!form.message.trim()) {
-    errors.message = "A message is required.";
-  } else if (form.message.trim().length < 15) {
-    errors.message =
-      "Please give us a bit more detail (at least 15 characters).";
+  if (!form.meetingType)
+    errors.meetingType = "Please choose onsite or virtual.";
+  if (!form.preferredDate) {
+    errors.preferredDate = "Please pick a date.";
+  }
+  if (!form.preferredTime) {
+    errors.preferredTime = "Please pick a time.";
+  }
+  // The slot is confirmed the moment it's submitted, so it has to be ahead of
+  // now — not merely today. The server enforces this too.
+  if (form.preferredDate && form.preferredTime) {
+    const slot = new Date(`${form.preferredDate}T${form.preferredTime}`);
+    if (!Number.isNaN(slot.getTime()) && slot.getTime() <= Date.now()) {
+      errors.preferredTime = "Please choose a time in the future.";
+    }
   }
   return errors;
 }
 
-export default function ContactForm() {
+export default function BookDemoForm() {
   const [form, setForm] = useState<FormData>({
     name: "",
     email: "",
     company: "",
-    topic: "",
+    meetingType: "",
+    preferredDate: "",
+    preferredTime: "",
     message: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  // Held onto so the success screen can name the slot back to the customer.
+  const [bookedSlot, setBookedSlot] = useState<string>("");
   // Shown when the network request itself fails — so we never falsely tell a
-  // customer their message was received when it wasn't.
+  // customer their demo is booked when it isn't.
   const [submitError, setSubmitError] = useState<string | null>(null);
   // Honeypot: a hidden field real users never see. Bots fill every field, so a
   // non-empty value here means "spam" and we silently drop the submission.
   const botRef = useRef<HTMLInputElement>(null);
+  const today = todayLocal();
 
   function handleChange(
     e: React.ChangeEvent<
@@ -102,27 +117,33 @@ export default function ContactForm() {
 
     setLoading(true);
     try {
-      const res = await fetch("/api/bookings", {
+      const res = await fetch("/api/demo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          company: form.company,
-          topic: form.topic,
-          message: form.message,
-        }),
+        body: JSON.stringify(form),
       });
       const data = await res.json();
 
       if (res.ok && data.success) {
+        setBookedSlot(
+          new Date(
+            `${form.preferredDate}T${form.preferredTime}`,
+          ).toLocaleString("en-GB", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+        );
         setSubmitted(true);
       } else {
         setSubmitError(
-          "We couldn't send your request. Please try again, or email enquiry@connexxiongroup.com directly.",
+          data.error ||
+            "We couldn't book your demo. Please try again, or email enquiry@connexxiongroup.com directly.",
         );
       }
     } catch {
@@ -142,13 +163,25 @@ export default function ContactForm() {
         aria-live="polite"
       >
         <div className="w-16 h-16 rounded-2xl bg-primary/10 border border-primary/20 flex items-center justify-center mb-6">
-          <CheckCircle size={28} className="text-primary" aria-hidden="true" />
+          <CalendarCheck
+            size={28}
+            className="text-primary"
+            aria-hidden="true"
+          />
         </div>
         <h3 className="text-2xl font-bold text-heading mb-3">
-          Message received!
+          Your demo is booked!
         </h3>
         <p className="text-body text-[15px] leading-relaxed max-w-sm">
-          Thanks for reaching out. We typically respond within 2 business hours.
+          {bookedSlot ? (
+            <>
+              We&apos;ll see you on{" "}
+              <span className="font-semibold text-heading">{bookedSlot}</span>.
+              A confirmation is on its way to your inbox.
+            </>
+          ) : (
+            <>A confirmation is on its way to your inbox.</>
+          )}
         </p>
         <button
           onClick={() => {
@@ -156,15 +189,18 @@ export default function ContactForm() {
               name: "",
               email: "",
               company: "",
-              topic: "",
+              meetingType: "",
+              preferredDate: "",
+              preferredTime: "",
               message: "",
             });
             setErrors({});
+            setBookedSlot("");
             setSubmitted(false);
           }}
           className="mt-7 text-sm font-semibold text-primary hover:text-heading motion-safe:transition-colors"
         >
-          Send another message →
+          Book another demo →
         </button>
       </div>
     );
@@ -179,7 +215,7 @@ export default function ContactForm() {
     <form
       onSubmit={handleSubmit}
       noValidate
-      aria-label="Contact form"
+      aria-label="Book a demo"
       className="space-y-5"
     >
       {/* Honeypot — hidden from people, catches bots. Leave empty; do not remove. */}
@@ -236,7 +272,7 @@ export default function ContactForm() {
             htmlFor="email"
             className="block text-[13px] font-semibold text-heading mb-2"
           >
-            Email address{" "}
+            Work email{" "}
             <span className="text-red-400" aria-hidden="true">
               *
             </span>
@@ -291,87 +327,153 @@ export default function ContactForm() {
           />
         </div>
 
-        {/* Topic */}
+        {/* Meeting type */}
         <div>
           <label
-            htmlFor="topic"
+            htmlFor="meetingType"
             className="block text-[13px] font-semibold text-heading mb-2"
           >
-            How can we help?{" "}
+            Meeting type{" "}
             <span className="text-red-400" aria-hidden="true">
               *
             </span>
           </label>
           <select
-            id="topic"
-            name="topic"
-            value={form.topic}
+            id="meetingType"
+            name="meetingType"
+            value={form.meetingType}
             onChange={handleChange}
             onBlur={handleBlur}
             aria-required="true"
-            aria-invalid={!!errors.topic}
-            aria-describedby={errors.topic ? "topic-err" : undefined}
-            className={`${base} cursor-pointer appearance-none ${errors.topic ? errored : normal} ${
-              !form.topic ? "text-body/40" : "text-heading"
+            aria-invalid={!!errors.meetingType}
+            aria-describedby={
+              errors.meetingType ? "meetingType-err" : undefined
+            }
+            className={`${base} cursor-pointer appearance-none ${errors.meetingType ? errored : normal} ${
+              !form.meetingType ? "text-body/40" : "text-heading"
             }`}
           >
             <option value="" disabled>
-              Select a topic…
+              Select meeting type…
             </option>
-            {topics.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
+            <option value="Virtual">Virtual</option>
+            <option value="Onsite">Onsite</option>
           </select>
-          {errors.topic && (
+          {errors.meetingType && (
             <p
-              id="topic-err"
+              id="meetingType-err"
               role="alert"
               className="mt-1.5 text-[12px] text-red-500"
             >
-              {errors.topic}
+              {errors.meetingType}
             </p>
           )}
         </div>
       </div>
 
-      {/* Message */}
+      <div className="grid sm:grid-cols-2 gap-5">
+        {/* Date */}
+        <div>
+          <label
+            htmlFor="preferredDate"
+            className="block text-[13px] font-semibold text-heading mb-2"
+          >
+            Date{" "}
+            <span className="text-red-400" aria-hidden="true">
+              *
+            </span>
+          </label>
+          <input
+            id="preferredDate"
+            name="preferredDate"
+            type="date"
+            min={today}
+            value={form.preferredDate}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            aria-required="true"
+            aria-invalid={!!errors.preferredDate}
+            aria-describedby={
+              errors.preferredDate ? "preferredDate-err" : undefined
+            }
+            className={`${base} cursor-pointer ${errors.preferredDate ? errored : normal} ${
+              !form.preferredDate ? "text-body/40" : "text-heading"
+            }`}
+          />
+          {errors.preferredDate && (
+            <p
+              id="preferredDate-err"
+              role="alert"
+              className="mt-1.5 text-[12px] text-red-500"
+            >
+              {errors.preferredDate}
+            </p>
+          )}
+        </div>
+
+        {/* Time */}
+        <div>
+          <label
+            htmlFor="preferredTime"
+            className="block text-[13px] font-semibold text-heading mb-2"
+          >
+            Time{" "}
+            <span className="text-[12px] font-normal text-body/50">(WAT)</span>{" "}
+            <span className="text-red-400" aria-hidden="true">
+              *
+            </span>
+          </label>
+          <input
+            id="preferredTime"
+            name="preferredTime"
+            type="time"
+            value={form.preferredTime}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            aria-required="true"
+            aria-invalid={!!errors.preferredTime}
+            aria-describedby={
+              errors.preferredTime ? "preferredTime-err" : undefined
+            }
+            className={`${base} cursor-pointer ${errors.preferredTime ? errored : normal} ${
+              !form.preferredTime ? "text-body/40" : "text-heading"
+            }`}
+          />
+          {errors.preferredTime && (
+            <p
+              id="preferredTime-err"
+              role="alert"
+              className="mt-1.5 text-[12px] text-red-500"
+            >
+              {errors.preferredTime}
+            </p>
+          )}
+        </div>
+      </div>
+
+      {/* Notes */}
       <div>
         <label
           htmlFor="message"
           className="block text-[13px] font-semibold text-heading mb-2"
         >
-          Message{" "}
-          <span className="text-red-400" aria-hidden="true">
-            *
+          Anything you&apos;d like us to focus on?{" "}
+          <span className="text-[12px] font-normal text-body/50">
+            (optional)
           </span>
         </label>
         <textarea
           id="message"
           name="message"
-          rows={5}
-          placeholder="Tell us what you need — the more context, the better we can help."
+          rows={4}
+          placeholder="Tell us about your team size, the modules you're most interested in, or any specific problem you're trying to solve."
           value={form.message}
           onChange={handleChange}
-          onBlur={handleBlur}
-          aria-required="true"
-          aria-invalid={!!errors.message}
-          aria-describedby={errors.message ? "message-err" : undefined}
-          className={`${base} resize-none ${errors.message ? errored : normal}`}
+          className={`${base} resize-none ${normal}`}
         />
-        {errors.message && (
-          <p
-            id="message-err"
-            role="alert"
-            className="mt-1.5 text-[12px] text-red-500"
-          >
-            {errors.message}
-          </p>
-        )}
       </div>
 
-      {/* Submission error — shown only when the send actually fails */}
+      {/* Submission error — shown only when the booking actually fails */}
       {submitError && (
         <p
           role="alert"
@@ -393,11 +495,11 @@ export default function ContactForm() {
               className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin"
               aria-hidden="true"
             />
-            Sending…
+            Booking…
           </>
         ) : (
           <>
-            Send message
+            Confirm my demo
             <ArrowRight
               size={16}
               strokeWidth={2.5}
@@ -409,8 +511,8 @@ export default function ContactForm() {
       </button>
 
       <p className="text-center text-[11px] text-body/50 leading-relaxed">
-        We respect your privacy. Your details are never shared with third
-        parties.
+        Your slot is confirmed instantly. Need a different time later? Just
+        reply to the confirmation email.
       </p>
     </form>
   );

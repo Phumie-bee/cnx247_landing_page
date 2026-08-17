@@ -41,7 +41,6 @@ export async function GET(req: NextRequest) {
     const content = reminder24h({
       leadName: b.name,
       teaserVideoUrl,
-      meetingType: b.meeting_type ?? undefined,
       meetingLink: b.meeting_link ?? undefined,
     });
     try {

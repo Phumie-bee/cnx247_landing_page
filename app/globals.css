@@ -230,6 +230,25 @@ body {
   animation: pulse-glow 2.4s ease-in-out infinite;
 }
 
+/* Watch-demo card — attention ring on the play button.
+   Same read as pulse-glow above, but animating transform/opacity instead of
+   box-shadow so it runs on the compositor and never repaints. */
+@keyframes ring-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  70%,
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+.animate-ring-pulse {
+  animation: ring-pulse 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
 /* Features panel — tab-switch content transition */
 @keyframes features-in {
   from {
