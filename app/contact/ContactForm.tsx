@@ -30,12 +30,6 @@ function validate(form: FormData): FormErrors {
     errors.email = "Please enter a valid email address.";
   }
   if (!form.topic) errors.topic = "Please select a topic.";
-  if (!form.message.trim()) {
-    errors.message = "A message is required.";
-  } else if (form.message.trim().length < 15) {
-    errors.message =
-      "Please give us a bit more detail (at least 15 characters).";
-  }
   return errors;
 }
 
@@ -343,8 +337,8 @@ export default function ContactForm() {
           className="block text-[13px] font-semibold text-heading mb-2"
         >
           Message{" "}
-          <span className="text-red-400" aria-hidden="true">
-            *
+          <span className="text-[12px] font-normal text-body/50">
+            (optional)
           </span>
         </label>
         <textarea
@@ -354,21 +348,8 @@ export default function ContactForm() {
           placeholder="Tell us what you need — the more context, the better we can help."
           value={form.message}
           onChange={handleChange}
-          onBlur={handleBlur}
-          aria-required="true"
-          aria-invalid={!!errors.message}
-          aria-describedby={errors.message ? "message-err" : undefined}
-          className={`${base} resize-none ${errors.message ? errored : normal}`}
+          className={`${base} resize-none ${normal}`}
         />
-        {errors.message && (
-          <p
-            id="message-err"
-            role="alert"
-            className="mt-1.5 text-[12px] text-red-500"
-          >
-            {errors.message}
-          </p>
-        )}
       </div>
 
       {/* Submission error — shown only when the send actually fails */}

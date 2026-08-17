@@ -38,14 +38,9 @@ export async function POST(req: Request) {
   const topic = (body.topic ?? "").trim();
   const company = (body.company ?? "").trim();
 
-  // Server-side validation (never trust the client alone).
-  if (
-    !name ||
-    !email ||
-    !isValidEmail(email) ||
-    !topic ||
-    message.length < 15
-  ) {
+  // Server-side validation (never trust the client alone). The message is
+  // optional — an enquiry with just a name, email and topic is still a lead.
+  if (!name || !email || !isValidEmail(email) || !topic) {
     return NextResponse.json(
       { success: false, error: "Please complete the form correctly." },
       { status: 422 },
@@ -63,7 +58,7 @@ export async function POST(req: Request) {
       INSERT INTO bookings
         (name, email, company, topic, message, status, kind)
       VALUES
-        (${name}, ${email}, ${company || null}, ${topic}, ${message}, 'new', 'enquiry')
+        (${name}, ${email}, ${company || null}, ${topic}, ${message || null}, 'new', 'enquiry')
     `;
   } catch (err) {
     console.error("[bookings] DB insert failed:", err);
